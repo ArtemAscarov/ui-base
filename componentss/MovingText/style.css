@@ -1,0 +1,49 @@
+.movint-element {
+  padding: 20px 0;
+  background: var(--defaultBg);
+  box-shadow: var(--box-shadow);
+  position: relative;
+  top: 50%;
+  left: -50px;
+  transform: rotate(-3deg);
+  width: calc(100% + 100px);
+  overflow: hidden;
+}
+
+fieldset {
+  height: 100vh;
+  overflow: hidden;
+  min-width: 0;
+}
+
+p {
+  color: white;
+  font-weight: 900;
+  font-size: 32px;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.group-of-elements {
+  gap: 550px;
+  display: inline-flex;
+  align-items: center;
+  padding-left: 100%;
+  animation: text 14s linear infinite;
+}
+
+.parent {
+  position: relative;
+  width: 100%;
+  height: 160px;
+}
+
+@keyframes text {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}

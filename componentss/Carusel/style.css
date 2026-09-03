@@ -1,0 +1,87 @@
+fieldset {
+  width: 100%;
+  height: 100vh;
+}
+
+button {
+  border: none;
+}
+
+.slide {
+  min-width: 800px;
+  padding: 10px;
+  height: 300px;
+  background: var(--defaultBg);
+  box-shadow: var(--box-shadow);
+  color: white;
+}
+
+.slides {
+  width: 800px;
+  overflow-x: hidden;
+}
+
+.track {
+  display: flex;
+  transition: transform 200ms linear;
+  gap: 10px;
+}
+
+.contolButton {
+  width: 20px;
+  height: 20px;
+  background-color: grey;
+  position: absolute;
+  cursor: pointer;
+  top: calc(50% - 10px);
+}
+
+.parent {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.relative {
+  position: relative;
+}
+
+.left {
+  left: -50px;
+}
+
+.right {
+  right: -50px;
+}
+
+.test-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+}
+
+.test-content-parent {
+  max-width: 300px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  div {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    background-color: black;
+  }
+}
+
+.smallSlide {
+  min-width: 200px;
+  padding: 10px;
+  height: 100px;
+  background: var(--defaultBg);
+  box-shadow: var(--box-shadow);
+  color: white;
+}

@@ -1,0 +1,14 @@
+body {
+  padding: 10px;
+}
+
+.parent {
+  max-width: 1920px;
+  width: 100%;
+  margin: 0 auto;
+  border: 1px solid black;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}

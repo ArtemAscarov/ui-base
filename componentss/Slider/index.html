@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="/default.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <fieldset>
+      <legend>Slider</legend>
+
+      <div class="sliders">
+        <div class="sliderParent">
+          <div class="sliderHeader">
+            <p>Возраст</p>
+            <p id="firstSliderValue">18</p>
+          </div>
+          <div class="sliderBody">
+            <p id="firstSliderStartValue">18</p>
+            <div id="firstSliderBg" class="sliderBg">
+              <div id="firstSliderPainting" class="sliderPainting"></div>
+              <div id="firstSliderCursor" class="sliderCursor"></div>
+            </div>
+            <p id="firstSliderSndValue">90</p>
+          </div>
+        </div>
+        <div class="sliderParent">
+          <div class="sliderHeader">
+            <p>Цена</p>
+            <p id="secondSliderValue">0 - 7000</p>
+          </div>
+          <div class="sliderBody">
+            <p id="secondSliderStartValue">0</p>
+            <div id="secondSliderBg" class="sliderBg">
+              <div id="secondSliderPainting" class="sliderPainting w-100"></div>
+              <div id="sliderCursorStart" class="sliderCursorStart"></div>
+              <div id="sliderCursorEnd" class="sliderCursorEnd"></div>
+            </div>
+            <p id="secondSliderEndValue">7000</p>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+
+    <script src="./index.js"></script>
+  </body>
+</html>

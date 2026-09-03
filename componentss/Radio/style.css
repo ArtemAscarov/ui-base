@@ -1,0 +1,52 @@
+.flex {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.inputParent {
+  cursor: pointer;
+}
+
+.defaultRadiio {
+  position: absolute;
+  opacity: 0;
+  top: 0;
+}
+
+.newRadio {
+  width: 16px;
+  border-radius: 50%;
+  height: 16px;
+  border: var(--defaultBorder);
+  background: var(--defaultBg);
+  box-shadow: var(--box-shadow);
+  position: relative;
+}
+
+.newRadio::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background-color: white;
+  position: absolute;
+  border-radius: 50%;
+  right: 25%;
+  top: 25%;
+  transform: scale(0);
+  transition: 80ms ease-in;
+}
+
+.defaultRadiio:checked + .newRadio::after {
+  transform: scale(1);
+}
+
+.defaultRadiio:focus-visible + .newRadio {
+  box-shadow: var(--focus-visible);
+}
+
+.radioesParent {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

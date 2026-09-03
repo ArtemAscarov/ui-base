@@ -1,0 +1,94 @@
+fieldset {
+  width: 100%;
+  height: 100vh;
+}
+
+.sliderParent {
+  max-width: 400px;
+  width: 100%;
+  padding: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.26);
+}
+
+.sliders {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.sliderHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.sliderBody {
+  background: var(--defaultBg);
+  width: 100%;
+
+  padding: 10px 15px;
+  border-radius: 8px;
+
+  color: white;
+  font-weight: 500;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: var(--box-shadow);
+}
+
+.sliderBg {
+  width: 100%;
+  position: relative;
+  height: 8px;
+  background: #0000002c;
+  border-radius: 10px;
+  margin: 0 8px;
+}
+
+.sliderCursor {
+  background-color: wheat;
+  border: 1px solid rgba(0, 0, 0, 0.592);
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: -50%;
+  cursor: pointer;
+  border-radius: 100%;
+}
+
+.sliderPainting {
+  height: 8px;
+  background: #00000083;
+  border-radius: 10px;
+  position: absolute;
+}
+
+.sliderCursorStart {
+  background-color: wheat;
+  border: 1px solid rgba(0, 0, 0, 0.592);
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: -50%;
+  cursor: pointer;
+  border-radius: 100%;
+}
+
+.sliderCursorEnd {
+  background-color: wheat;
+  border: 1px solid rgba(0, 0, 0, 0.592);
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: -50%;
+  cursor: pointer;
+  border-radius: 100%;
+}
+
+.w-100{
+  width: 100%;
+}

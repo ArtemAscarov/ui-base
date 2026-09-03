@@ -1,0 +1,74 @@
+button {
+  padding: 5px 10px;
+  border: var(--defaultBorder);
+  background: var(--defaultBg);
+  box-shadow: var(--box-shadow);
+  width: 100%;
+  color: white;
+  cursor: pointer;
+  transition: all 200ms ease-in;
+  text-align: start;
+}
+
+button:hover {
+  box-shadow: var(--focus-visible);
+}
+
+button:focus-visible {
+  box-shadow: var(--focus-visible);
+}
+.parent {
+  position: relative;
+  max-width: 300px;
+  width: 100%;
+}
+
+.select_body {
+  display: grid;
+  grid-template-rows: 0fr;
+
+  top: 35px;
+  position: absolute;
+  width: 100%;
+
+  /* opacity: 0; */
+  transition: all 100ms linear;
+
+  overflow: hidden;
+}
+
+.select_body--content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+}
+
+.is-open {
+  grid-template-rows: 1fr;
+  padding: 5px;
+  /* opacity: 100%; */
+}
+
+#selected-option {
+  padding-right: 25px;
+  position: relative;
+}
+
+.arrow {
+  position: absolute;
+  right: 10px;
+  top: 26%;
+  transition: all 200ms linear;
+  width: 15px;
+  height: 15px;
+  background: url("./assets/arrow.svg");
+
+  transform: rotate(0);
+  background-size: contain;
+  pointer-events: none;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
