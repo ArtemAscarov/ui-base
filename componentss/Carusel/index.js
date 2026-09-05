@@ -1,54 +1,55 @@
-function infinitCarusel(container) {
-  const track = container.querySelector(".track");
-  const buttonNext = container.querySelector(".nextSlide");
-  const buttonPrew = container.querySelector(".prewSlide");
-  const viewport = container.querySelector(".slides");
-  const gap = 10;
+function initCarousel(carousel) {
+  const viewport = carousel.querySelector(".ui-carousel__viewport");
+  const track = carousel.querySelector(".ui-carousel__track");
+  const prevButton = carousel.querySelector(".ui-carousel__button--prev");
+  const nextButton = carousel.querySelector(".ui-carousel__button--next");
 
-  const realSlides = [...track.children];
-  const count = realSlides.length;
-  const step = realSlides[0].getBoundingClientRect().width + gap;
-  const visibleCount = Math.ceil(viewport.getBoundingClientRect().width / step);
+  const slides = [...track.children];
+  const count = slides.length;
 
-  realSlides
+  function getGap() {
+    return parseFloat(getComputedStyle(track).columnGap) || 0;
+  }
+
+  function getStep() {
+    return slides[0].getBoundingClientRect().width + getGap();
+  }
+
+  const visibleCount = Math.ceil(
+    viewport.getBoundingClientRect().width / getStep()
+  );
+
+  slides
     .slice(0, visibleCount)
-    .map((i) => i.cloneNode(true))
-    .forEach((i) => track.appendChild(i));
+    .map((slide) => slide.cloneNode(true))
+    .forEach((clone) => track.appendChild(clone));
 
-  realSlides
+  slides
     .slice(-visibleCount)
-    .map((i) => i.cloneNode(true))
+    .map((slide) => slide.cloneNode(true))
     .reverse()
-    .forEach((i) => track.insertBefore(i, track.firstChild));
+    .forEach((clone) => track.insertBefore(clone, track.firstChild));
 
   let currentIndex = visibleCount;
   let isAnimating = false;
 
-  function getSlideStep() {
-    const rect = realSlides[0].getBoundingClientRect().width + gap;
-    return rect;
-  }
-
   function render(animate = true) {
-    const step = getSlideStep();
-    track.style.transition = animate ? "transform 0.4s linear" : "none";
-    track.style.transform = `translateX(${-currentIndex * step}px)`;
+    track.style.transition = animate ? "" : "none";
+    track.style.transform = `translateX(${-currentIndex * getStep()}px)`;
   }
 
   function goTo(index) {
     if (isAnimating) return;
+
     isAnimating = true;
     currentIndex = index;
-
     render();
   }
 
-  setInterval(() => {
-    goTo(currentIndex + 1);
-  }, 8000);
+  setInterval(() => goTo(currentIndex + 1), 8000);
 
-  buttonNext.addEventListener("click", () => goTo(currentIndex + 1));
-  buttonPrew.addEventListener("click", () => goTo(currentIndex - 1));
+  nextButton.addEventListener("click", () => goTo(currentIndex + 1));
+  prevButton.addEventListener("click", () => goTo(currentIndex - 1));
 
   track.addEventListener("transitionend", () => {
     if (currentIndex >= count + visibleCount) {
@@ -68,9 +69,7 @@ function infinitCarusel(container) {
 }
 
 function main() {
-  const containers = document.querySelectorAll(".relative");
-
-  containers.forEach((elem) => infinitCarusel(elem));
+  document.querySelectorAll("[data-ui-carousel]").forEach(initCarousel);
 }
 
 main();

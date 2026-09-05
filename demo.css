@@ -1,0 +1,83 @@
+.demo-page {
+  padding: 10px;
+}
+
+.demo-grid {
+  max-width: 1920px;
+  width: 100%;
+  margin: 0 auto;
+  border: 1px solid black;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.demo-grid iframe {
+  padding: 5px;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+.demo-frame {
+  padding: 5px;
+}
+
+.demo-frame--fill {
+  width: 100%;
+  height: 100vh;
+}
+
+.demo-frame--clip {
+  overflow: hidden;
+  min-width: 0;
+}
+
+.demo-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.demo-stack--centered {
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.demo-center {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.demo-slide-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+}
+
+.demo-dots {
+  max-width: 300px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.demo-dots__item {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  background-color: black;
+}
+
+.demo-carousel--logos {
+  --carousel-slide-width: 200px;
+  --carousel-slide-height: 100px;
+}

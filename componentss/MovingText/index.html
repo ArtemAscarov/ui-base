@@ -3,11 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="./style.css" />
+    <title>Moving text</title>
     <link rel="stylesheet" href="/default.css" />
+    <link rel="stylesheet" href="/demo.css" />
+    <link rel="stylesheet" href="./style.css" />
 
-     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
@@ -15,16 +16,23 @@
     />
   </head>
   <body>
-    <fieldset>
+    <fieldset class="demo-frame demo-frame--fill demo-frame--clip">
       <legend>Scrolling text</legend>
-      <div class="parent">
-        <div class="movint-element">
-          <div class="group-of-elements">
-            <p>Здесь просто пустой текст не стоит в это вчитыватся.</p>
 
-            <p>Тут такой же пустой текст, я же говорил не читай это.</p>
+      <div class="ui-marquee">
+        <div class="ui-marquee__ribbon">
+          <div class="ui-marquee__group">
+            <p class="ui-marquee__item">
+              Здесь просто пустой текст не стоит в это вчитыватся.
+            </p>
 
-            <p>Если ты это читаешь, то ты явно не понял первые 2 текста.</p>
+            <p class="ui-marquee__item">
+              Тут такой же пустой текст, я же говорил не читай это.
+            </p>
+
+            <p class="ui-marquee__item">
+              Если ты это читаешь, то ты явно не понял первые 2 текста.
+            </p>
           </div>
         </div>
       </div>

@@ -1,27 +1,56 @@
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+a {
   text-decoration: none;
+}
+
+ul,
+ol {
   list-style: none;
-  font-family: "Roboto", sans-serif;
 }
 
 body {
-  --defaultBg: #cc5ded;
-  --defaultBorder: 1px solid #cc5ded;
-  --focus-visible: 0px 0px 5px 2px rgb(31, 25, 31);
-  --box-shadow: 0px 0px 5px 0.5px rgb(188, 58, 188);
+  font-family: "Roboto", sans-serif;
 }
 
-html::-webkit-scrollbar {
-  display: none;
+input,
+button,
+select,
+textarea {
+  font: inherit;
 }
 
-fieldset {
-  padding: 5px;
-}
+:root {
+  color-scheme: light;
 
-iframe {
-  padding: 5px;
+  --ui-bg: #666969;
+  --ui-fg: #ffffff;
+  --ui-muted: grey;
+
+  --ui-border-width: 1px;
+  --ui-border-color: #4b494b;
+  --ui-border-subtle: rgba(0, 0, 0, 0.26);
+
+  --ui-accent: wheat;
+  --ui-accent-border: rgba(0, 0, 0, 0.592);
+
+  --ui-track: #0000002c;
+  --ui-track-fill: #00000083;
+
+  --ui-radius: 8px;
+  --ui-radius-pill: 10px;
+  --ui-radius-round: 50%;
+
+  --ui-shadow: 0px 0px 5px 0.5px rgb(130, 128, 130);
+  --ui-focus-ring: 0px 0px 5px 2px rgb(31, 25, 31);
+
+  --ui-duration-fast: 80ms;
+  --ui-duration: 200ms;
+  --ui-ease: linear;
 }

@@ -1,41 +1,111 @@
 function main() {
-  function firstSlider() {
-    let sliderValue = document.getElementById("firstSliderValue");
-    let sliderPainting = document.getElementById("firstSliderPainting");
-    let sliderCursor = document.getElementById("firstSliderCursor");
-    let sliderBg = document.getElementById("firstSliderBg");
+  singleSlider();
+  rangeSlider();
+}
 
-    let sliderStartValue = document.getElementById("firstSliderStartValue");
-    let sliderEndValue = document.getElementById("firstSliderSndValue");
+function singleSlider() {
+  const valueLabel = document.getElementById("firstSliderValue");
+  const minLabel = document.getElementById("firstSliderMin");
+  const maxLabel = document.getElementById("firstSliderMax");
+  const track = document.getElementById("firstSliderTrack");
+  const range = document.getElementById("firstSliderRange");
+  const thumb = document.getElementById("firstSliderThumb");
 
-    const min = 18;
-    const max = 90;
-    const step = 1;
+  const min = 18;
+  const max = 90;
+  const step = 1;
 
-    function update(percent) {
-      const rowValue = Math.round(min + (percent / 100) * (max - min));
-      const steppedValue = Math.round(rowValue / step) * step;
-      const steppedPercent = ((steppedValue - min) / (max - min)) * 100;
-      sliderStartValue.textContent = min;
-      sliderEndValue.textContent = max;
+  function percentFromEvent(event) {
+    const rect = track.getBoundingClientRect();
+    const percent = ((event.clientX - rect.left) / rect.width) * 100;
+    return Math.min(100, Math.max(0, percent));
+  }
 
-      sliderCursor.style.left = `calc(${steppedPercent + "%"} - 8px)`;
-      sliderPainting.style.width = steppedPercent + "%";
-      sliderValue.textContent = steppedValue;
+  function update(percent) {
+    const rawValue = min + (percent / 100) * (max - min);
+    const value = Math.round(rawValue / step) * step;
+    const valuePercent = ((value - min) / (max - min)) * 100;
+
+    thumb.style.left = valuePercent + "%";
+    range.style.width = valuePercent + "%";
+    valueLabel.textContent = value;
+  }
+
+  thumb.addEventListener("pointerdown", () => {
+    function onMove(event) {
+      update(percentFromEvent(event));
     }
 
-    function percentFromEvent(e) {
-      const rect = sliderBg.getBoundingClientRect();
-      const position = e.clientX - rect.left;
-      const percent = (position / rect.width) * 100;
-      return Math.min(100, Math.max(0, percent));
+    function onUp() {
+      document.removeEventListener("pointermove", onMove);
+      document.removeEventListener("pointerup", onUp);
     }
 
-    sliderCursor.addEventListener("pointerdown", () => {
-      // console.log("sliderCursor:pointerdown");
+    document.addEventListener("pointermove", onMove);
+    document.addEventListener("pointerup", onUp);
+  });
 
-      function onMove(e) {
-        update(percentFromEvent(e));
+  minLabel.textContent = min;
+  maxLabel.textContent = max;
+  update(0);
+}
+
+function rangeSlider() {
+  const valueLabel = document.getElementById("secondSliderValue");
+  const minLabel = document.getElementById("secondSliderMin");
+  const maxLabel = document.getElementById("secondSliderMax");
+  const track = document.getElementById("secondSliderTrack");
+  const range = document.getElementById("secondSliderRange");
+  const startThumb = document.getElementById("secondSliderStartThumb");
+  const endThumb = document.getElementById("secondSliderEndThumb");
+
+  const min = 0;
+  const max = 7000;
+  const step = 10;
+
+  let startPercent = 0;
+  let endPercent = 100;
+
+  function toValue(percent) {
+    const rawValue = min + (percent / 100) * (max - min);
+    return Math.round(rawValue / step) * step;
+  }
+
+  function toPercent(value) {
+    return ((value - min) / (max - min)) * 100;
+  }
+
+  function percentFromEvent(event) {
+    const rect = track.getBoundingClientRect();
+    const percent = ((event.clientX - rect.left) / rect.width) * 100;
+    return Math.min(100, Math.max(0, percent));
+  }
+
+  function render() {
+    const startValue = toValue(startPercent);
+    const endValue = toValue(endPercent);
+    const start = toPercent(startValue);
+    const end = toPercent(endValue);
+
+    range.style.left = start + "%";
+    range.style.width = end - start + "%";
+    startThumb.style.left = start + "%";
+    endThumb.style.left = end + "%";
+    valueLabel.textContent = `${startValue} - ${endValue}`;
+  }
+
+  function makeDraggable(thumb, isStart) {
+    thumb.addEventListener("pointerdown", () => {
+      function onMove(event) {
+        const percent = percentFromEvent(event);
+
+        if (isStart) {
+          startPercent = Math.min(percent, endPercent);
+        } else {
+          endPercent = Math.max(percent, startPercent);
+        }
+
+        render();
       }
 
       function onUp() {
@@ -46,88 +116,14 @@ function main() {
       document.addEventListener("pointermove", onMove);
       document.addEventListener("pointerup", onUp);
     });
-
-    update(0);
   }
 
-  function secondSlider() {
-    let sliderValue = document.getElementById("secondSliderValue");
-    let sliderPainting = document.getElementById("secondSliderPainting");
-    let sliderCursorStart = document.getElementById("sliderCursorStart");
-    let sliderCursorEnd = document.getElementById("sliderCursorEnd");
-    let sliderBg = document.getElementById("secondSliderBg");
+  makeDraggable(startThumb, true);
+  makeDraggable(endThumb, false);
 
-    let sliderStartValue = document.getElementById("secondSliderStartValue");
-    let sliderEndValue = document.getElementById("secondSliderEndValue");
-
-    const min = 0;
-    const max = 7000;
-    const step = 10;
-
-    let startePercent = 0;
-    let endPercent = 100;
-
-    function render() {
-      const startValue = Math.round(min + (startePercent / 100) * (max - min));
-      const endValue = Math.round(min + (endPercent / 100) * (max - min));
-
-      const steppedStartValue = Math.round(startValue / step) * step;
-      const steppedEndValue = Math.round(endValue / step) * step;
-
-      const steppedStartPercent =
-        ((steppedStartValue - min) / (max - min)) * 100;
-      const steppedEndPercent = ((steppedEndValue - min) / (max - min)) * 100;
-
-      sliderStartValue.textContent = min;
-      sliderEndValue.textContent = max;
-
-      sliderPainting.style.left = steppedStartPercent + "%";
-      sliderPainting.style.width =
-        steppedEndPercent - steppedStartPercent + "%";
-      sliderCursorStart.style.left = `calc(${steppedStartPercent + "%"} - 8px)`;
-      sliderCursorEnd.style.left = `calc(${steppedEndPercent + "%"} - 8px)`;
-
-      sliderValue.textContent = `${steppedStartValue} - ${steppedEndValue}`;
-    }
-
-    function percentFromEvent(e) {
-      const rect = sliderBg.getBoundingClientRect();
-      const position = e.clientX - rect.left;
-      const percent = (position / rect.width) * 100;
-      return Math.max(0, Math.min(100, percent));
-    }
-
-    function makeDraggable(el, isStart) {
-      el.addEventListener("pointerdown", () => {
-        function onMove(e) {
-          const percent = percentFromEvent(e);
-
-          if (isStart) {
-            startePercent = Math.min(percent, endPercent);
-          } else {
-            endPercent = Math.max(percent, startePercent);
-          }
-
-          render();
-        }
-
-        function onUp() {
-          document.removeEventListener("pointermove", onMove);
-          document.removeEventListener("pointerup", onUp);
-        }
-
-        document.addEventListener("pointermove", onMove);
-        document.addEventListener("pointerup", onUp);
-      });
-    }
-
-    makeDraggable(sliderCursorStart, true);
-    makeDraggable(sliderCursorEnd, false);
-    render();
-  }
-
-  firstSlider();
-  secondSlider();
+  minLabel.textContent = min;
+  maxLabel.textContent = max;
+  render();
 }
 
 main();

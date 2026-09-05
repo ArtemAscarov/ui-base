@@ -1,46 +1,46 @@
-.customCheckbox {
-  border: var(--defaultBorder);
-  border-radius: 20%;
-  width: 15px;
-  height: 15px;
-  box-shadow: var(--box-shadow);
-  background-color: var(--defaultBg);
+.ui-checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--checkbox-gap, 10px);
   cursor: pointer;
-  position: relative;
+  color: var(--checkbox-fg, inherit);
 }
 
-.defaultCheckbox:checked + .customCheckbox::after {
+.ui-checkbox__input {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+}
+
+.ui-checkbox__box {
+  position: relative;
+  width: var(--checkbox-size, 15px);
+  height: var(--checkbox-size, 15px);
+  border: var(--checkbox-border-width, var(--ui-border-width)) solid
+    var(--checkbox-border-color, var(--ui-border-color));
+  border-radius: var(--checkbox-radius, 20%);
+  background-color: var(--checkbox-bg, var(--ui-bg));
+  box-shadow: var(--ui-shadow);
+  cursor: pointer;
+}
+
+.ui-checkbox__box::after {
+  content: "";
+  position: absolute;
+  inset: calc(var(--checkbox-border-width, var(--ui-border-width)) * -1);
+
+  background-color: var(--checkbox-mark-color, var(--ui-fg));
+  -webkit-mask: url("./assets/checkMark.svg") center / 100% 100% no-repeat;
+  mask: url("./assets/checkMark.svg") center / 100% 100% no-repeat;
+
+  transform: scale(0);
+  transition: transform var(--ui-duration-fast) var(--ui-ease);
+}
+
+.ui-checkbox__input:checked + .ui-checkbox__box::after {
   transform: scale(1);
 }
 
-.defaultCheckbox:focus-visible + .customCheckbox {
-  box-shadow: var(--focus-visible);
-}
-
-.customCheckbox::after {
-  content: "";
-  background-image: url(/componentss/Checkbox/assets/checkMark.svg);
-  width: 10px;
-  height: 10px;
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  transform: scale(0);
-  transition: 80ms linear;
-}
-.defaultCheckbox {
-  opacity: 0;
-  top: 0;
-  position: absolute;
-}
-
-.flex {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.inputParent {
-  cursor: pointer;
+.ui-checkbox__input:focus-visible + .ui-checkbox__box {
+  box-shadow: var(--ui-focus-ring);
 }

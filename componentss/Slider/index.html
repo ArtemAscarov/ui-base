@@ -3,9 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="./style.css" />
+    <title>Slider</title>
     <link rel="stylesheet" href="/default.css" />
+    <link rel="stylesheet" href="/demo.css" />
+    <link rel="stylesheet" href="./style.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,37 +16,38 @@
     />
   </head>
   <body>
-    <fieldset>
+    <fieldset class="demo-frame demo-frame--fill">
       <legend>Slider</legend>
 
-      <div class="sliders">
-        <div class="sliderParent">
-          <div class="sliderHeader">
+      <div class="demo-stack demo-stack--centered">
+        <div class="ui-slider">
+          <div class="ui-slider__header">
             <p>Возраст</p>
             <p id="firstSliderValue">18</p>
           </div>
-          <div class="sliderBody">
-            <p id="firstSliderStartValue">18</p>
-            <div id="firstSliderBg" class="sliderBg">
-              <div id="firstSliderPainting" class="sliderPainting"></div>
-              <div id="firstSliderCursor" class="sliderCursor"></div>
+          <div class="ui-slider__body">
+            <p id="firstSliderMin">18</p>
+            <div class="ui-slider__track" id="firstSliderTrack">
+              <div class="ui-slider__range" id="firstSliderRange"></div>
+              <div class="ui-slider__thumb" id="firstSliderThumb"></div>
             </div>
-            <p id="firstSliderSndValue">90</p>
+            <p id="firstSliderMax">90</p>
           </div>
         </div>
-        <div class="sliderParent">
-          <div class="sliderHeader">
+
+        <div class="ui-slider">
+          <div class="ui-slider__header">
             <p>Цена</p>
             <p id="secondSliderValue">0 - 7000</p>
           </div>
-          <div class="sliderBody">
-            <p id="secondSliderStartValue">0</p>
-            <div id="secondSliderBg" class="sliderBg">
-              <div id="secondSliderPainting" class="sliderPainting w-100"></div>
-              <div id="sliderCursorStart" class="sliderCursorStart"></div>
-              <div id="sliderCursorEnd" class="sliderCursorEnd"></div>
+          <div class="ui-slider__body">
+            <p id="secondSliderMin">0</p>
+            <div class="ui-slider__track" id="secondSliderTrack">
+              <div class="ui-slider__range" id="secondSliderRange"></div>
+              <div class="ui-slider__thumb" id="secondSliderStartThumb"></div>
+              <div class="ui-slider__thumb" id="secondSliderEndThumb"></div>
             </div>
-            <p id="secondSliderEndValue">7000</p>
+            <p id="secondSliderMax">7000</p>
           </div>
         </div>
       </div>

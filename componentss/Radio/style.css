@@ -1,52 +1,50 @@
-.flex {
+.ui-radio {
   display: flex;
   align-items: center;
-  gap: 10px;
-}
-
-.inputParent {
+  gap: var(--radio-gap, 10px);
   cursor: pointer;
+  color: var(--radio-fg, inherit);
 }
 
-.defaultRadiio {
+.ui-radio__input {
   position: absolute;
   opacity: 0;
   top: 0;
 }
 
-.newRadio {
-  width: 16px;
-  border-radius: 50%;
-  height: 16px;
-  border: var(--defaultBorder);
-  background: var(--defaultBg);
-  box-shadow: var(--box-shadow);
-  position: relative;
+@property --radio-dot-radius {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
 }
 
-.newRadio::after {
-  content: "";
-  width: 8px;
-  height: 8px;
-  background-color: white;
-  position: absolute;
-  border-radius: 50%;
-  right: 25%;
-  top: 25%;
-  transform: scale(0);
-  transition: 80ms ease-in;
+.ui-radio__circle {
+  width: var(--radio-size, 16px);
+  height: var(--radio-size, 16px);
+  border: var(--radio-border-width, var(--ui-border-width)) solid
+    var(--radio-border-color, var(--ui-border-color));
+  border-radius: var(--ui-radius-round);
+  background-color: var(--radio-bg, var(--ui-bg));
+  box-shadow: var(--ui-shadow);
+
+  background-image: radial-gradient(
+    circle at center,
+    var(--radio-dot-color, var(--ui-fg)) 0,
+    var(--radio-dot-color, var(--ui-fg)) var(--radio-dot-radius, 0px),
+    transparent calc(var(--radio-dot-radius, 0px) * 1.12)
+  );
+  background-origin: border-box;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+
+  transition: --radio-dot-radius var(--ui-duration-fast) ease-in;
 }
 
-.defaultRadiio:checked + .newRadio::after {
-  transform: scale(1);
+.ui-radio__input:checked + .ui-radio__circle {
+  --radio-dot-radius: calc(var(--radio-dot-size, 8px) / 2);
 }
 
-.defaultRadiio:focus-visible + .newRadio {
-  box-shadow: var(--focus-visible);
+.ui-radio__input:focus-visible + .ui-radio__circle {
+  box-shadow: var(--ui-focus-ring);
 }
 
-.radioesParent {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
