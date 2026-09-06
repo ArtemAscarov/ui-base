@@ -9,11 +9,8 @@ function initCarousel(carousel) {
   const slides = [...track.children];
   const count = slides.length;
 
-  // Пустая карусель — не ошибка, просто нечего показывать.
   if (count === 0) return;
 
-  // Автопрокрутка выключена по умолчанию: движение без спроса —
-  // плохая доступность. Включается через data-autoplay="4000".
   const autoplayDelay = Number(carousel.dataset.autoplay ?? 0);
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
@@ -103,7 +100,6 @@ function initCarousel(carousel) {
     autoplayTimer = null;
   }
 
-  // Кнопки необязательны: карусель может жить на одном свайпе.
   nextButton?.addEventListener("click", () => goTo(currentIndex + 1));
   prevButton?.addEventListener("click", () => goTo(currentIndex - 1));
 

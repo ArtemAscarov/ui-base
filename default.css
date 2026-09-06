@@ -1,23 +1,13 @@
-/* =============================================================
-   UI-base · default.css
-
-   Необязательный слой. Состоит из двух вещей:
-     1) мини-reset для демо-страниц;
-     2) токены темы (--ui-*) — общее оформление всех компонентов.
-
-   Компоненты работают и БЕЗ этого файла: внутри каждого
-   компонента у любой переменной есть литеральное значение
-   по умолчанию. Этот файл нужен, чтобы поменять внешний вид
-   всех компонентов сразу, из одного места.
-   ============================================================= */
-
-/* ---------------------------- reset ------------------------- */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
 ul,
@@ -35,51 +25,4 @@ select,
 textarea {
   font: inherit;
   color: inherit;
-}
-
-body {
-  font-family: var(--ui-font-family);
-}
-
-/* ------------------------ токены темы ----------------------- */
-:root {
-  color-scheme: light;
-
-  /* Системный шрифт: ноль сетевых запросов, родной вид в каждой ОС.
-     Хочешь свой — переопредели --ui-font-family, а не правь компоненты. */
-  --ui-font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial,
-    sans-serif;
-
-  /* поверхности и текст */
-  --ui-bg: #666969;
-  --ui-fg: #ffffff;
-  --ui-muted: #808080;
-
-  /* границы */
-  --ui-border-width: 1px;
-  --ui-border-color: #4b494b;
-  --ui-border-subtle: rgba(0, 0, 0, 0.26);
-
-  /* акцент (ручки слайдера и т.п.) */
-  --ui-accent: wheat;
-  --ui-accent-border: rgba(0, 0, 0, 0.592);
-
-  /* дорожки прогресса */
-  --ui-track: rgba(0, 0, 0, 0.17);
-  --ui-track-fill: rgba(0, 0, 0, 0.51);
-
-  /* скругления */
-  --ui-radius: 8px;
-  --ui-radius-pill: 10px;
-  --ui-radius-round: 50%;
-
-  /* тени */
-  --ui-shadow: 0 0 5px 0.5px rgb(130, 128, 130);
-  --ui-focus-ring: 0 0 5px 2px rgb(31, 25, 31);
-
-  /* время и кривая анимаций */
-  --ui-duration-fast: 80ms;
-  --ui-duration: 200ms;
-  --ui-duration-slow: 400ms;
-  --ui-ease: linear;
 }

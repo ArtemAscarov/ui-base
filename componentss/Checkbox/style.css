@@ -1,59 +1,34 @@
-/* =============================================================
-   UI-base · Checkbox
-
-   Публичный API — переменные --checkbox-*.
-   Тема (общая на все компоненты) — переменные --ui-*.
-   Если нет ни того, ни другого — работают литеральные значения
-   ниже, поэтому файл самодостаточен: скопировал — и работает.
-
-   Порядок разрешения: --checkbox-* → --ui-* → значение по умолчанию.
-   ============================================================= */
-
 .ui-checkbox {
-  --_checkbox-gap: var(--checkbox-gap, 10px);
-  --_checkbox-size: var(--checkbox-size, 15px);
-  --_checkbox-radius: var(--checkbox-radius, 20%);
-  --_checkbox-fg: var(--checkbox-fg, inherit);
-  --_checkbox-bg: var(--checkbox-bg, var(--ui-bg, #666969));
-  --_checkbox-border-width: var(
-    --checkbox-border-width,
-    var(--ui-border-width, 1px)
-  );
-  --_checkbox-border-color: var(
-    --checkbox-border-color,
-    var(--ui-border-color, #4b494b)
-  );
-  --_checkbox-border-hover-color: var(
-    --checkbox-border-hover-color,
-    var(--ui-fg, #ffffff)
-  );
-  --_checkbox-mark-color: var(--checkbox-mark-color, var(--ui-fg, #ffffff));
-  --_checkbox-shadow: var(
-    --checkbox-shadow,
-    var(--ui-shadow, 0 0 5px 0.5px rgb(130, 128, 130))
-  );
-  --_checkbox-focus-ring: var(
-    --checkbox-focus-ring,
-    var(--ui-focus-ring, 0 0 5px 2px rgb(31, 25, 31))
-  );
-  --_checkbox-disabled-opacity: var(--checkbox-disabled-opacity, 0.5);
-  --_checkbox-duration: var(--checkbox-duration, var(--ui-duration-fast, 80ms));
-  --_checkbox-ease: var(--checkbox-ease, var(--ui-ease, linear));
-  --_checkbox-icon: var(
-    --checkbox-icon,
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.5 9.5 18 20 6.5'/%3E%3C/svg%3E")
-  );
+  --checkbox-color: inherit;
+  --checkbox-bg: #666969;
+  --checkbox-mark-color: #ffffff;
+  --checkbox-border-color: #4b494b;
+  --checkbox-border-hover-color: #ffffff;
+
+  --checkbox-size: 15px;
+  --checkbox-gap: 10px;
+
+  --checkbox-border-width: 1px;
+  --checkbox-radius: 20%;
+
+  --checkbox-shadow: 0 0 5px 0.5px rgb(130, 128, 130);
+  --checkbox-focus-ring: 0 0 5px 2px rgb(31, 25, 31);
+
+  --checkbox-disabled-opacity: 0.5;
+
+  --checkbox-duration: 80ms;
+  --checkbox-easing: linear;
+
+  --checkbox-mark-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.5 9.5 18 20 6.5'/%3E%3C/svg%3E");
 
   position: relative;
   display: flex;
   align-items: center;
-  gap: var(--_checkbox-gap);
-  color: var(--_checkbox-fg);
+  gap: var(--checkbox-gap);
+  color: var(--checkbox-color);
   cursor: pointer;
 }
 
-/* Настоящий input прячем, но оставляем в потоке: он ловит клики
-   по <label>, клавиатуру и остаётся полем формы. */
 .ui-checkbox__input {
   position: absolute;
   top: 0;
@@ -62,38 +37,31 @@
 
 .ui-checkbox__box {
   position: relative;
-  width: var(--_checkbox-size);
-  height: var(--_checkbox-size);
-  border: var(--_checkbox-border-width) solid var(--_checkbox-border-color);
-  border-radius: var(--_checkbox-radius);
-  background-color: var(--_checkbox-bg);
-  box-shadow: var(--_checkbox-shadow);
+  width: var(--checkbox-size);
+  height: var(--checkbox-size);
+  border: var(--checkbox-border-width) solid var(--checkbox-border-color);
+  border-radius: var(--checkbox-radius);
+  background-color: var(--checkbox-bg);
+  box-shadow: var(--checkbox-shadow);
   cursor: inherit;
-  transition: border-color var(--_checkbox-duration) var(--_checkbox-ease);
+  transition: border-color var(--checkbox-duration) var(--checkbox-easing);
 }
 
-/* Галочка — не картинка, а маска: цвет задаётся background-color,
-   поэтому иконка перекрашивается вместе с темой. */
 .ui-checkbox__box::after {
   content: "";
   position: absolute;
   inset: 0;
-
-  background-color: var(--_checkbox-mark-color);
-  -webkit-mask: var(--_checkbox-icon) center / contain no-repeat;
-  mask: var(--_checkbox-icon) center / contain no-repeat;
-
+  background-color: var(--checkbox-mark-color);
+  -webkit-mask: var(--checkbox-mark-icon) center / contain no-repeat;
+  mask: var(--checkbox-mark-icon) center / contain no-repeat;
   transform: scale(0);
-  transition: transform var(--_checkbox-duration) var(--_checkbox-ease);
+  transition: transform var(--checkbox-duration) var(--checkbox-easing);
 }
 
 .ui-checkbox__input:checked + .ui-checkbox__box::after {
   transform: scale(1);
 }
 
-/* Третье состояние: чёрточка вместо галочки.
-   Правило стоит после :checked, чтобы при обоих флагах
-   побеждала чёрточка — как в нативном чекбоксе. */
 .ui-checkbox__input:indeterminate + .ui-checkbox__box::after {
   inset: 40% 20%;
   -webkit-mask: none;
@@ -103,14 +71,14 @@
 }
 
 .ui-checkbox:has(.ui-checkbox__input:not(:disabled)):hover .ui-checkbox__box {
-  border-color: var(--_checkbox-border-hover-color);
+  border-color: var(--checkbox-border-hover-color);
 }
 
 .ui-checkbox__input:focus-visible + .ui-checkbox__box {
-  box-shadow: var(--_checkbox-focus-ring);
+  box-shadow: var(--checkbox-focus-ring);
 }
 
 .ui-checkbox:has(.ui-checkbox__input:disabled) {
   cursor: not-allowed;
-  opacity: var(--_checkbox-disabled-opacity);
+  opacity: var(--checkbox-disabled-opacity);
 }

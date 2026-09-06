@@ -4,8 +4,6 @@ function initSelect(select) {
   const input = select.querySelector(".ui-select__input");
   const options = [...select.querySelectorAll(".ui-select__option")];
 
-  // Компонент не должен падать на неполной разметке: без триггера
-  // или без списка делать нечего, всё остальное — необязательно.
   if (!trigger || !list || options.length === 0) return;
 
   const placeholder = trigger.textContent.trim();
@@ -21,8 +19,6 @@ function initSelect(select) {
   }
 
   function close() {
-    // Фокус надо увести ДО inert: иначе браузер выкинет его в <body>
-    // и следующий Tab начнёт обход страницы с самого начала.
     if (list.contains(document.activeElement)) trigger.focus();
 
     select.classList.remove("ui-select--open");
@@ -56,8 +52,6 @@ function initSelect(select) {
   function choose(option) {
     sync(option);
 
-    // Скрытый input меняем из кода, а код не порождает событий сам:
-    // диспатчим change вручную, чтобы форма и подписчики о нём узнали.
     if (input) input.dispatchEvent(new Event("change", { bubbles: true }));
 
     close();
@@ -91,8 +85,6 @@ function initSelect(select) {
   });
 
   options.forEach((option, index) => {
-    // Roving tabindex: в Tab-обход попадает только триггер,
-    // между пунктами ходят стрелками.
     option.setAttribute("tabindex", "-1");
 
     option.addEventListener("click", () => choose(option));
@@ -128,15 +120,11 @@ function initSelect(select) {
     });
   });
 
-  // Клик мимо компонента закрывает список. Именно contains(),
-  // а не stopPropagation() внутри: глушить всплытие означало бы
-  // ломать чужие обработчики на всей странице.
   document.addEventListener("click", (event) => {
     if (select.contains(event.target)) return;
     close();
   });
 
-  // Разметка может прийти с уже выбранным пунктом — подхватываем его.
   const preselected = options[selectedIndex()];
   if (preselected) sync(preselected);
 

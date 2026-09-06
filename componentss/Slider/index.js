@@ -6,11 +6,8 @@ function initSlider(slider) {
   const maxLabel = slider.querySelector(".ui-slider__bound--max");
   const thumbs = [...slider.querySelectorAll(".ui-slider__thumb")];
 
-  // Дорожка и хотя бы одна ручка обязательны, подписи — нет.
   if (!track || thumbs.length === 0) return;
 
-  // Настройки живут в data-* на контейнере, а не в id:
-  // так на одной странице может стоять сколько угодно слайдеров.
   const min = Number(slider.dataset.min ?? 0);
   const max = Number(slider.dataset.max ?? 100);
   const step = Number(slider.dataset.step ?? 1);
@@ -18,9 +15,6 @@ function initSlider(slider) {
 
   const isRange = thumbs.length > 1;
 
-  // Сетка шага отсчитывается от min, а не от нуля: при min = 18 и
-  // step = 5 допустимы 18, 23, 28..., а не 20, 25, 30.
-  // toFixed убирает мусор плавающей точки вида 0.30000000000000004.
   function snap(value) {
     const stepped = min + Math.round((value - min) / step) * step;
     const clamped = Math.min(max, Math.max(min, stepped));
@@ -40,8 +34,6 @@ function initSlider(slider) {
     snap(Number(thumb.dataset.value ?? (index === 0 ? min : max)))
   );
 
-  // Ручки диапазона могут «перепрыгнуть» друг друга. Тогда меняем
-  // значения местами и возвращаем новый индекс той, что тащат.
   function setValue(index, value) {
     values[index] = value;
 
@@ -86,10 +78,6 @@ function initSlider(slider) {
   track.addEventListener("pointerdown", (event) => {
     if (event.pointerType === "mouse" && event.button !== 0) return;
 
-    // preventDefault гасит действие браузера по умолчанию
-    // (перетаскивание, выделение), setPointerCapture привязывает
-    // все последующие pointer-события к дорожке — курсор может
-    // уехать хоть за пределы окна, ручка не «залипнет».
     event.preventDefault();
     track.setPointerCapture(event.pointerId);
 
@@ -147,8 +135,6 @@ function initSlider(slider) {
       case "End":
         next = max;
         break;
-      // Любая другая клавиша — не наша: выходим ДО preventDefault,
-      // иначе Tab перестанет уводить фокус и получится ловушка.
       default:
         return;
     }

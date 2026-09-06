@@ -1,56 +1,30 @@
-/* =============================================================
-   UI-base · Radio
-
-   Публичный API — переменные --radio-*.
-   Тема — переменные --ui-*.
-   Порядок разрешения: --radio-* → --ui-* → значение по умолчанию.
-   ============================================================= */
-
-/* Обычную кастомную переменную анимировать нельзя: браузер не знает,
-   что в ней лежит длина. @property объявляет тип — и radius начинает
-   плавно интерполироваться. */
-@property --_radio-dot-radius {
-  syntax: "<length>";
-  inherits: false;
-  initial-value: 0px;
-}
-
 .ui-radio {
-  --_radio-gap: var(--radio-gap, 10px);
-  --_radio-size: var(--radio-size, 16px);
-  --_radio-dot-size: var(--radio-dot-size, 8px);
-  --_radio-fg: var(--radio-fg, inherit);
-  --_radio-bg: var(--radio-bg, var(--ui-bg, #666969));
-  --_radio-dot-color: var(--radio-dot-color, var(--ui-fg, #ffffff));
-  --_radio-border-width: var(
-    --radio-border-width,
-    var(--ui-border-width, 1px)
-  );
-  --_radio-border-color: var(
-    --radio-border-color,
-    var(--ui-border-color, #4b494b)
-  );
-  --_radio-border-hover-color: var(
-    --radio-border-hover-color,
-    var(--ui-fg, #ffffff)
-  );
-  --_radio-shadow: var(
-    --radio-shadow,
-    var(--ui-shadow, 0 0 5px 0.5px rgb(130, 128, 130))
-  );
-  --_radio-focus-ring: var(
-    --radio-focus-ring,
-    var(--ui-focus-ring, 0 0 5px 2px rgb(31, 25, 31))
-  );
-  --_radio-disabled-opacity: var(--radio-disabled-opacity, 0.5);
-  --_radio-duration: var(--radio-duration, var(--ui-duration-fast, 80ms));
-  --_radio-ease: var(--radio-ease, var(--ui-ease, linear));
+  --radio-color: inherit;
+  --radio-bg: #666969;
+  --radio-dot-color: #ffffff;
+  --radio-border-color: #4b494b;
+  --radio-border-hover-color: #ffffff;
+
+  --radio-size: 16px;
+  --radio-dot-size: 8px;
+  --radio-gap: 10px;
+
+  --radio-border-width: 1px;
+  --radio-radius: 50%;
+
+  --radio-shadow: 0 0 5px 0.5px rgb(130, 128, 130);
+  --radio-focus-ring: 0 0 5px 2px rgb(31, 25, 31);
+
+  --radio-disabled-opacity: 0.5;
+
+  --radio-duration: 80ms;
+  --radio-easing: linear;
 
   position: relative;
   display: flex;
   align-items: center;
-  gap: var(--_radio-gap);
-  color: var(--_radio-fg);
+  gap: var(--radio-gap);
+  color: var(--radio-color);
   cursor: pointer;
 }
 
@@ -61,43 +35,43 @@
 }
 
 .ui-radio__circle {
-  width: var(--_radio-size);
-  height: var(--_radio-size);
-  border: var(--_radio-border-width) solid var(--_radio-border-color);
-  border-radius: var(--radio-radius, var(--ui-radius-round, 50%));
-  background-color: var(--_radio-bg);
-  box-shadow: var(--_radio-shadow);
+  position: relative;
+  width: var(--radio-size);
+  height: var(--radio-size);
+  border: var(--radio-border-width) solid var(--radio-border-color);
+  border-radius: var(--radio-radius);
+  background-color: var(--radio-bg);
+  box-shadow: var(--radio-shadow);
   cursor: inherit;
-
-  /* Точка — не отдельный элемент, а радиальный градиент:
-     нечего добавлять в разметку, анимируется один радиус. */
-  background-image: radial-gradient(
-    circle at center,
-    var(--_radio-dot-color) 0,
-    var(--_radio-dot-color) var(--_radio-dot-radius),
-    transparent calc(var(--_radio-dot-radius) * 1.12)
-  );
-  background-origin: border-box;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-
-  transition: --_radio-dot-radius var(--_radio-duration) ease-in,
-    border-color var(--_radio-duration) var(--_radio-ease);
+  transition: border-color var(--radio-duration) var(--radio-easing);
 }
 
-.ui-radio__input:checked + .ui-radio__circle {
-  --_radio-dot-radius: calc(var(--_radio-dot-size) / 2);
+.ui-radio__circle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--radio-dot-size);
+  height: var(--radio-dot-size);
+  border-radius: var(--radio-radius);
+  background-color: var(--radio-dot-color);
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform var(--radio-duration) var(--radio-easing);
+}
+
+.ui-radio__input:checked + .ui-radio__circle::after {
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .ui-radio:has(.ui-radio__input:not(:disabled)):hover .ui-radio__circle {
-  border-color: var(--_radio-border-hover-color);
+  border-color: var(--radio-border-hover-color);
 }
 
 .ui-radio__input:focus-visible + .ui-radio__circle {
-  box-shadow: var(--_radio-focus-ring);
+  box-shadow: var(--radio-focus-ring);
 }
 
 .ui-radio:has(.ui-radio__input:disabled) {
   cursor: not-allowed;
-  opacity: var(--_radio-disabled-opacity);
+  opacity: var(--radio-disabled-opacity);
 }

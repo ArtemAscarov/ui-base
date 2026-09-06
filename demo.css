@@ -1,10 +1,3 @@
-/* =============================================================
-   UI-base · demo.css
-
-   Стили ТОЛЬКО для витрины. В компоненты не входят,
-   копировать к себе в проект не нужно.
-   ============================================================= */
-
 .demo-page {
   padding: 16px;
 }
@@ -19,13 +12,13 @@
 }
 
 .demo-grid iframe {
-  border: 1px solid var(--ui-border-subtle);
+  border: 1px solid rgba(0, 0, 0, 0.26);
   background: #ffffff;
 }
 
 .demo-frame {
   padding: 8px;
-  border: 1px solid var(--ui-border-subtle);
+  border: 1px solid rgba(0, 0, 0, 0.26);
 }
 
 .demo-frame--clip {
@@ -52,7 +45,6 @@
   margin-bottom: 20px;
 }
 
-/* Заглушка внутри слайда карусели. */
 .demo-slide {
   display: grid;
   place-items: center;
@@ -60,8 +52,7 @@
   font-size: 20px;
 }
 
-/* Карусель в режиме «несколько слайдов сразу». */
-.demo-carousel--multi {
+.ui-carousel.demo-carousel--multi {
   --carousel-slide-width: 180px;
   --carousel-slide-height: 90px;
 }
