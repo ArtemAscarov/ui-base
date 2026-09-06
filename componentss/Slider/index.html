@@ -4,50 +4,73 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Slider</title>
-    <link rel="stylesheet" href="/default.css" />
-    <link rel="stylesheet" href="/demo.css" />
+    <link rel="stylesheet" href="../../default.css" />
+    <link rel="stylesheet" href="../../demo.css" />
     <link rel="stylesheet" href="./style.css" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body>
-    <fieldset class="demo-frame demo-frame--fill">
+    <fieldset class="demo-frame">
       <legend>Slider</legend>
 
       <div class="demo-stack demo-stack--centered">
-        <div class="ui-slider">
+        <div
+          class="ui-slider"
+          data-ui-slider
+          data-min="0"
+          data-max="100"
+          data-step="1"
+        >
           <div class="ui-slider__header">
-            <p>Возраст</p>
-            <p id="firstSliderValue">18</p>
+            <span class="ui-slider__title">Demo</span>
+            <span class="ui-slider__value"></span>
           </div>
           <div class="ui-slider__body">
-            <p id="firstSliderMin">18</p>
-            <div class="ui-slider__track" id="firstSliderTrack">
-              <div class="ui-slider__range" id="firstSliderRange"></div>
-              <div class="ui-slider__thumb" id="firstSliderThumb"></div>
+            <span class="ui-slider__bound ui-slider__bound--min"></span>
+            <div class="ui-slider__track">
+              <div class="ui-slider__range"></div>
+              <div
+                class="ui-slider__thumb"
+                role="slider"
+                tabindex="0"
+                aria-label="Demo"
+                data-value="40"
+              ></div>
             </div>
-            <p id="firstSliderMax">90</p>
+            <span class="ui-slider__bound ui-slider__bound--max"></span>
           </div>
         </div>
 
-        <div class="ui-slider">
+        <div
+          class="ui-slider"
+          data-ui-slider
+          data-min="0"
+          data-max="1000"
+          data-step="10"
+        >
           <div class="ui-slider__header">
-            <p>Цена</p>
-            <p id="secondSliderValue">0 - 7000</p>
+            <span class="ui-slider__title">Demo range</span>
+            <span class="ui-slider__value"></span>
           </div>
           <div class="ui-slider__body">
-            <p id="secondSliderMin">0</p>
-            <div class="ui-slider__track" id="secondSliderTrack">
-              <div class="ui-slider__range" id="secondSliderRange"></div>
-              <div class="ui-slider__thumb" id="secondSliderStartThumb"></div>
-              <div class="ui-slider__thumb" id="secondSliderEndThumb"></div>
+            <span class="ui-slider__bound ui-slider__bound--min"></span>
+            <div class="ui-slider__track">
+              <div class="ui-slider__range"></div>
+              <div
+                class="ui-slider__thumb"
+                role="slider"
+                tabindex="0"
+                aria-label="Demo from"
+                data-value="200"
+              ></div>
+              <div
+                class="ui-slider__thumb"
+                role="slider"
+                tabindex="0"
+                aria-label="Demo to"
+                data-value="800"
+              ></div>
             </div>
-            <p id="secondSliderMax">7000</p>
+            <span class="ui-slider__bound ui-slider__bound--max"></span>
           </div>
         </div>
       </div>

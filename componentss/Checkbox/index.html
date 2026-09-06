@@ -4,16 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Checkbox</title>
-    <link rel="stylesheet" href="/default.css" />
-    <link rel="stylesheet" href="/demo.css" />
+    <link rel="stylesheet" href="../../default.css" />
+    <link rel="stylesheet" href="../../demo.css" />
     <link rel="stylesheet" href="./style.css" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body>
     <fieldset class="demo-frame">
@@ -27,7 +20,7 @@
             type="checkbox"
           />
           <div class="ui-checkbox__box"></div>
-          Не отмечено
+          Demo
         </label>
 
         <label class="ui-checkbox" for="checkbox-checked">
@@ -38,9 +31,33 @@
             type="checkbox"
           />
           <div class="ui-checkbox__box"></div>
-          Отмечено
+          Demo checked
+        </label>
+
+        <label class="ui-checkbox" for="checkbox-mixed">
+          <input
+            data-indeterminate
+            id="checkbox-mixed"
+            class="ui-checkbox__input"
+            type="checkbox"
+          />
+          <div class="ui-checkbox__box"></div>
+          Demo mixed
+        </label>
+
+        <label class="ui-checkbox" for="checkbox-disabled">
+          <input
+            disabled
+            id="checkbox-disabled"
+            class="ui-checkbox__input"
+            type="checkbox"
+          />
+          <div class="ui-checkbox__box"></div>
+          Demo disabled
         </label>
       </div>
     </fieldset>
+
+    <script src="./index.js"></script>
   </body>
 </html>

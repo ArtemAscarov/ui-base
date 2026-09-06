@@ -1,35 +1,75 @@
+/* =============================================================
+   UI-base · Marquee (бегущая строка)
+
+   Публичный API — переменные --marquee-*.
+   Тема — переменные --ui-*.
+   Порядок разрешения: --marquee-* → --ui-* → значение по умолчанию.
+
+   Как это едет: внутри viewport лежат ДВЕ одинаковые группы,
+   поэтому сдвиг на -50% ставит вторую ровно туда, где была
+   первая — шва не видно. Вторую группу создаёт index.js.
+   ============================================================= */
+
 .ui-marquee {
+  --_marquee-height: var(--marquee-height, 160px);
+  --_marquee-overhang: var(--marquee-overhang, 50px);
+  --_marquee-padding-y: var(--marquee-padding-y, 20px);
+  --_marquee-tilt: var(--marquee-tilt, -3deg);
+  --_marquee-gap: var(--marquee-gap, 64px);
+  --_marquee-duration: var(--marquee-duration, 20s);
+  --_marquee-bg: var(--marquee-bg, var(--ui-bg, #666969));
+  --_marquee-fg: var(--marquee-fg, var(--ui-fg, #ffffff));
+  --_marquee-shadow: var(
+    --marquee-shadow,
+    var(--ui-shadow, 0 0 5px 0.5px rgb(130, 128, 130))
+  );
+  --_marquee-font-size: var(--marquee-font-size, 32px);
+  --_marquee-font-weight: var(--marquee-font-weight, 700);
+
   position: relative;
   width: 100%;
-  height: var(--marquee-height, 160px);
+  height: var(--_marquee-height);
 }
 
+/* Лента шире родителя на overhang с каждой стороны: при наклоне
+   её углы иначе заезжали бы внутрь и были бы видны пустые треугольники. */
 .ui-marquee__ribbon {
-  position: relative;
+  position: absolute;
   top: 50%;
-  left: calc(var(--marquee-overhang, 50px) * -1);
-  width: calc(100% + var(--marquee-overhang, 50px) * 2);
-  padding: var(--marquee-padding-y, 20px) 0;
-  background: var(--marquee-bg, var(--ui-bg));
-  box-shadow: var(--ui-shadow);
-  transform: rotate(var(--marquee-tilt, -3deg));
+  left: calc(var(--_marquee-overhang) * -1);
+  width: calc(100% + var(--_marquee-overhang) * 2);
+  padding: var(--_marquee-padding-y) 0;
+  background: var(--_marquee-bg);
+  box-shadow: var(--_marquee-shadow);
+  transform: translateY(-50%) rotate(var(--_marquee-tilt));
   overflow: hidden;
 }
 
+.ui-marquee__viewport {
+  display: flex;
+  width: max-content;
+  animation: ui-marquee-scroll var(--_marquee-duration) linear infinite;
+}
+
+/* padding-right ровно в размер gap: он играет роль промежутка
+   между последним элементом группы и первым элементом её копии. */
 .ui-marquee__group {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: var(--marquee-gap, 550px);
-  padding-left: 100%;
-  animation: ui-marquee-scroll var(--marquee-duration, 14s) linear infinite;
+  gap: var(--_marquee-gap);
+  padding-right: var(--_marquee-gap);
 }
 
 .ui-marquee__item {
-  display: inline-block;
   white-space: nowrap;
-  color: var(--marquee-fg, var(--ui-fg));
-  font-size: var(--marquee-font-size, 32px);
-  font-weight: var(--marquee-font-weight, 900);
+  color: var(--_marquee-fg);
+  font-size: var(--_marquee-font-size);
+  font-weight: var(--_marquee-font-weight);
+}
+
+.ui-marquee:hover .ui-marquee__viewport,
+.ui-marquee:focus-within .ui-marquee__viewport {
+  animation-play-state: paused;
 }
 
 @keyframes ui-marquee-scroll {
@@ -38,6 +78,12 @@
   }
 
   to {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-marquee__viewport {
+    animation: none;
   }
 }

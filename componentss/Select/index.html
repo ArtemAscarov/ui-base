@@ -4,34 +4,67 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Select</title>
-    <link rel="stylesheet" href="/default.css" />
-    <link rel="stylesheet" href="/demo.css" />
+    <link rel="stylesheet" href="../../default.css" />
+    <link rel="stylesheet" href="../../demo.css" />
     <link rel="stylesheet" href="./style.css" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body>
     <fieldset class="demo-frame">
       <legend>Select</legend>
 
       <div class="ui-select" data-ui-select>
+        <input class="ui-select__input" type="hidden" name="demo" />
+
         <div class="ui-select__header">
-          <button class="ui-select__trigger" type="button">
-            Выберите сложность
+          <button
+            class="ui-select__trigger"
+            type="button"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+          >
+            Demo
           </button>
           <div class="ui-select__arrow"></div>
         </div>
-        <div class="ui-select__list">
-          <div class="ui-select__options">
-            <button class="ui-select__option" type="button">Легко</button>
-            <button class="ui-select__option" type="button">Средне</button>
-            <button class="ui-select__option" type="button">Сложно</button>
-            <button class="ui-select__option" type="button">Невозможно</button>
+
+        <div class="ui-select__list" inert>
+          <div class="ui-select__options" role="listbox" aria-label="Demo">
+            <button
+              class="ui-select__option"
+              type="button"
+              role="option"
+              aria-selected="false"
+              data-value="1"
+            >
+              Demo 1
+            </button>
+            <button
+              class="ui-select__option"
+              type="button"
+              role="option"
+              aria-selected="false"
+              data-value="2"
+            >
+              Demo 2
+            </button>
+            <button
+              class="ui-select__option"
+              type="button"
+              role="option"
+              aria-selected="false"
+              data-value="3"
+            >
+              Demo 3
+            </button>
+            <button
+              class="ui-select__option"
+              type="button"
+              role="option"
+              aria-selected="false"
+              data-value="4"
+            >
+              Demo 4
+            </button>
           </div>
         </div>
       </div>

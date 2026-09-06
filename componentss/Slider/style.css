@@ -1,56 +1,125 @@
+/* =============================================================
+   UI-base · Slider (одна ручка или диапазон)
+
+   Публичный API — переменные --slider-*.
+   Тема — переменные --ui-*.
+   Порядок разрешения: --slider-* → --ui-* → значение по умолчанию.
+   ============================================================= */
+
 .ui-slider {
-  max-width: var(--slider-width, 400px);
+  --_slider-width: var(--slider-width, 400px);
+  --_slider-padding: var(--slider-padding, 5px);
+  --_slider-body-padding: var(--slider-body-padding, 10px 15px);
+  --_slider-header-gap: var(--slider-header-gap, 10px);
+  --_slider-gap: var(--slider-gap, 10px);
+  --_slider-radius: var(--slider-radius, var(--ui-radius, 8px));
+  --_slider-label-fg: var(--slider-label-fg, inherit);
+  --_slider-fg: var(--slider-fg, var(--ui-fg, #ffffff));
+  --_slider-font-weight: var(--slider-font-weight, 500);
+  --_slider-bg: var(--slider-bg, var(--ui-bg, #666969));
+  --_slider-border-width: var(
+    --slider-border-width,
+    var(--ui-border-width, 1px)
+  );
+  --_slider-border-color: var(
+    --slider-border-color,
+    var(--ui-border-subtle, rgba(0, 0, 0, 0.26))
+  );
+  --_slider-shadow: var(
+    --slider-shadow,
+    var(--ui-shadow, 0 0 5px 0.5px rgb(130, 128, 130))
+  );
+  --_slider-focus-ring: var(
+    --slider-focus-ring,
+    var(--ui-focus-ring, 0 0 5px 2px rgb(31, 25, 31))
+  );
+  --_slider-track-height: var(--slider-track-height, 8px);
+  --_slider-track-radius: var(
+    --slider-track-radius,
+    var(--ui-radius-pill, 10px)
+  );
+  --_slider-track-color: var(
+    --slider-track-color,
+    var(--ui-track, rgba(0, 0, 0, 0.17))
+  );
+  --_slider-range-color: var(
+    --slider-range-color,
+    var(--ui-track-fill, rgba(0, 0, 0, 0.51))
+  );
+  --_slider-thumb-size: var(--slider-thumb-size, 16px);
+  --_slider-thumb-color: var(--slider-thumb-color, var(--ui-accent, wheat));
+  --_slider-thumb-border-color: var(
+    --slider-thumb-border-color,
+    var(--ui-accent-border, rgba(0, 0, 0, 0.592))
+  );
+
   width: 100%;
-  padding: var(--slider-padding, 5px);
-  border: var(--slider-border-width, var(--ui-border-width)) solid
-    var(--slider-border-color, var(--ui-border-subtle));
-  color: var(--slider-label-fg, inherit);
+  max-width: var(--_slider-width);
+  padding: var(--_slider-padding);
+  border: var(--_slider-border-width) solid var(--_slider-border-color);
+  color: var(--_slider-label-fg);
 }
 
 .ui-slider__header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: var(--_slider-header-gap);
 }
 
 .ui-slider__body {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--_slider-gap);
   width: 100%;
-  padding: 10px 15px;
-  border-radius: var(--ui-radius);
-  background: var(--slider-bg, var(--ui-bg));
-  box-shadow: var(--ui-shadow);
-  color: var(--slider-fg, var(--ui-fg));
-  font-weight: 500;
+  padding: var(--_slider-body-padding);
+  border-radius: var(--_slider-radius);
+  background: var(--_slider-bg);
+  box-shadow: var(--_slider-shadow);
+  color: var(--_slider-fg);
+  font-weight: var(--_slider-font-weight);
+
+  /* Без этого протаскивание ручки выделяет подписи как текст. */
+  user-select: none;
 }
 
 .ui-slider__track {
   position: relative;
   width: 100%;
-  height: var(--slider-track-height, 8px);
-  border-radius: var(--ui-radius-pill);
-  background: var(--slider-track-color, var(--ui-track));
-  margin: 0 calc(var(--slider-thumb-size, 16px) / 2);
+  height: var(--_slider-track-height);
+
+  /* Половина ручки торчит за край дорожки в крайних положениях —
+     резервируем это место, иначе ручка обрежется. */
+  margin: 0 calc(var(--_slider-thumb-size) / 2);
+  border-radius: var(--_slider-track-radius);
+  background: var(--_slider-track-color);
+  cursor: pointer;
+
+  /* Решение «жест — это скролл или перетаскивание» браузер принимает
+     ДО того, как сработает JS. none = никаких жестов, всё наше. */
+  touch-action: none;
 }
 
 .ui-slider__range {
   position: absolute;
-  height: var(--slider-track-height, 8px);
-  border-radius: var(--ui-radius-pill);
-  background: var(--slider-range-color, var(--ui-track-fill));
+  height: var(--_slider-track-height);
+  border-radius: var(--_slider-track-radius);
+  background: var(--_slider-range-color);
 }
 
 .ui-slider__thumb {
   position: absolute;
   top: 50%;
-  width: var(--slider-thumb-size, 16px);
-  height: var(--slider-thumb-size, 16px);
-  border: var(--ui-border-width) solid
-    var(--slider-thumb-border-color, var(--ui-accent-border));
-  border-radius: var(--ui-radius-round);
-  background-color: var(--slider-thumb-color, var(--ui-accent));
+  width: var(--_slider-thumb-size);
+  height: var(--_slider-thumb-size);
+  border: var(--_slider-border-width) solid var(--_slider-thumb-border-color);
+  border-radius: var(--slider-thumb-radius, var(--ui-radius-round, 50%));
+  background-color: var(--_slider-thumb-color);
   transform: translate(-50%, -50%);
   cursor: pointer;
+  touch-action: none;
+}
+
+.ui-slider__thumb:focus-visible {
+  outline: none;
+  box-shadow: var(--_slider-focus-ring);
 }

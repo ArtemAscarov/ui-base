@@ -1,129 +1,179 @@
-function main() {
-  singleSlider();
-  rangeSlider();
-}
+function initSlider(slider) {
+  const track = slider.querySelector(".ui-slider__track");
+  const range = slider.querySelector(".ui-slider__range");
+  const valueLabel = slider.querySelector(".ui-slider__value");
+  const minLabel = slider.querySelector(".ui-slider__bound--min");
+  const maxLabel = slider.querySelector(".ui-slider__bound--max");
+  const thumbs = [...slider.querySelectorAll(".ui-slider__thumb")];
 
-function singleSlider() {
-  const valueLabel = document.getElementById("firstSliderValue");
-  const minLabel = document.getElementById("firstSliderMin");
-  const maxLabel = document.getElementById("firstSliderMax");
-  const track = document.getElementById("firstSliderTrack");
-  const range = document.getElementById("firstSliderRange");
-  const thumb = document.getElementById("firstSliderThumb");
+  // Дорожка и хотя бы одна ручка обязательны, подписи — нет.
+  if (!track || thumbs.length === 0) return;
 
-  const min = 18;
-  const max = 90;
-  const step = 1;
+  // Настройки живут в data-* на контейнере, а не в id:
+  // так на одной странице может стоять сколько угодно слайдеров.
+  const min = Number(slider.dataset.min ?? 0);
+  const max = Number(slider.dataset.max ?? 100);
+  const step = Number(slider.dataset.step ?? 1);
+  const decimals = (String(step).split(".")[1] ?? "").length;
 
-  function percentFromEvent(event) {
-    const rect = track.getBoundingClientRect();
-    const percent = ((event.clientX - rect.left) / rect.width) * 100;
-    return Math.min(100, Math.max(0, percent));
-  }
+  const isRange = thumbs.length > 1;
 
-  function update(percent) {
-    const rawValue = min + (percent / 100) * (max - min);
-    const value = Math.round(rawValue / step) * step;
-    const valuePercent = ((value - min) / (max - min)) * 100;
-
-    thumb.style.left = valuePercent + "%";
-    range.style.width = valuePercent + "%";
-    valueLabel.textContent = value;
-  }
-
-  thumb.addEventListener("pointerdown", () => {
-    function onMove(event) {
-      update(percentFromEvent(event));
-    }
-
-    function onUp() {
-      document.removeEventListener("pointermove", onMove);
-      document.removeEventListener("pointerup", onUp);
-    }
-
-    document.addEventListener("pointermove", onMove);
-    document.addEventListener("pointerup", onUp);
-  });
-
-  minLabel.textContent = min;
-  maxLabel.textContent = max;
-  update(0);
-}
-
-function rangeSlider() {
-  const valueLabel = document.getElementById("secondSliderValue");
-  const minLabel = document.getElementById("secondSliderMin");
-  const maxLabel = document.getElementById("secondSliderMax");
-  const track = document.getElementById("secondSliderTrack");
-  const range = document.getElementById("secondSliderRange");
-  const startThumb = document.getElementById("secondSliderStartThumb");
-  const endThumb = document.getElementById("secondSliderEndThumb");
-
-  const min = 0;
-  const max = 7000;
-  const step = 10;
-
-  let startPercent = 0;
-  let endPercent = 100;
-
-  function toValue(percent) {
-    const rawValue = min + (percent / 100) * (max - min);
-    return Math.round(rawValue / step) * step;
+  // Сетка шага отсчитывается от min, а не от нуля: при min = 18 и
+  // step = 5 допустимы 18, 23, 28..., а не 20, 25, 30.
+  // toFixed убирает мусор плавающей точки вида 0.30000000000000004.
+  function snap(value) {
+    const stepped = min + Math.round((value - min) / step) * step;
+    const clamped = Math.min(max, Math.max(min, stepped));
+    return Number(clamped.toFixed(decimals));
   }
 
   function toPercent(value) {
     return ((value - min) / (max - min)) * 100;
   }
 
-  function percentFromEvent(event) {
+  function valueFromClientX(clientX) {
     const rect = track.getBoundingClientRect();
-    const percent = ((event.clientX - rect.left) / rect.width) * 100;
-    return Math.min(100, Math.max(0, percent));
+    return snap(min + ((clientX - rect.left) / rect.width) * (max - min));
+  }
+
+  const values = thumbs.map((thumb, index) =>
+    snap(Number(thumb.dataset.value ?? (index === 0 ? min : max)))
+  );
+
+  // Ручки диапазона могут «перепрыгнуть» друг друга. Тогда меняем
+  // значения местами и возвращаем новый индекс той, что тащат.
+  function setValue(index, value) {
+    values[index] = value;
+
+    if (isRange && values[0] > values[1]) {
+      values.reverse();
+      return index === 0 ? 1 : 0;
+    }
+
+    return index;
+  }
+
+  function nearestIndex(value) {
+    if (!isRange) return 0;
+
+    const toStart = Math.abs(value - values[0]);
+    const toEnd = Math.abs(value - values[1]);
+
+    return toEnd <= toStart ? 1 : 0;
   }
 
   function render() {
-    const startValue = toValue(startPercent);
-    const endValue = toValue(endPercent);
-    const start = toPercent(startValue);
-    const end = toPercent(endValue);
+    const start = isRange ? toPercent(values[0]) : 0;
+    const end = isRange ? toPercent(values[1]) : toPercent(values[0]);
 
-    range.style.left = start + "%";
-    range.style.width = end - start + "%";
-    startThumb.style.left = start + "%";
-    endThumb.style.left = end + "%";
-    valueLabel.textContent = `${startValue} - ${endValue}`;
-  }
+    if (range) {
+      range.style.left = start + "%";
+      range.style.width = end - start + "%";
+    }
 
-  function makeDraggable(thumb, isStart) {
-    thumb.addEventListener("pointerdown", () => {
-      function onMove(event) {
-        const percent = percentFromEvent(event);
-
-        if (isStart) {
-          startPercent = Math.min(percent, endPercent);
-        } else {
-          endPercent = Math.max(percent, startPercent);
-        }
-
-        render();
-      }
-
-      function onUp() {
-        document.removeEventListener("pointermove", onMove);
-        document.removeEventListener("pointerup", onUp);
-      }
-
-      document.addEventListener("pointermove", onMove);
-      document.addEventListener("pointerup", onUp);
+    thumbs.forEach((thumb, index) => {
+      thumb.style.left = toPercent(values[index]) + "%";
+      thumb.setAttribute("aria-valuenow", values[index]);
     });
+
+    if (valueLabel) {
+      valueLabel.textContent = isRange
+        ? `${values[0]} - ${values[1]}`
+        : values[0];
+    }
   }
 
-  makeDraggable(startThumb, true);
-  makeDraggable(endThumb, false);
+  track.addEventListener("pointerdown", (event) => {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
 
-  minLabel.textContent = min;
-  maxLabel.textContent = max;
+    // preventDefault гасит действие браузера по умолчанию
+    // (перетаскивание, выделение), setPointerCapture привязывает
+    // все последующие pointer-события к дорожке — курсор может
+    // уехать хоть за пределы окна, ручка не «залипнет».
+    event.preventDefault();
+    track.setPointerCapture(event.pointerId);
+
+    const grabbedThumb = event.target.closest(".ui-slider__thumb");
+    let index;
+
+    if (grabbedThumb) {
+      index = thumbs.indexOf(grabbedThumb);
+    } else {
+      const value = valueFromClientX(event.clientX);
+      index = setValue(nearestIndex(value), value);
+      render();
+    }
+
+    function onMove(moveEvent) {
+      index = setValue(index, valueFromClientX(moveEvent.clientX));
+      render();
+    }
+
+    function onUp() {
+      track.removeEventListener("pointermove", onMove);
+      track.removeEventListener("pointerup", onUp);
+      track.removeEventListener("pointercancel", onUp);
+      thumbs[index].focus();
+    }
+
+    track.addEventListener("pointermove", onMove);
+    track.addEventListener("pointerup", onUp);
+    track.addEventListener("pointercancel", onUp);
+  });
+
+  function onKeyDown(event) {
+    const index = thumbs.indexOf(event.currentTarget);
+    const bigStep = Math.max(step, (max - min) / 10);
+    let next;
+
+    switch (event.key) {
+      case "ArrowRight":
+      case "ArrowUp":
+        next = values[index] + step;
+        break;
+      case "ArrowLeft":
+      case "ArrowDown":
+        next = values[index] - step;
+        break;
+      case "PageUp":
+        next = values[index] + bigStep;
+        break;
+      case "PageDown":
+        next = values[index] - bigStep;
+        break;
+      case "Home":
+        next = min;
+        break;
+      case "End":
+        next = max;
+        break;
+      // Любая другая клавиша — не наша: выходим ДО preventDefault,
+      // иначе Tab перестанет уводить фокус и получится ловушка.
+      default:
+        return;
+    }
+
+    event.preventDefault();
+
+    const nextIndex = setValue(index, snap(next));
+    render();
+    thumbs[nextIndex].focus();
+  }
+
+  thumbs.forEach((thumb) => {
+    thumb.setAttribute("aria-valuemin", min);
+    thumb.setAttribute("aria-valuemax", max);
+    thumb.addEventListener("keydown", onKeyDown);
+  });
+
+  if (minLabel) minLabel.textContent = min;
+  if (maxLabel) maxLabel.textContent = max;
+
   render();
+}
+
+function main() {
+  document.querySelectorAll("[data-ui-slider]").forEach(initSlider);
 }
 
 main();

@@ -1,50 +1,103 @@
-.ui-radio {
-  display: flex;
-  align-items: center;
-  gap: var(--radio-gap, 10px);
-  cursor: pointer;
-  color: var(--radio-fg, inherit);
-}
+/* =============================================================
+   UI-base · Radio
 
-.ui-radio__input {
-  position: absolute;
-  opacity: 0;
-  top: 0;
-}
+   Публичный API — переменные --radio-*.
+   Тема — переменные --ui-*.
+   Порядок разрешения: --radio-* → --ui-* → значение по умолчанию.
+   ============================================================= */
 
-@property --radio-dot-radius {
+/* Обычную кастомную переменную анимировать нельзя: браузер не знает,
+   что в ней лежит длина. @property объявляет тип — и radius начинает
+   плавно интерполироваться. */
+@property --_radio-dot-radius {
   syntax: "<length>";
   inherits: false;
   initial-value: 0px;
 }
 
-.ui-radio__circle {
-  width: var(--radio-size, 16px);
-  height: var(--radio-size, 16px);
-  border: var(--radio-border-width, var(--ui-border-width)) solid
-    var(--radio-border-color, var(--ui-border-color));
-  border-radius: var(--ui-radius-round);
-  background-color: var(--radio-bg, var(--ui-bg));
-  box-shadow: var(--ui-shadow);
+.ui-radio {
+  --_radio-gap: var(--radio-gap, 10px);
+  --_radio-size: var(--radio-size, 16px);
+  --_radio-dot-size: var(--radio-dot-size, 8px);
+  --_radio-fg: var(--radio-fg, inherit);
+  --_radio-bg: var(--radio-bg, var(--ui-bg, #666969));
+  --_radio-dot-color: var(--radio-dot-color, var(--ui-fg, #ffffff));
+  --_radio-border-width: var(
+    --radio-border-width,
+    var(--ui-border-width, 1px)
+  );
+  --_radio-border-color: var(
+    --radio-border-color,
+    var(--ui-border-color, #4b494b)
+  );
+  --_radio-border-hover-color: var(
+    --radio-border-hover-color,
+    var(--ui-fg, #ffffff)
+  );
+  --_radio-shadow: var(
+    --radio-shadow,
+    var(--ui-shadow, 0 0 5px 0.5px rgb(130, 128, 130))
+  );
+  --_radio-focus-ring: var(
+    --radio-focus-ring,
+    var(--ui-focus-ring, 0 0 5px 2px rgb(31, 25, 31))
+  );
+  --_radio-disabled-opacity: var(--radio-disabled-opacity, 0.5);
+  --_radio-duration: var(--radio-duration, var(--ui-duration-fast, 80ms));
+  --_radio-ease: var(--radio-ease, var(--ui-ease, linear));
 
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--_radio-gap);
+  color: var(--_radio-fg);
+  cursor: pointer;
+}
+
+.ui-radio__input {
+  position: absolute;
+  top: 0;
+  opacity: 0;
+}
+
+.ui-radio__circle {
+  width: var(--_radio-size);
+  height: var(--_radio-size);
+  border: var(--_radio-border-width) solid var(--_radio-border-color);
+  border-radius: var(--radio-radius, var(--ui-radius-round, 50%));
+  background-color: var(--_radio-bg);
+  box-shadow: var(--_radio-shadow);
+  cursor: inherit;
+
+  /* Точка — не отдельный элемент, а радиальный градиент:
+     нечего добавлять в разметку, анимируется один радиус. */
   background-image: radial-gradient(
     circle at center,
-    var(--radio-dot-color, var(--ui-fg)) 0,
-    var(--radio-dot-color, var(--ui-fg)) var(--radio-dot-radius, 0px),
-    transparent calc(var(--radio-dot-radius, 0px) * 1.12)
+    var(--_radio-dot-color) 0,
+    var(--_radio-dot-color) var(--_radio-dot-radius),
+    transparent calc(var(--_radio-dot-radius) * 1.12)
   );
   background-origin: border-box;
   background-repeat: no-repeat;
   background-size: 100% 100%;
 
-  transition: --radio-dot-radius var(--ui-duration-fast) ease-in;
+  transition: --_radio-dot-radius var(--_radio-duration) ease-in,
+    border-color var(--_radio-duration) var(--_radio-ease);
 }
 
 .ui-radio__input:checked + .ui-radio__circle {
-  --radio-dot-radius: calc(var(--radio-dot-size, 8px) / 2);
+  --_radio-dot-radius: calc(var(--_radio-dot-size) / 2);
+}
+
+.ui-radio:has(.ui-radio__input:not(:disabled)):hover .ui-radio__circle {
+  border-color: var(--_radio-border-hover-color);
 }
 
 .ui-radio__input:focus-visible + .ui-radio__circle {
-  box-shadow: var(--ui-focus-ring);
+  box-shadow: var(--_radio-focus-ring);
 }
 
+.ui-radio:has(.ui-radio__input:disabled) {
+  cursor: not-allowed;
+  opacity: var(--_radio-disabled-opacity);
+}

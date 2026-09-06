@@ -1,7 +1,52 @@
+/* =============================================================
+   UI-base · Select
+
+   Публичный API — переменные --select-*.
+   Тема — переменные --ui-*.
+   Порядок разрешения: --select-* → --ui-* → значение по умолчанию.
+
+   Иконка стрелки вшита в CSS как data-URI и рисуется маской,
+   поэтому компоненту не нужна отдельная папка assets и он
+   перекрашивается вместе с текстом.
+   ============================================================= */
+
 .ui-select {
+  --_select-width: var(--select-width, 300px);
+  --_select-padding-y: var(--select-padding-y, 5px);
+  --_select-padding-x: var(--select-padding-x, 10px);
+  --_select-gap: var(--select-gap, 10px);
+  --_select-radius: var(--select-radius, 0px);
+  --_select-fg: var(--select-fg, var(--ui-fg, #ffffff));
+  --_select-bg: var(--select-bg, var(--ui-bg, #666969));
+  --_select-border-width: var(
+    --select-border-width,
+    var(--ui-border-width, 1px)
+  );
+  --_select-border-color: var(
+    --select-border-color,
+    var(--ui-border-color, #4b494b)
+  );
+  --_select-shadow: var(
+    --select-shadow,
+    var(--ui-shadow, 0 0 5px 0.5px rgb(130, 128, 130))
+  );
+  --_select-focus-ring: var(
+    --select-focus-ring,
+    var(--ui-focus-ring, 0 0 5px 2px rgb(31, 25, 31))
+  );
+  --_select-arrow-size: var(--select-arrow-size, 15px);
+  --_select-arrow-inset: var(--select-arrow-inset, 10px);
+  --_select-arrow-color: var(--select-arrow-color, currentColor);
+  --_select-duration: var(--select-duration, var(--ui-duration, 200ms));
+  --_select-ease: var(--select-ease, var(--ui-ease, linear));
+  --_select-icon: var(
+    --select-icon,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 8l8 8 8-8'/%3E%3C/svg%3E")
+  );
+
   position: relative;
-  max-width: var(--select-width, 300px);
   width: 100%;
+  max-width: var(--_select-width);
 }
 
 .ui-select__header {
@@ -11,66 +56,72 @@
 .ui-select__trigger,
 .ui-select__option {
   width: 100%;
-  padding: var(--select-padding-y, 5px) var(--select-padding-x, 10px);
-  border: var(--select-border-width, var(--ui-border-width)) solid
-    var(--select-border-color, var(--ui-border-color));
-  background: var(--select-bg, var(--ui-bg));
-  box-shadow: var(--ui-shadow);
-  color: var(--select-fg, var(--ui-fg));
+  padding: var(--_select-padding-y) var(--_select-padding-x);
+  border: var(--_select-border-width) solid var(--_select-border-color);
+  border-radius: var(--_select-radius);
+  background: var(--_select-bg);
+  box-shadow: var(--_select-shadow);
+  color: var(--_select-fg);
   text-align: start;
   cursor: pointer;
-  transition: box-shadow var(--ui-duration) ease-in;
+  transition: box-shadow var(--_select-duration) ease-in;
 }
 
 .ui-select__trigger:hover,
 .ui-select__option:hover,
 .ui-select__trigger:focus-visible,
 .ui-select__option:focus-visible {
-  box-shadow: var(--ui-focus-ring);
+  outline: none;
+  box-shadow: var(--_select-focus-ring);
 }
 
+/* Освобождаем место под стрелку, чтобы длинный текст под неё не заезжал. */
 .ui-select__trigger {
-  padding-right: calc(
-    var(--select-arrow-size, 15px) + var(--select-arrow-inset, 10px)
-  );
+  padding-right: calc(var(--_select-arrow-size) + var(--_select-arrow-inset));
 }
 
 .ui-select__arrow {
   position: absolute;
-  right: var(--select-arrow-inset, 10px);
   top: 50%;
-  width: var(--select-arrow-size, 15px);
-  height: var(--select-arrow-size, 15px);
+  right: var(--_select-arrow-inset);
+  width: var(--_select-arrow-size);
+  height: var(--_select-arrow-size);
+  color: var(--_select-fg);
 
-  background-color: var(--select-arrow-color, var(--ui-fg));
-  -webkit-mask: url("./assets/arrow.svg") center / contain no-repeat;
-  mask: url("./assets/arrow.svg") center / contain no-repeat;
+  background-color: var(--_select-arrow-color);
+  -webkit-mask: var(--_select-icon) center / contain no-repeat;
+  mask: var(--_select-icon) center / contain no-repeat;
 
   transform: translateY(-50%) rotate(0deg);
-  transition: transform var(--ui-duration) var(--ui-ease);
+  transition: transform var(--_select-duration) var(--_select-ease);
+
+  /* Стрелка нарисована поверх кнопки — клики должны проходить сквозь неё. */
   pointer-events: none;
 }
 
+/* Раскрытие через grid-template-rows: 0fr → 1fr — единственный способ
+   анимировать «высоту по содержимому» без замера высоты в JS. */
 .ui-select__list {
   position: absolute;
   top: 100%;
+  z-index: 1;
   width: 100%;
   display: grid;
   grid-template-rows: 0fr;
   overflow: hidden;
-  transition: grid-template-rows var(--select-duration, 100ms) var(--ui-ease);
+  transition: grid-template-rows var(--_select-duration) var(--_select-ease);
 }
 
 .ui-select__options {
   display: flex;
   flex-direction: column;
-  gap: var(--select-gap, 10px);
+  gap: var(--_select-gap);
   min-height: 0;
 }
 
 .ui-select--open .ui-select__list {
   grid-template-rows: 1fr;
-  padding: var(--select-padding-y, 5px);
+  padding: var(--_select-padding-y);
 }
 
 .ui-select--open .ui-select__arrow {

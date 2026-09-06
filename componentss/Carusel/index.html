@@ -3,147 +3,93 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Carusel</title>
-    <link rel="stylesheet" href="/default.css" />
-    <link rel="stylesheet" href="/demo.css" />
+    <title>Carousel</title>
+    <link rel="stylesheet" href="../../default.css" />
+    <link rel="stylesheet" href="../../demo.css" />
     <link rel="stylesheet" href="./style.css" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body>
-    <fieldset class="demo-frame demo-frame--fill">
-      <legend>Carusel</legend>
+    <fieldset class="demo-frame">
+      <legend>Carousel</legend>
 
       <div class="demo-center">
-        <div class="ui-carousel" data-ui-carousel>
+        <div
+          class="ui-carousel"
+          data-ui-carousel
+          data-autoplay="4000"
+          role="group"
+          aria-roledescription="carousel"
+          aria-label="Demo"
+        >
           <button
             class="ui-carousel__button ui-carousel__button--prev"
             type="button"
+            aria-label="Previous slide"
           ></button>
+
           <div class="ui-carousel__viewport">
             <div class="ui-carousel__track">
               <div class="ui-carousel__slide">
-                <div class="demo-slide-content">
-                  <h1>Здесь может быть контент</h1>
-
-                  <div class="demo-dots">
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                    <div class="demo-dots__item"></div>
-                  </div>
-                </div>
+                <div class="demo-slide">Demo 1</div>
               </div>
-              <div class="ui-carousel__slide"></div>
-              <div class="ui-carousel__slide"></div>
+              <div class="ui-carousel__slide">
+                <div class="demo-slide">Demo 2</div>
+              </div>
+              <div class="ui-carousel__slide">
+                <div class="demo-slide">Demo 3</div>
+              </div>
             </div>
           </div>
+
           <button
             class="ui-carousel__button ui-carousel__button--next"
             type="button"
+            aria-label="Next slide"
           ></button>
         </div>
       </div>
 
       <div class="demo-center">
-        <div class="ui-carousel demo-carousel--logos" data-ui-carousel>
+        <div
+          class="ui-carousel demo-carousel--multi"
+          data-ui-carousel
+          role="group"
+          aria-roledescription="carousel"
+          aria-label="Demo multiple"
+        >
           <button
             class="ui-carousel__button ui-carousel__button--prev"
             type="button"
+            aria-label="Previous slide"
           ></button>
+
           <div class="ui-carousel__viewport">
             <div class="ui-carousel__track">
               <div class="ui-carousel__slide">
-                <div class="demo-slide-content">
-                  <h1>logo</h1>
-                </div>
+                <div class="demo-slide">Demo 1</div>
               </div>
               <div class="ui-carousel__slide">
-                <div class="demo-slide-content">
-                  <h1>logo</h1>
-                </div>
+                <div class="demo-slide">Demo 2</div>
               </div>
               <div class="ui-carousel__slide">
-                <div class="demo-slide-content">
-                  <h1>logo</h1>
-                </div>
+                <div class="demo-slide">Demo 3</div>
               </div>
               <div class="ui-carousel__slide">
-                <div class="demo-slide-content">
-                  <h1>logo</h1>
-                </div>
+                <div class="demo-slide">Demo 4</div>
               </div>
               <div class="ui-carousel__slide">
-                <div class="demo-slide-content">
-                  <h1>logo</h1>
-                </div>
+                <div class="demo-slide">Demo 5</div>
               </div>
               <div class="ui-carousel__slide">
-                <div class="demo-slide-content">
-                  <h1>logo</h1>
-                </div>
-              </div>
-              <div class="ui-carousel__slide">
-                <div class="demo-slide-content">
-                  <h1>logo</h1>
-                </div>
-              </div>
-              <div class="ui-carousel__slide">
-                <div class="demo-slide-content">
-                  <h1>logo</h1>
-                </div>
-              </div>
-              <div class="ui-carousel__slide">
-                <div class="demo-slide-content">
-                  <h1>logo</h1>
-                </div>
-              </div>
-              <div class="ui-carousel__slide">
-                <div class="demo-slide-content">
-                  <h1>logo</h1>
-                </div>
+                <div class="demo-slide">Demo 6</div>
               </div>
             </div>
           </div>
+
           <button
             class="ui-carousel__button ui-carousel__button--next"
             type="button"
+            aria-label="Next slide"
           ></button>
         </div>
       </div>

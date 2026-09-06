@@ -1,42 +1,126 @@
+/* =============================================================
+   UI-base · Carousel
+
+   Публичный API — переменные --carousel-*.
+   Тема — переменные --ui-*.
+   Порядок разрешения: --carousel-* → --ui-* → значение по умолчанию.
+
+   Стрелки на кнопках рисует сам компонент: кнопка в разметке
+   пустая, иконка приходит из CSS маской, поэтому её видно
+   «из коробки» и она перекрашивается переменной.
+   ============================================================= */
+
 .ui-carousel {
+  --_carousel-width: var(--carousel-width, 800px);
+  --_carousel-gap: var(--carousel-gap, 10px);
+  --_carousel-slide-width: var(--carousel-slide-width, 100%);
+  --_carousel-slide-height: var(--carousel-slide-height, 300px);
+  --_carousel-slide-padding: var(--carousel-slide-padding, 10px);
+  --_carousel-radius: var(--carousel-radius, var(--ui-radius, 8px));
+  --_carousel-bg: var(--carousel-bg, var(--ui-bg, #666969));
+  --_carousel-fg: var(--carousel-fg, var(--ui-fg, #ffffff));
+  --_carousel-shadow: var(
+    --carousel-shadow,
+    var(--ui-shadow, 0 0 5px 0.5px rgb(130, 128, 130))
+  );
+  --_carousel-focus-ring: var(
+    --carousel-focus-ring,
+    var(--ui-focus-ring, 0 0 5px 2px rgb(31, 25, 31))
+  );
+  --_carousel-duration: var(
+    --carousel-duration,
+    var(--ui-duration-slow, 400ms)
+  );
+  --_carousel-ease: var(--carousel-ease, var(--ui-ease, linear));
+  --_carousel-button-size: var(--carousel-button-size, 32px);
+  --_carousel-button-inset: var(--carousel-button-inset, 8px);
+  --_carousel-button-bg: var(--carousel-button-bg, var(--ui-muted, #808080));
+  --_carousel-button-fg: var(--carousel-button-fg, var(--ui-fg, #ffffff));
+  --_carousel-button-icon-size: var(--carousel-button-icon-size, 55%);
+  --_carousel-icon: var(
+    --carousel-icon,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 5l7 7-7 7'/%3E%3C/svg%3E")
+  );
+
   position: relative;
+  width: 100%;
+  max-width: var(--_carousel-width);
+  margin-inline: auto;
 }
 
 .ui-carousel__viewport {
-  width: var(--carousel-viewport-width, 800px);
-  overflow-x: hidden;
+  overflow: hidden;
+
+  /* pan-y, а не none: вертикальный скролл страницы пальцем остаётся
+     за браузером, горизонтальный жест забираем себе. */
+  touch-action: pan-y;
+  user-select: none;
 }
 
 .ui-carousel__track {
   display: flex;
-  gap: var(--carousel-gap, 10px);
-  transition: transform var(--carousel-duration, 400ms) var(--ui-ease);
+  gap: var(--_carousel-gap);
+  transition: transform var(--_carousel-duration) var(--_carousel-ease);
 }
 
 .ui-carousel__slide {
-  min-width: var(--carousel-slide-width, 800px);
-  height: var(--carousel-slide-height, 300px);
-  padding: var(--carousel-slide-padding, 10px);
-  background: var(--carousel-bg, var(--ui-bg));
-  box-shadow: var(--ui-shadow);
-  color: var(--carousel-fg, var(--ui-fg));
+  /* flex-shrink: 0 обязателен — иначе flex сожмёт слайды,
+     чтобы «уместить» их все в видимую область. */
+  flex: 0 0 var(--_carousel-slide-width);
+  height: var(--_carousel-slide-height);
+  padding: var(--_carousel-slide-padding);
+  border-radius: var(--_carousel-radius);
+  background: var(--_carousel-bg);
+  box-shadow: var(--_carousel-shadow);
+  color: var(--_carousel-fg);
+  overflow: hidden;
 }
 
 .ui-carousel__button {
   position: absolute;
   top: 50%;
+  z-index: 1;
   transform: translateY(-50%);
-  width: var(--carousel-button-size, 20px);
-  height: var(--carousel-button-size, 20px);
+  width: var(--_carousel-button-size);
+  height: var(--_carousel-button-size);
   border: none;
-  background-color: var(--carousel-button-bg, var(--ui-muted));
+  border-radius: var(--carousel-button-radius, var(--ui-radius-round, 50%));
+  background-color: var(--_carousel-button-bg);
   cursor: pointer;
 }
 
+.ui-carousel__button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-color: var(--_carousel-button-fg);
+  -webkit-mask: var(--_carousel-icon) center /
+    var(--_carousel-button-icon-size) no-repeat;
+  mask: var(--_carousel-icon) center / var(--_carousel-button-icon-size)
+    no-repeat;
+}
+
+/* Одна иконка на обе кнопки: «назад» — это «вперёд», развёрнутое на 180°. */
+.ui-carousel__button--prev::before {
+  transform: rotate(180deg);
+}
+
+.ui-carousel__button:focus-visible {
+  outline: none;
+  box-shadow: var(--_carousel-focus-ring);
+}
+
 .ui-carousel__button--prev {
-  left: calc(var(--carousel-button-offset, 50px) * -1);
+  left: var(--_carousel-button-inset);
 }
 
 .ui-carousel__button--next {
-  right: calc(var(--carousel-button-offset, 50px) * -1);
+  right: var(--_carousel-button-inset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-carousel__track {
+    transition: none;
+  }
 }
