@@ -13,6 +13,7 @@
 
   --marquee-shadow: 0 0 5px 0.5px rgb(130, 128, 130);
 
+  --marquee-speed: 60;
   --marquee-duration: 20s;
 
   position: relative;
@@ -52,7 +53,11 @@
   font-weight: var(--marquee-font-weight);
 }
 
-.ui-marquee:hover .ui-marquee__viewport,
+.ui-marquee[data-direction="reverse"] .ui-marquee__viewport {
+  animation-direction: reverse;
+}
+
+.ui-marquee:not([data-pause-on-hover="false"]):hover .ui-marquee__viewport,
 .ui-marquee:focus-within .ui-marquee__viewport {
   animation-play-state: paused;
 }

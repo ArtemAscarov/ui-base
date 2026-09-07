@@ -21,19 +21,20 @@
             type="button"
             aria-haspopup="listbox"
             aria-expanded="false"
+            aria-controls="demo-select-list"
           >
             Demo
           </button>
           <div class="ui-select__arrow"></div>
         </div>
 
-        <div class="ui-select__list" inert>
+        <div class="ui-select__list" id="demo-select-list" inert>
           <div class="ui-select__options" role="listbox" aria-label="Demo">
             <button
               class="ui-select__option"
               type="button"
               role="option"
-              aria-selected="false"
+              aria-selected="true"
               data-value="1"
             >
               Demo 1
@@ -53,8 +54,9 @@
               role="option"
               aria-selected="false"
               data-value="3"
+              disabled
             >
-              Demo 3
+              Demo 3 disabled
             </button>
             <button
               class="ui-select__option"
@@ -64,6 +66,24 @@
               data-value="4"
             >
               Demo 4
+            </button>
+            <button
+              class="ui-select__option"
+              type="button"
+              role="option"
+              aria-selected="false"
+              data-value="5"
+            >
+              Demo 5
+            </button>
+            <button
+              class="ui-select__option"
+              type="button"
+              role="option"
+              aria-selected="false"
+              data-value="6"
+            >
+              Demo 6
             </button>
           </div>
         </div>

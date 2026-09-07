@@ -1,7 +1,5 @@
-function main() {
-  document.querySelectorAll("[data-indeterminate]").forEach((input) => {
+document
+  .querySelectorAll(".ui-checkbox__input[data-indeterminate]")
+  .forEach((input) => {
     input.indeterminate = true;
   });
-}
-
-main();

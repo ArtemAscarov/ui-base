@@ -8,6 +8,13 @@ function initSelect(select) {
 
   const placeholder = trigger.textContent.trim();
 
+  let typed = "";
+  let typedTimer;
+
+  function enabled() {
+    return options.filter((option) => !option.disabled);
+  }
+
   function isOpen() {
     return select.classList.contains("ui-select--open");
   }
@@ -24,47 +31,88 @@ function initSelect(select) {
     select.classList.remove("ui-select--open");
     trigger.setAttribute("aria-expanded", "false");
     list.setAttribute("inert", "");
+    typed = "";
+  }
+
+  function focusAt(index) {
+    const items = enabled();
+
+    if (items.length === 0) return null;
+
+    const option = items[(index + items.length) % items.length];
+    option.focus({ preventScroll: true });
+
+    return option;
+  }
+
+  function moveTo(index) {
+    const option = focusAt(index);
+
+    if (option) option.scrollIntoView({ block: "nearest" });
   }
 
   function selectedIndex() {
-    return options.findIndex(
+    return enabled().findIndex(
       (option) => option.getAttribute("aria-selected") === "true"
     );
   }
 
-  function focusOption(index) {
-    options[(index + options.length) % options.length].focus();
+  function search(char) {
+    clearTimeout(typedTimer);
+
+    typed += char.toLowerCase();
+    typedTimer = setTimeout(() => (typed = ""), 500);
+
+    const items = enabled();
+    const query = [...typed].every((letter) => letter === typed[0])
+      ? typed[0]
+      : typed;
+    const from = Math.max(items.indexOf(document.activeElement), 0);
+    const skip = query.length === 1 ? 1 : 0;
+
+    for (let step = 0; step < items.length; step += 1) {
+      const at = (from + skip + step) % items.length;
+
+      if (items[at].textContent.trim().toLowerCase().startsWith(query)) {
+        moveTo(at);
+        return;
+      }
+    }
   }
 
-  function sync(option) {
+  function show(option) {
     options.forEach((item) =>
       item.setAttribute("aria-selected", String(item === option))
     );
 
-    const value = option ? option.dataset.value ?? option.textContent.trim() : "";
+    const value = option
+      ? option.dataset.value ?? option.textContent.trim()
+      : "";
 
     trigger.textContent = option ? option.textContent.trim() : placeholder;
+    select.classList.toggle("ui-select--placeholder", !option);
 
-    if (!input) return;
-    input.value = value;
+    if (input) input.value = value;
+
+    return value;
   }
 
   function choose(option) {
-    sync(option);
+    const value = show(option);
 
-    if (input) input.dispatchEvent(new Event("change", { bubbles: true }));
+    select.dispatchEvent(
+      new CustomEvent("ui-select:change", {
+        bubbles: true,
+        detail: { value, option },
+      })
+    );
 
     close();
   }
 
   trigger.addEventListener("click", () => {
-    if (isOpen()) {
-      close();
-      return;
-    }
-
-    open();
-    focusOption(Math.max(selectedIndex(), 0));
+    if (isOpen()) close();
+    else open();
   });
 
   trigger.addEventListener("keydown", (event) => {
@@ -77,62 +125,64 @@ function initSelect(select) {
 
     event.preventDefault();
     open();
-    focusOption(
-      event.key === "ArrowDown"
-        ? Math.max(selectedIndex(), 0)
-        : options.length - 1
-    );
+    focusAt(event.key === "ArrowUp" ? -1 : Math.max(selectedIndex(), 0));
   });
 
-  options.forEach((option, index) => {
-    option.setAttribute("tabindex", "-1");
+  options.forEach((option) => {
+    option.tabIndex = -1;
+
+    if (option.disabled) option.setAttribute("aria-disabled", "true");
 
     option.addEventListener("click", () => choose(option));
 
     option.addEventListener("keydown", (event) => {
+      const at = enabled().indexOf(option);
+
       switch (event.key) {
         case "ArrowDown":
           event.preventDefault();
-          focusOption(index + 1);
+          moveTo(at + 1);
           break;
         case "ArrowUp":
           event.preventDefault();
-          focusOption(index - 1);
+          moveTo(at - 1);
           break;
         case "Home":
           event.preventDefault();
-          focusOption(0);
+          moveTo(0);
           break;
         case "End":
           event.preventDefault();
-          focusOption(options.length - 1);
+          moveTo(-1);
           break;
         case "Enter":
-        case " ":
           event.preventDefault();
           choose(option);
+          break;
+        case " ":
+          event.preventDefault();
+          if (typed) search(" ");
+          else choose(option);
           break;
         case "Escape":
         case "Tab":
           close();
           break;
+        default:
+          if (event.key.length === 1 && !event.ctrlKey && !event.metaKey) {
+            event.preventDefault();
+            search(event.key);
+          }
       }
     });
   });
 
   document.addEventListener("click", (event) => {
-    if (select.contains(event.target)) return;
-    close();
+    if (!select.contains(event.target)) close();
   });
 
-  const preselected = options[selectedIndex()];
-  if (preselected) sync(preselected);
-
+  show(options.find((option) => option.getAttribute("aria-selected") === "true"));
   close();
 }
 
-function main() {
-  document.querySelectorAll("[data-ui-select]").forEach(initSelect);
-}
-
-main();
+document.querySelectorAll("[data-ui-select]").forEach(initSelect);

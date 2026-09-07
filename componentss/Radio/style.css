@@ -15,27 +15,34 @@
   --radio-shadow: 0 0 5px 0.5px rgb(130, 128, 130);
   --radio-focus-ring: 0 0 5px 2px rgb(31, 25, 31);
 
+  --radio-active-scale: 0.9;
   --radio-disabled-opacity: 0.5;
 
   --radio-duration: 80ms;
   --radio-easing: linear;
 
   position: relative;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: var(--radio-gap);
   color: var(--radio-color);
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .ui-radio__input {
   position: absolute;
   top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
   opacity: 0;
+  pointer-events: none;
 }
 
 .ui-radio__circle {
   position: relative;
+  flex: none;
   width: var(--radio-size);
   height: var(--radio-size);
   border: var(--radio-border-width) solid var(--radio-border-color);
@@ -43,7 +50,8 @@
   background-color: var(--radio-bg);
   box-shadow: var(--radio-shadow);
   cursor: inherit;
-  transition: border-color var(--radio-duration) var(--radio-easing);
+  transition: border-color var(--radio-duration) var(--radio-easing),
+    transform var(--radio-duration) var(--radio-easing);
 }
 
 .ui-radio__circle::after {
@@ -67,6 +75,10 @@
   border-color: var(--radio-border-hover-color);
 }
 
+.ui-radio:has(.ui-radio__input:not(:disabled)):active .ui-radio__circle {
+  transform: scale(var(--radio-active-scale));
+}
+
 .ui-radio__input:focus-visible + .ui-radio__circle {
   box-shadow: var(--radio-focus-ring);
 }
@@ -74,4 +86,10 @@
 .ui-radio:has(.ui-radio__input:disabled) {
   cursor: not-allowed;
   opacity: var(--radio-disabled-opacity);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-radio {
+    --radio-duration: 1ms;
+  }
 }
