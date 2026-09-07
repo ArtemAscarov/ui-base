@@ -1,0 +1,62 @@
+<div class="ui-slider" data-slider data-min="0" data-max="100" data-step="1">
+  <input class="ui-slider__input" type="hidden" name="amount" data-slider-input />
+
+  <div class="ui-slider__header">
+    <span class="ui-slider__title">Amount</span>
+    <span class="ui-slider__value" data-slider-value></span>
+  </div>
+
+  <div class="ui-slider__body">
+    <span class="ui-slider__bound" data-slider-bound="min"></span>
+
+    <div class="ui-slider__track" data-slider-track>
+      <div class="ui-slider__range" data-slider-range></div>
+      <div
+        class="ui-slider__thumb"
+        data-slider-thumb
+        data-value="40"
+        role="slider"
+        tabindex="0"
+        aria-label="Amount"
+      ></div>
+    </div>
+
+    <span class="ui-slider__bound" data-slider-bound="max"></span>
+  </div>
+</div>
+
+<div class="ui-slider" data-slider data-min="0" data-max="1000" data-step="10">
+  <input class="ui-slider__input" type="hidden" name="from" data-slider-input />
+  <input class="ui-slider__input" type="hidden" name="to" data-slider-input />
+
+  <div class="ui-slider__header">
+    <span class="ui-slider__title">Price</span>
+    <span class="ui-slider__value" data-slider-value></span>
+  </div>
+
+  <div class="ui-slider__body">
+    <span class="ui-slider__bound" data-slider-bound="min"></span>
+
+    <div class="ui-slider__track" data-slider-track>
+      <div class="ui-slider__range" data-slider-range></div>
+      <div
+        class="ui-slider__thumb"
+        data-slider-thumb
+        data-value="200"
+        role="slider"
+        tabindex="0"
+        aria-label="Price from"
+      ></div>
+      <div
+        class="ui-slider__thumb"
+        data-slider-thumb
+        data-value="800"
+        role="slider"
+        tabindex="0"
+        aria-label="Price to"
+      ></div>
+    </div>
+
+    <span class="ui-slider__bound" data-slider-bound="max"></span>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="ui-select" data-select>
+  <input class="ui-select__input" type="hidden" name="plan" data-select-input />
+
+  <div class="ui-select__header">
+    <button
+      class="ui-select__trigger"
+      type="button"
+      aria-haspopup="listbox"
+      aria-expanded="false"
+      aria-controls="select-plan-list"
+      data-select-trigger
+    >
+      Choose a plan
+    </button>
+    <span class="ui-select__arrow"></span>
+  </div>
+
+  <div
+    class="ui-select__list"
+    id="select-plan-list"
+    aria-hidden="true"
+    data-select-list
+  >
+    <div class="ui-select__options" role="listbox" aria-label="Plan">
+      <button
+        class="ui-select__option"
+        type="button"
+        role="option"
+        aria-selected="false"
+        data-select-option
+        data-value="free"
+        data-selected
+      >
+        Free
+      </button>
+      <button
+        class="ui-select__option"
+        type="button"
+        role="option"
+        aria-selected="false"
+        data-select-option
+        data-value="pro"
+      >
+        Pro
+      </button>
+      <button
+        class="ui-select__option"
+        type="button"
+        role="option"
+        aria-selected="false"
+        data-select-option
+        data-value="team"
+        disabled
+      >
+        Team
+      </button>
+      <button
+        class="ui-select__option"
+        type="button"
+        role="option"
+        aria-selected="false"
+        data-select-option
+        data-value="enterprise"
+      >
+        Enterprise
+      </button>
+    </div>
+  </div>
+</div>

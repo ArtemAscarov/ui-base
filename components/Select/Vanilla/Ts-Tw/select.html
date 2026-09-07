@@ -1,0 +1,93 @@
+<div class="group relative w-full min-w-0 max-w-[var(--select-width)] data-[open]:[--select-arrow-rotate:180deg] motion-reduce:[--select-duration:1ms]" style="
+    --select-color: #ffffff;
+    --select-bg: #666969;
+    --select-border-color: #4b494b;
+    --select-arrow-color: #ffffff;
+    --select-width: 300px;
+    --select-padding-y: 5px;
+    --select-padding-x: 10px;
+    --select-gap: 10px;
+    --select-border-width: 1px;
+    --select-radius: 0;
+    --select-arrow-size: 15px;
+    --select-arrow-inset: 10px;
+    --select-check-size: 14px;
+    --select-list-max-height: 240px;
+    --select-shadow: 0 0 5px 0.5px rgb(130, 128, 130);
+    --select-focus-ring: 0 0 5px 2px rgb(31, 25, 31);
+    --select-placeholder-opacity: 0.75;
+    --select-disabled-opacity: 0.5;
+    --select-duration: 200ms;
+    --select-easing: linear;
+    --select-arrow-rotate: 0deg;
+    --select-arrow-icon: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 8l8 8 8-8'/%3E%3C/svg%3E&quot;);
+    --select-check-icon: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.5 9.5 18 20 6.5'/%3E%3C/svg%3E&quot;);
+  " data-select>
+  <input type="hidden" name="plan" data-select-input />
+
+  <div class="relative">
+    <button
+      class="w-full py-[var(--select-padding-y)] px-[var(--select-padding-x)] border-[length:var(--select-border-width)] border-solid border-[color:var(--select-border-color)] rounded-[var(--select-radius)] bg-[var(--select-bg)] [box-shadow:var(--select-shadow)] text-[color:var(--select-color)] text-start cursor-pointer transition-shadow duration-[var(--select-duration)] ease-[var(--select-easing)] disabled:cursor-not-allowed disabled:opacity-[var(--select-disabled-opacity)] focus-visible:outline-none pr-[calc(var(--select-arrow-size)+var(--select-arrow-inset)*2)] overflow-hidden whitespace-nowrap text-ellipsis hover:[box-shadow:var(--select-focus-ring)] focus-visible:[box-shadow:var(--select-focus-ring)] group-data-[placeholder]:opacity-[var(--select-placeholder-opacity)]"
+      type="button"
+      aria-haspopup="listbox"
+      aria-expanded="false"
+      aria-controls="select-plan-list"
+      data-select-trigger
+    >
+      Choose a plan
+    </button>
+    <span class="absolute top-1/2 right-[var(--select-arrow-inset)] w-[var(--select-arrow-size)] h-[var(--select-arrow-size)] bg-[var(--select-arrow-color)] [-webkit-mask:var(--select-arrow-icon)_center/contain_no-repeat] [mask:var(--select-arrow-icon)_center/contain_no-repeat] [transform:translateY(-50%)_rotate(var(--select-arrow-rotate))] transition-transform duration-[var(--select-duration)] ease-[var(--select-easing)] pointer-events-none"></span>
+  </div>
+
+  <div
+    class="absolute top-full z-[1] grid grid-rows-[0fr] items-start w-full overflow-hidden pointer-events-none transition-[grid-template-rows,padding] duration-[var(--select-duration)] ease-[var(--select-easing)] group-data-[open]:grid-rows-[1fr] group-data-[open]:p-[var(--select-padding-y)] group-data-[open]:pointer-events-auto"
+    id="select-plan-list"
+    aria-hidden="true"
+    data-select-list
+  >
+    <div class="flex flex-col gap-[var(--select-gap)] max-h-[var(--select-list-max-height)] overflow-y-auto overscroll-contain" role="listbox" aria-label="Plan">
+      <button
+        class="w-full py-[var(--select-padding-y)] px-[var(--select-padding-x)] border-[length:var(--select-border-width)] border-solid border-[color:var(--select-border-color)] rounded-[var(--select-radius)] bg-[var(--select-bg)] [box-shadow:var(--select-shadow)] text-[color:var(--select-color)] text-start cursor-pointer transition-shadow duration-[var(--select-duration)] ease-[var(--select-easing)] disabled:cursor-not-allowed disabled:opacity-[var(--select-disabled-opacity)] focus-visible:outline-none relative flex-none pr-[calc(var(--select-check-size)+var(--select-arrow-inset)*2)] enabled:hover:[box-shadow:var(--select-focus-ring)] focus-visible:[box-shadow:var(--select-focus-ring)] after:content-[''] after:absolute after:top-1/2 after:right-[var(--select-arrow-inset)] after:w-[var(--select-check-size)] after:h-[var(--select-check-size)] after:bg-current after:[-webkit-mask:var(--select-check-icon)_center/contain_no-repeat] after:[mask:var(--select-check-icon)_center/contain_no-repeat] after:[transform:translateY(-50%)_scale(0)] after:transition-transform after:duration-[var(--select-duration)] after:ease-[var(--select-easing)] aria-selected:after:[transform:translateY(-50%)_scale(1)]"
+        type="button"
+        role="option"
+        aria-selected="false"
+        data-select-option
+        data-value="free"
+        data-selected
+      >
+        Free
+      </button>
+      <button
+        class="w-full py-[var(--select-padding-y)] px-[var(--select-padding-x)] border-[length:var(--select-border-width)] border-solid border-[color:var(--select-border-color)] rounded-[var(--select-radius)] bg-[var(--select-bg)] [box-shadow:var(--select-shadow)] text-[color:var(--select-color)] text-start cursor-pointer transition-shadow duration-[var(--select-duration)] ease-[var(--select-easing)] disabled:cursor-not-allowed disabled:opacity-[var(--select-disabled-opacity)] focus-visible:outline-none relative flex-none pr-[calc(var(--select-check-size)+var(--select-arrow-inset)*2)] enabled:hover:[box-shadow:var(--select-focus-ring)] focus-visible:[box-shadow:var(--select-focus-ring)] after:content-[''] after:absolute after:top-1/2 after:right-[var(--select-arrow-inset)] after:w-[var(--select-check-size)] after:h-[var(--select-check-size)] after:bg-current after:[-webkit-mask:var(--select-check-icon)_center/contain_no-repeat] after:[mask:var(--select-check-icon)_center/contain_no-repeat] after:[transform:translateY(-50%)_scale(0)] after:transition-transform after:duration-[var(--select-duration)] after:ease-[var(--select-easing)] aria-selected:after:[transform:translateY(-50%)_scale(1)]"
+        type="button"
+        role="option"
+        aria-selected="false"
+        data-select-option
+        data-value="pro"
+      >
+        Pro
+      </button>
+      <button
+        class="w-full py-[var(--select-padding-y)] px-[var(--select-padding-x)] border-[length:var(--select-border-width)] border-solid border-[color:var(--select-border-color)] rounded-[var(--select-radius)] bg-[var(--select-bg)] [box-shadow:var(--select-shadow)] text-[color:var(--select-color)] text-start cursor-pointer transition-shadow duration-[var(--select-duration)] ease-[var(--select-easing)] disabled:cursor-not-allowed disabled:opacity-[var(--select-disabled-opacity)] focus-visible:outline-none relative flex-none pr-[calc(var(--select-check-size)+var(--select-arrow-inset)*2)] enabled:hover:[box-shadow:var(--select-focus-ring)] focus-visible:[box-shadow:var(--select-focus-ring)] after:content-[''] after:absolute after:top-1/2 after:right-[var(--select-arrow-inset)] after:w-[var(--select-check-size)] after:h-[var(--select-check-size)] after:bg-current after:[-webkit-mask:var(--select-check-icon)_center/contain_no-repeat] after:[mask:var(--select-check-icon)_center/contain_no-repeat] after:[transform:translateY(-50%)_scale(0)] after:transition-transform after:duration-[var(--select-duration)] after:ease-[var(--select-easing)] aria-selected:after:[transform:translateY(-50%)_scale(1)]"
+        type="button"
+        role="option"
+        aria-selected="false"
+        data-select-option
+        data-value="team"
+        disabled
+      >
+        Team
+      </button>
+      <button
+        class="w-full py-[var(--select-padding-y)] px-[var(--select-padding-x)] border-[length:var(--select-border-width)] border-solid border-[color:var(--select-border-color)] rounded-[var(--select-radius)] bg-[var(--select-bg)] [box-shadow:var(--select-shadow)] text-[color:var(--select-color)] text-start cursor-pointer transition-shadow duration-[var(--select-duration)] ease-[var(--select-easing)] disabled:cursor-not-allowed disabled:opacity-[var(--select-disabled-opacity)] focus-visible:outline-none relative flex-none pr-[calc(var(--select-check-size)+var(--select-arrow-inset)*2)] enabled:hover:[box-shadow:var(--select-focus-ring)] focus-visible:[box-shadow:var(--select-focus-ring)] after:content-[''] after:absolute after:top-1/2 after:right-[var(--select-arrow-inset)] after:w-[var(--select-check-size)] after:h-[var(--select-check-size)] after:bg-current after:[-webkit-mask:var(--select-check-icon)_center/contain_no-repeat] after:[mask:var(--select-check-icon)_center/contain_no-repeat] after:[transform:translateY(-50%)_scale(0)] after:transition-transform after:duration-[var(--select-duration)] after:ease-[var(--select-easing)] aria-selected:after:[transform:translateY(-50%)_scale(1)]"
+        type="button"
+        role="option"
+        aria-selected="false"
+        data-select-option
+        data-value="enterprise"
+      >
+        Enterprise
+      </button>
+    </div>
+  </div>
+</div>

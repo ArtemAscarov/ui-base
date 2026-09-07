@@ -1,0 +1,52 @@
+<style>
+  @keyframes ui-marquee-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+</style>
+
+<div class="group relative w-full min-w-0 h-[var(--marquee-height)]" style="
+    --marquee-color: #ffffff;
+    --marquee-bg: #666969;
+    --marquee-height: 160px;
+    --marquee-padding-y: 20px;
+    --marquee-overhang: 50px;
+    --marquee-gap: 64px;
+    --marquee-tilt: -3deg;
+    --marquee-font-size: 32px;
+    --marquee-font-weight: 700;
+    --marquee-shadow: 0 0 5px 0.5px rgb(130, 128, 130);
+    --marquee-speed: 60;
+    --marquee-duration: 20s;
+  " data-marquee>
+  <div class="absolute top-1/2 left-[calc(var(--marquee-overhang)*-1)] w-[calc(100%+var(--marquee-overhang)*2)] py-[var(--marquee-padding-y)] bg-[var(--marquee-bg)] [box-shadow:var(--marquee-shadow)] [transform:translateY(-50%)_rotate(var(--marquee-tilt))] overflow-hidden" data-marquee-ribbon>
+    <div class="flex w-max animate-[ui-marquee-scroll_var(--marquee-duration)_linear_infinite] group-focus-within:[animation-play-state:paused] motion-reduce:animate-none group-hover:[animation-play-state:paused]" data-marquee-viewport>
+      <div class="flex items-center gap-[var(--marquee-gap)] pr-[var(--marquee-gap)]" data-marquee-group>
+        <p class="m-0 whitespace-nowrap text-[color:var(--marquee-color)] text-[length:var(--marquee-font-size)] [font-weight:var(--marquee-font-weight)]">Ship fast</p>
+        <p class="m-0 whitespace-nowrap text-[color:var(--marquee-color)] text-[length:var(--marquee-font-size)] [font-weight:var(--marquee-font-weight)]">Stay accessible</p>
+        <p class="m-0 whitespace-nowrap text-[color:var(--marquee-color)] text-[length:var(--marquee-font-size)] [font-weight:var(--marquee-font-weight)]">Own your code</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="group relative w-full min-w-0 h-[var(--marquee-height)]" style="
+    --marquee-color: #ffffff;
+    --marquee-bg: #666969;
+    --marquee-height: 160px;
+    --marquee-padding-y: 20px;
+    --marquee-overhang: 50px;
+    --marquee-gap: 64px;
+    --marquee-tilt: -3deg;
+    --marquee-font-size: 32px;
+    --marquee-font-weight: 700;
+    --marquee-shadow: 0 0 5px 0.5px rgb(130, 128, 130);
+    --marquee-speed: 60;
+    --marquee-duration: 20s;
+  " data-marquee>
+  <div class="absolute top-1/2 left-[calc(var(--marquee-overhang)*-1)] w-[calc(100%+var(--marquee-overhang)*2)] py-[var(--marquee-padding-y)] bg-[var(--marquee-bg)] [box-shadow:var(--marquee-shadow)] [transform:translateY(-50%)_rotate(var(--marquee-tilt))] overflow-hidden" data-marquee-ribbon>
+    <div class="flex w-max animate-[ui-marquee-scroll_var(--marquee-duration)_linear_infinite] group-focus-within:[animation-play-state:paused] motion-reduce:animate-none group-hover:[animation-play-state:paused] [animation-direction:reverse]" data-marquee-viewport>
+      <div class="flex items-center gap-[var(--marquee-gap)] pr-[var(--marquee-gap)]" data-marquee-group>
+        <p class="m-0 whitespace-nowrap text-[color:var(--marquee-color)] text-[length:var(--marquee-font-size)] [font-weight:var(--marquee-font-weight)]">Same speed, more text</p>
+        <p class="m-0 whitespace-nowrap text-[color:var(--marquee-color)] text-[length:var(--marquee-font-size)] [font-weight:var(--marquee-font-weight)]">Reversed</p>
+      </div>
+    </div>
+  </div>
+</div>

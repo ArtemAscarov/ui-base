@@ -1,0 +1,65 @@
+<div class="group relative w-full min-w-0 max-w-[var(--carousel-width)] mx-auto" style="
+    --carousel-color: #ffffff;
+    --carousel-bg: #666969;
+    --carousel-button-bg: #808080;
+    --carousel-button-color: #ffffff;
+    --carousel-width: 800px;
+    --carousel-gap: 10px;
+    --carousel-slide-width: 100%;
+    --carousel-slide-height: 300px;
+    --carousel-slide-padding: 10px;
+    --carousel-button-size: 32px;
+    --carousel-button-inset: 8px;
+    --carousel-arrow-size: 55%;
+    --carousel-dot-size: 8px;
+    --carousel-dot-hit: 22px;
+    --carousel-dot-opacity: 0.45;
+    --carousel-dot-scale: 1;
+    --carousel-dot-active-scale: 1.4;
+    --carousel-dots-gap: 2px;
+    --carousel-dots-offset: 10px;
+    --carousel-radius: 8px;
+    --carousel-button-radius: 50%;
+    --carousel-shadow: 0 0 5px 0.5px rgb(130, 128, 130);
+    --carousel-focus-ring: 0 0 5px 2px rgb(31, 25, 31);
+    --carousel-duration: 400ms;
+    --carousel-easing: linear;
+    --carousel-arrow-icon: url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 5l7 7-7 7'/%3E%3C/svg%3E&quot;);
+  "
+  data-carousel
+  data-autoplay="4000"
+  role="group"
+  aria-roledescription="carousel"
+  aria-label="Highlights"
+>
+  <button
+    class="absolute top-1/2 z-[1] w-[var(--carousel-button-size)] h-[var(--carousel-button-size)] border-none rounded-[var(--carousel-button-radius)] bg-[var(--carousel-button-bg)] [transform:translateY(-50%)] cursor-pointer before:content-[''] before:absolute before:inset-0 before:bg-[var(--carousel-button-color)] before:[-webkit-mask:var(--carousel-arrow-icon)_center/var(--carousel-arrow-size)_no-repeat] before:[mask:var(--carousel-arrow-icon)_center/var(--carousel-arrow-size)_no-repeat] focus-visible:outline-none focus-visible:[box-shadow:var(--carousel-focus-ring)] left-[var(--carousel-button-inset)] before:[transform:rotate(180deg)]"
+    type="button"
+    aria-label="Previous slide"
+    data-carousel-prev
+  ></button>
+
+  <div class="overflow-hidden touch-pan-y select-none" data-carousel-viewport>
+    <div class="flex gap-[var(--carousel-gap)] transition-transform duration-[var(--carousel-duration)] ease-[var(--carousel-easing)] group-data-[dragging]:transition-none group-data-[instant]:transition-none motion-reduce:transition-none" data-carousel-track>
+      <div class="flex-[0_0_var(--carousel-slide-width)] h-[var(--carousel-slide-height)] p-[var(--carousel-slide-padding)] rounded-[var(--carousel-radius)] bg-[var(--carousel-bg)] [box-shadow:var(--carousel-shadow)] text-[color:var(--carousel-color)] overflow-hidden">First</div>
+      <div class="flex-[0_0_var(--carousel-slide-width)] h-[var(--carousel-slide-height)] p-[var(--carousel-slide-padding)] rounded-[var(--carousel-radius)] bg-[var(--carousel-bg)] [box-shadow:var(--carousel-shadow)] text-[color:var(--carousel-color)] overflow-hidden">Second</div>
+      <div class="flex-[0_0_var(--carousel-slide-width)] h-[var(--carousel-slide-height)] p-[var(--carousel-slide-padding)] rounded-[var(--carousel-radius)] bg-[var(--carousel-bg)] [box-shadow:var(--carousel-shadow)] text-[color:var(--carousel-color)] overflow-hidden">Third</div>
+    </div>
+  </div>
+
+  <button
+    class="absolute top-1/2 z-[1] w-[var(--carousel-button-size)] h-[var(--carousel-button-size)] border-none rounded-[var(--carousel-button-radius)] bg-[var(--carousel-button-bg)] [transform:translateY(-50%)] cursor-pointer before:content-[''] before:absolute before:inset-0 before:bg-[var(--carousel-button-color)] before:[-webkit-mask:var(--carousel-arrow-icon)_center/var(--carousel-arrow-size)_no-repeat] before:[mask:var(--carousel-arrow-icon)_center/var(--carousel-arrow-size)_no-repeat] focus-visible:outline-none focus-visible:[box-shadow:var(--carousel-focus-ring)] right-[var(--carousel-button-inset)]"
+    type="button"
+    aria-label="Next slide"
+    data-carousel-next
+  ></button>
+
+  <div class="flex justify-center gap-[var(--carousel-dots-gap)] mt-[var(--carousel-dots-offset)]" data-carousel-dots data-dot-class="relative w-[var(--carousel-dot-hit)] h-[var(--carousel-dot-hit)] p-0 border-none bg-transparent cursor-pointer before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:w-[var(--carousel-dot-size)] before:h-[var(--carousel-dot-size)] before:rounded-[var(--carousel-button-radius)] before:bg-[var(--carousel-button-bg)] before:opacity-[var(--carousel-dot-opacity)] before:[transform:translate(-50%,-50%)_scale(var(--carousel-dot-scale))] before:transition-[opacity,transform] before:duration-[var(--carousel-duration)] before:ease-[var(--carousel-easing)] aria-[current=true]:[--carousel-dot-scale:var(--carousel-dot-active-scale)] aria-[current=true]:before:opacity-100 focus-visible:outline-none focus-visible:before:opacity-100 focus-visible:before:[box-shadow:var(--carousel-focus-ring)] motion-reduce:before:transition-none"></div>
+
+  <div
+    class="absolute w-px h-px -m-px overflow-hidden [clip-path:inset(50%)] whitespace-nowrap"
+    role="status"
+    aria-live="polite"
+    data-carousel-status
+  ></div>
+</div>

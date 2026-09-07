@@ -4,47 +4,1212 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>UI-base</title>
-    <link rel="stylesheet" href="./default.css" />
-    <link rel="stylesheet" href="./demo.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=JetBrains+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap"
+    />
+
+    <link rel="stylesheet" href="./components/Checkbox/Vanilla/Js/checkbox.css" />
+    <link rel="stylesheet" href="./components/Radio/Vanilla/Js/radio.css" />
+    <link rel="stylesheet" href="./components/Select/Vanilla/Js/select.css" />
+    <link rel="stylesheet" href="./components/Slider/Vanilla/Js/slider.css" />
+    <link rel="stylesheet" href="./components/Marquee/Vanilla/Js/marquee.css" />
+    <link rel="stylesheet" href="./components/Carousel/Vanilla/Js/carousel.css" />
+
+    <style>
+      :root {
+        --paper: #f4f2ee;
+        --raise: #fbfaf8;
+        --stage: #ffffff;
+        --ink: #1c1a1c;
+        --muted: #6f6a6c;
+        --line: #ded9d1;
+        --line-soft: #ebe7e0;
+        --accent: #8a6a2f;
+        --accent-wash: #efe4cc;
+
+        --shell: 1180px;
+        --gap: clamp(28px, 4vw, 56px);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --paper: #131213;
+          --raise: #1a191a;
+          --stage: #201f20;
+          --ink: #ebe8e3;
+          --muted: #948f91;
+          --line: #302d30;
+          --line-soft: #262326;
+          --accent: #dcbc78;
+          --accent-wash: #2b2519;
+        }
+      }
+
+      :root[data-theme="dark"] {
+        --paper: #131213;
+        --raise: #1a191a;
+        --stage: #201f20;
+        --ink: #ebe8e3;
+        --muted: #948f91;
+        --line: #302d30;
+        --line-soft: #262326;
+        --accent: #dcbc78;
+        --accent-wash: #2b2519;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .shell {
+        width: 100%;
+        max-width: var(--shell);
+        margin-inline: auto;
+        padding-inline: clamp(20px, 5vw, 40px);
+      }
+
+      a {
+        color: inherit;
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+      }
+
+      .eyebrow {
+        margin: 0;
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+
+      .masthead {
+        display: grid;
+        gap: 32px;
+        padding-block: clamp(44px, 8vw, 88px) 36px;
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      @media (min-width: 860px) {
+        .masthead {
+          grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+          align-items: end;
+        }
+      }
+
+      .masthead__title {
+        margin: 12px 0 0;
+        font-family: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+        font-size: clamp(46px, 8vw, 84px);
+        font-weight: 700;
+        font-optical-sizing: auto;
+        line-height: 0.94;
+        letter-spacing: -0.03em;
+        text-wrap: balance;
+      }
+
+      .masthead__lede {
+        margin: 18px 0 0;
+        max-width: 46ch;
+        font-size: clamp(17px, 1.6vw, 19px);
+        color: var(--muted);
+      }
+
+      .masthead__side {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      @media (min-width: 860px) {
+        .masthead__side {
+          align-items: flex-end;
+        }
+      }
+
+      .langs {
+        display: inline-flex;
+        border: 1px solid var(--line);
+      }
+
+      .langs button {
+        padding: 6px 15px;
+        border: 0;
+        background: var(--raise);
+        color: var(--muted);
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        cursor: pointer;
+      }
+
+      .langs button + button {
+        border-left: 1px solid var(--line);
+      }
+
+      .langs button[aria-pressed="true"] {
+        background: var(--accent-wash);
+        color: var(--accent);
+      }
+
+      .tally {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 4px;
+        border: 1px solid var(--line);
+        background: var(--line-soft);
+      }
+
+      .tally div {
+        padding: 16px 18px 14px;
+        background: var(--raise);
+      }
+
+      .tally dt {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .tally dd {
+        margin: 2px 0 0;
+        font-family: "Bricolage Grotesque", ui-sans-serif, sans-serif;
+        font-size: 30px;
+        font-weight: 700;
+        line-height: 1.1;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .banner {
+        margin-block: 8px 0;
+        overflow: hidden;
+      }
+
+      .banner .ui-marquee {
+        --marquee-height: 128px;
+        --marquee-font-size: clamp(24px, 3.4vw, 34px);
+        --marquee-gap: 52px;
+        --marquee-overhang: 80px;
+      }
+
+      .matrix {
+        padding-block: clamp(40px, 6vw, 72px) 8px;
+      }
+
+      .matrix__grid {
+        display: grid;
+        gap: 1px;
+        margin-top: 22px;
+        border: 1px solid var(--line);
+        background: var(--line);
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      @media (min-width: 720px) {
+        .matrix__grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+
+      .stack {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 22px;
+        background: var(--raise);
+      }
+
+      .stack h3 {
+        margin: 0;
+        font-family: "Bricolage Grotesque", ui-sans-serif, sans-serif;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      .stack p {
+        margin: 0;
+        font-size: 15px;
+        color: var(--muted);
+      }
+
+      .files {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin: 2px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .files li {
+        padding: 4px 8px;
+        border: 1px solid var(--line);
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .files li[data-primary] {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      .component {
+        display: grid;
+        gap: var(--gap);
+        padding-block: clamp(40px, 6vw, 68px);
+        border-top: 1px solid var(--line);
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      @media (min-width: 900px) {
+        .component {
+          grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+        }
+      }
+
+      .component__head h2 {
+        margin: 10px 0 0;
+        font-family: "Bricolage Grotesque", ui-sans-serif, sans-serif;
+        font-size: clamp(28px, 3.4vw, 38px);
+        font-weight: 700;
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+      }
+
+      .component__head p {
+        margin: 10px 0 0;
+        max-width: 42ch;
+        color: var(--muted);
+      }
+
+      .stage {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 26px;
+        margin-top: 24px;
+        padding: clamp(22px, 3vw, 34px);
+        border: 1px solid var(--line);
+        background: var(--stage);
+      }
+
+      .stage--stack {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .stage--block {
+        display: block;
+        overflow: hidden;
+      }
+
+      .spec {
+        display: flex;
+        flex-direction: column;
+        gap: 26px;
+        align-self: start;
+      }
+
+      @media (min-width: 900px) {
+        .spec {
+          position: sticky;
+          top: 28px;
+        }
+      }
+
+      .spec section {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .spec h3 {
+        margin: 0;
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .api {
+        display: grid;
+        gap: 1px;
+        border: 1px solid var(--line);
+        background: var(--line);
+      }
+
+      .api div {
+        display: grid;
+        gap: 2px 14px;
+        padding: 9px 12px;
+        background: var(--raise);
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      @media (min-width: 520px) {
+        .api div {
+          grid-template-columns: minmax(120px, auto) minmax(0, 1fr);
+          align-items: baseline;
+        }
+      }
+
+      .api dt {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 12.5px;
+        color: var(--ink);
+        word-break: break-word;
+      }
+
+      .api dd {
+        margin: 0;
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      .tokens {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tokens li {
+        display: flex;
+        gap: 8px;
+        padding: 5px 9px;
+        border: 1px solid var(--line);
+        background: var(--raise);
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 12px;
+      }
+
+      .tokens b {
+        font-weight: 400;
+        color: var(--ink);
+      }
+
+      .tokens span {
+        color: var(--muted);
+        font-variant-numeric: tabular-nums;
+      }
+
+      .demo-note {
+        margin: 0;
+        font-size: 14px;
+        font-style: italic;
+        color: var(--muted);
+      }
+
+      .colophon {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 28px;
+        justify-content: space-between;
+        padding-block: 34px 56px;
+        border-top: 1px solid var(--line);
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .slide-demo {
+        display: grid;
+        place-items: center;
+        height: 100%;
+        font-family: "Bricolage Grotesque", ui-sans-serif, sans-serif;
+        font-size: 26px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      .stage .ui-carousel {
+        --carousel-slide-height: 170px;
+        --carousel-width: 620px;
+      }
+
+      .stage .ui-slider {
+        --slider-width: 100%;
+      }
+    </style>
   </head>
-  <body class="demo-page">
-    <div class="demo-grid">
-      <iframe
-        title="Checkbox"
-        width="240"
-        height="200"
-        src="./componentss/Checkbox/index.html"
-      ></iframe>
-      <iframe
-        title="Radio"
-        width="240"
-        height="170"
-        src="./componentss/Radio/index.html"
-      ></iframe>
-      <iframe
-        title="Select"
-        width="340"
-        height="330"
-        src="./componentss/Select/index.html"
-      ></iframe>
-      <iframe
-        title="Slider"
-        width="440"
-        height="340"
-        src="./componentss/Slider/index.html"
-      ></iframe>
-      <iframe
-        title="Marquee"
-        width="900"
-        height="400"
-        src="./componentss/MovingText/index.html"
-      ></iframe>
-      <iframe
-        title="Carousel"
-        width="900"
-        height="580"
-        src="./componentss/Carusel/index.html"
-      ></iframe>
+
+  <body>
+    <header class="shell masthead">
+      <div>
+        <p class="eyebrow" data-i18n="masthead.eyebrow">Copy-paste component source</p>
+        <h1 class="masthead__title">UI-base</h1>
+        <p class="masthead__lede" data-i18n="masthead.lede">
+          Six hand-built components, each shipped as plain source for the stack
+          you actually use. No package to install, no runtime to adopt — take
+          the three files and own them.
+        </p>
+      </div>
+
+      <div class="masthead__side">
+        <div class="langs" role="group" aria-label="Language" data-i18n-aria="langs.aria">
+          <button type="button" data-lang="en" aria-pressed="true">EN</button>
+          <button type="button" data-lang="ru" aria-pressed="false">RU</button>
+        </div>
+
+        <dl class="tally">
+          <div>
+            <dt data-i18n="tally.components">Components</dt>
+            <dd>6</dd>
+          </div>
+          <div>
+            <dt data-i18n="tally.variants">Variants</dt>
+            <dd>12</dd>
+          </div>
+          <div>
+            <dt data-i18n="tally.files">Files</dt>
+            <dd>128</dd>
+          </div>
+        </dl>
+      </div>
+    </header>
+
+    <div class="shell banner">
+      <div class="ui-marquee" data-marquee>
+        <div class="ui-marquee__ribbon" data-marquee-ribbon>
+          <div class="ui-marquee__viewport" data-marquee-viewport>
+            <div class="ui-marquee__group" data-marquee-group>
+              <p class="ui-marquee__item" data-i18n="banner.keyboard">Keyboard first</p>
+              <p class="ui-marquee__item" data-i18n="banner.deps">No dependencies</p>
+              <p class="ui-marquee__item" data-i18n="banner.themed">Themed by CSS variables</p>
+              <p class="ui-marquee__item" data-i18n="banner.motion">Reduced-motion aware</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <section class="shell matrix">
+      <p class="eyebrow" data-i18n="matrix.eyebrow">Every component, three stacks</p>
+      <div class="matrix__grid">
+        <div class="stack">
+          <h3>Vanilla</h3>
+          <p data-i18n-html="matrix.vanilla">
+            Markup you paste, a stylesheet, and a script that wires itself to
+            <code>data-</code> attributes.
+          </p>
+          <ul class="files">
+            <li data-primary>select.html</li>
+            <li data-primary>select.css</li>
+            <li data-primary>select.js</li>
+            <li>select.ts</li>
+          </ul>
+        </div>
+
+        <div class="stack">
+          <h3>React</h3>
+          <p data-i18n="matrix.react">
+            One component, props instead of attributes, controlled or
+            uncontrolled.
+          </p>
+          <ul class="files">
+            <li data-primary>Select.tsx</li>
+            <li data-primary>Select.css</li>
+            <li>Select.jsx</li>
+          </ul>
+        </div>
+
+        <div class="stack">
+          <h3>Next</h3>
+          <p data-i18n-html="matrix.next">
+            The React file with <code>"use client"</code> on top — the only
+            thing the App Router actually needs.
+          </p>
+          <ul class="files">
+            <li data-primary>Select.tsx</li>
+            <li data-primary>Select.css</li>
+            <li>Select.jsx</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="demo-note" style="margin-top: 16px" data-i18n="matrix.note">
+        Each stack ships four variants — Js, Ts, and a Tailwind twin of each
+        that drops the stylesheet and keeps the same custom properties.
+      </p>
+    </section>
+
+    <main class="shell">
+      <article class="component">
+        <div>
+          <div class="component__head">
+            <p class="eyebrow" data-i18n="checkbox.eyebrow">01 — form</p>
+            <h2>Checkbox</h2>
+            <p data-i18n-html="checkbox.lede">
+              A real <code>input</code> stays in the form and keeps the
+              keyboard; the box beside it is what you style. Indeterminate is
+              set from markup and cleared by the browser on first click.
+            </p>
+          </div>
+
+          <div class="stage stage--stack">
+            <label class="ui-checkbox" for="demo-terms">
+              <input
+                class="ui-checkbox__input"
+                id="demo-terms"
+                type="checkbox"
+                data-checkbox-input
+              />
+              <span class="ui-checkbox__box"></span>
+              <span data-i18n="checkbox.terms">Accept terms</span>
+            </label>
+
+            <label class="ui-checkbox" for="demo-news">
+              <input
+                class="ui-checkbox__input"
+                id="demo-news"
+                type="checkbox"
+                checked
+                data-checkbox-input
+              />
+              <span class="ui-checkbox__box"></span>
+              <span data-i18n="checkbox.subscribe">Subscribe</span>
+            </label>
+
+            <label class="ui-checkbox" for="demo-all">
+              <input
+                class="ui-checkbox__input"
+                id="demo-all"
+                type="checkbox"
+                data-checkbox-input
+                data-indeterminate
+              />
+              <span class="ui-checkbox__box"></span>
+              <span data-i18n="checkbox.all">Select all</span>
+            </label>
+
+            <label class="ui-checkbox" for="demo-locked">
+              <input
+                class="ui-checkbox__input"
+                id="demo-locked"
+                type="checkbox"
+                disabled
+                data-checkbox-input
+              />
+              <span class="ui-checkbox__box"></span>
+              <span data-i18n="checkbox.locked">Unavailable</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="spec">
+          <section>
+            <h3 data-i18n="spec.markup">Markup</h3>
+            <dl class="api">
+              <div>
+                <dt>data-indeterminate</dt>
+                <dd data-i18n="checkbox.mixed">Start in the mixed state</dd>
+              </div>
+              <div>
+                <dt>checked / disabled</dt>
+                <dd data-i18n="checkbox.native">Native attributes, nothing custom</dd>
+              </div>
+            </dl>
+          </section>
+
+          <section>
+            <h3 data-i18n="spec.props">React props</h3>
+            <dl class="api">
+              <div>
+                <dt>indeterminate</dt>
+                <dd>boolean</dd>
+              </div>
+              <div>
+                <dt>onChange</dt>
+                <dd>(checked: boolean) =&gt; void</dd>
+              </div>
+            </dl>
+          </section>
+
+          <section>
+            <h3 data-i18n="spec.tokens">Tokens</h3>
+            <ul class="tokens">
+              <li><b>--checkbox-size</b><span>15px</span></li>
+              <li><b>--checkbox-radius</b><span>20%</span></li>
+              <li><b>--checkbox-bg</b><span>#666969</span></li>
+              <li><b>--checkbox-duration</b><span>80ms</span></li>
+            </ul>
+          </section>
+        </div>
+      </article>
+
+      <article class="component">
+        <div>
+          <div class="component__head">
+            <p class="eyebrow" data-i18n="radio.eyebrow">02 — form</p>
+            <h2>Radio</h2>
+            <p data-i18n-html="radio.lede">
+              The checkbox anatomy with a dot instead of a mark. No script at
+              all — grouping, arrow keys and roving focus are what the browser
+              already does with a shared <code>name</code>.
+            </p>
+          </div>
+
+          <div class="stage stage--stack">
+            <label class="ui-radio" for="demo-free">
+              <input
+                class="ui-radio__input"
+                id="demo-free"
+                type="radio"
+                name="demo-plan"
+                value="free"
+                checked
+              />
+              <span class="ui-radio__circle"></span>
+              <span data-i18n="radio.free">Free</span>
+            </label>
+
+            <label class="ui-radio" for="demo-pro">
+              <input
+                class="ui-radio__input"
+                id="demo-pro"
+                type="radio"
+                name="demo-plan"
+                value="pro"
+              />
+              <span class="ui-radio__circle"></span>
+              <span data-i18n="radio.pro">Pro</span>
+            </label>
+
+            <label class="ui-radio" for="demo-team">
+              <input
+                class="ui-radio__input"
+                id="demo-team"
+                type="radio"
+                name="demo-plan"
+                value="team"
+                disabled
+              />
+              <span class="ui-radio__circle"></span>
+              <span data-i18n="radio.team">Team</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="spec">
+          <section>
+            <h3 data-i18n="spec.files">Files</h3>
+            <ul class="files">
+              <li data-primary>radio.html</li>
+              <li data-primary>radio.css</li>
+            </ul>
+            <p class="demo-note" data-i18n="radio.noscript">
+              The only component with no script in any stack.
+            </p>
+          </section>
+
+          <section>
+            <h3 data-i18n="spec.props">React props</h3>
+            <dl class="api">
+              <div>
+                <dt>name / value</dt>
+                <dd data-i18n="radio.required">Required, groups the inputs</dd>
+              </div>
+              <div>
+                <dt>onChange</dt>
+                <dd>(value: string) =&gt; void</dd>
+              </div>
+            </dl>
+          </section>
+
+          <section>
+            <h3 data-i18n="spec.tokens">Tokens</h3>
+            <ul class="tokens">
+              <li><b>--radio-size</b><span>16px</span></li>
+              <li><b>--radio-dot-size</b><span>8px</span></li>
+              <li><b>--radio-dot-color</b><span>#ffffff</span></li>
+            </ul>
+          </section>
+        </div>
+      </article>
+
+      <article class="component">
+        <div>
+          <div class="component__head">
+            <p class="eyebrow" data-i18n="select.eyebrow">03 — overlay</p>
+            <h2>Select</h2>
+            <p data-i18n="select.lede">
+              A listbox that behaves like the native one: arrows move, letters
+              jump to a match, repeating a letter cycles through it, and
+              disabled options are skipped rather than focused.
+            </p>
+          </div>
+
+          <div class="stage">
+            <div class="ui-select" data-select>
+              <input
+                class="ui-select__input"
+                type="hidden"
+                name="demo-plan-value"
+                data-select-input
+              />
+
+              <div class="ui-select__header">
+                <button
+                  class="ui-select__trigger"
+                  type="button"
+                  aria-haspopup="listbox"
+                  aria-expanded="false"
+                  aria-controls="demo-select-list"
+                  data-select-trigger data-i18n="select.placeholder">
+                  Choose a plan
+                </button>
+                <span class="ui-select__arrow"></span>
+              </div>
+
+              <div
+                class="ui-select__list"
+                id="demo-select-list"
+                aria-hidden="true"
+                data-select-list
+              >
+                <div class="ui-select__options" role="listbox" aria-label="Plan">
+                  <button
+                    class="ui-select__option"
+                    type="button"
+                    role="option"
+                    aria-selected="false"
+                    data-select-option
+                    data-value="free"
+                    data-selected data-i18n="select.free">
+                    Free
+                  </button>
+                  <button
+                    class="ui-select__option"
+                    type="button"
+                    role="option"
+                    aria-selected="false"
+                    data-select-option
+                    data-value="pro" data-i18n="select.pro">
+                    Pro
+                  </button>
+                  <button
+                    class="ui-select__option"
+                    type="button"
+                    role="option"
+                    aria-selected="false"
+                    data-select-option
+                    data-value="team"
+                    disabled data-i18n="select.team">
+                    Team
+                  </button>
+                  <button
+                    class="ui-select__option"
+                    type="button"
+                    role="option"
+                    aria-selected="false"
+                    data-select-option
+                    data-value="enterprise" data-i18n="select.enterprise">
+                    Enterprise
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spec">
+          <section>
+            <h3 data-i18n="spec.markup">Markup</h3>
+            <dl class="api">
+              <div>
+                <dt>data-value</dt>
+                <dd data-i18n="select.value">Value written to the hidden input</dd>
+              </div>
+              <div>
+                <dt>data-selected</dt>
+                <dd data-i18n="select.selected">Option shown on first paint</dd>
+              </div>
+              <div>
+                <dt>select:change</dt>
+                <dd data-i18n="select.event">Bubbling event, value in detail</dd>
+              </div>
+            </dl>
+          </section>
+
+          <section>
+            <h3 data-i18n="spec.props">React props</h3>
+            <dl class="api">
+              <div>
+                <dt>options</dt>
+                <dd>{ value, label, disabled }[]</dd>
+              </div>
+              <div>
+                <dt>value / defaultValue</dt>
+                <dd data-i18n="select.controlled">Controlled or uncontrolled</dd>
+              </div>
+            </dl>
+          </section>
+
+          <section>
+            <h3 data-i18n="spec.tokens">Tokens</h3>
+            <ul class="tokens">
+              <li><b>--select-width</b><span>300px</span></li>
+              <li><b>--select-list-max-height</b><span>240px</span></li>
+              <li><b>--select-duration</b><span>200ms</span></li>
+            </ul>
+          </section>
+        </div>
+      </article>
+
+      <article class="component">
+        <div>
+          <div class="component__head">
+            <p class="eyebrow" data-i18n="slider.eyebrow">04 — input</p>
+            <h2>Slider</h2>
+            <p data-i18n="slider.lede">
+              One thumb or two. Dragging one past the other swaps the pair
+              instead of jamming, and every move reaches the outside world
+              through hidden inputs and events.
+            </p>
+          </div>
+
+          <div class="stage stage--stack">
+            <div
+              class="ui-slider"
+              data-slider
+              data-min="0"
+              data-max="100"
+              data-step="1"
+            >
+              <input
+                class="ui-slider__input"
+                type="hidden"
+                name="demo-amount"
+                data-slider-input
+              />
+              <div class="ui-slider__header">
+                <span class="ui-slider__title" data-i18n="slider.amount">Amount</span>
+                <span class="ui-slider__value" data-slider-value></span>
+              </div>
+              <div class="ui-slider__body">
+                <span class="ui-slider__bound" data-slider-bound="min"></span>
+                <div class="ui-slider__track" data-slider-track>
+                  <div class="ui-slider__range" data-slider-range></div>
+                  <div
+                    class="ui-slider__thumb"
+                    data-slider-thumb
+                    data-value="40"
+                    role="slider"
+                    tabindex="0"
+                    aria-label="Amount"
+                  ></div>
+                </div>
+                <span class="ui-slider__bound" data-slider-bound="max"></span>
+              </div>
+            </div>
+
+            <div
+              class="ui-slider"
+              data-slider
+              data-min="0"
+              data-max="1000"
+              data-step="10"
+            >
+              <input
+                class="ui-slider__input"
+                type="hidden"
+                name="demo-from"
+                data-slider-input
+              />
+              <input
+                class="ui-slider__input"
+                type="hidden"
+                name="demo-to"
+                data-slider-input
+              />
+              <div class="ui-slider__header">
+                <span class="ui-slider__title" data-i18n="slider.price">Price</span>
+                <span class="ui-slider__value" data-slider-value></span>
+              </div>
+              <div class="ui-slider__body">
+                <span class="ui-slider__bound" data-slider-bound="min"></span>
+                <div class="ui-slider__track" data-slider-track>
+                  <div class="ui-slider__range" data-slider-range></div>
+                  <div
+                    class="ui-slider__thumb"
+                    data-slider-thumb
+                    data-value="200"
+                    role="slider"
+                    tabindex="0"
+                    aria-label="Price from"
+                  ></div>
+                  <div
+                    class="ui-slider__thumb"
+                    data-slider-thumb
+                    data-value="800"
+                    role="slider"
+                    tabindex="0"
+                    aria-label="Price to"
+                  ></div>
+                </div>
+                <span class="ui-slider__bound" data-slider-bound="max"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spec">
+          <section>
+            <h3 data-i18n="spec.markup">Markup</h3>
+            <dl class="api">
+              <div>
+                <dt>data-min / max / step</dt>
+                <dd data-i18n="slider.range">Range and granularity</dd>
+              </div>
+              <div>
+                <dt>data-slider-thumb</dt>
+                <dd data-i18n="slider.two">Two of them makes it a range</dd>
+              </div>
+              <div>
+                <dt>slider:input / :change</dt>
+                <dd data-i18n="slider.events">While dragging, then on release</dd>
+              </div>
+            </dl>
+          </section>
+
+          <section>
+            <h3 data-i18n="spec.props">React props</h3>
+            <dl class="api">
+              <div>
+                <dt>defaultValue</dt>
+                <dd>number, or [from, to]</dd>
+              </div>
+              <div>
+                <dt>onInput / onChange</dt>
+                <dd data-i18n="slider.live">Live value, then committed</dd>
+              </div>
+            </dl>
+          </section>
+
+          <section>
+            <h3 data-i18n="spec.tokens">Tokens</h3>
+            <ul class="tokens">
+              <li><b>--slider-track-height</b><span>8px</span></li>
+              <li><b>--slider-thumb-size</b><span>16px</span></li>
+              <li><b>--slider-thumb-color</b><span>wheat</span></li>
+            </ul>
+          </section>
+        </div>
+      </article>
+
+      <article class="component">
+        <div>
+          <div class="component__head">
+            <p class="eyebrow" data-i18n="marquee.eyebrow">05 — motion</p>
+            <h2>Marquee</h2>
+            <p data-i18n="marquee.lede">
+              Speed is set in pixels per second, not seconds per loop, so two
+              words and twenty words travel at the same pace. The script fills
+              the ribbon with as many copies as the width needs.
+            </p>
+          </div>
+
+          <div class="stage stage--block">
+            <div class="ui-marquee" data-marquee data-direction="reverse">
+              <div class="ui-marquee__ribbon" data-marquee-ribbon>
+                <div class="ui-marquee__viewport" data-marquee-viewport>
+                  <div class="ui-marquee__group" data-marquee-group>
+                    <p class="ui-marquee__item" data-i18n="marquee.demo1">60 px per second</p>
+                    <p class="ui-marquee__item" data-i18n="marquee.demo2">Pauses on hover</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spec">
+          <section>
+            <h3 data-i18n="spec.markup">Markup</h3>
+            <dl class="api">
+              <div>
+                <dt>data-direction</dt>
+                <dd data-i18n="marquee.reverse">"reverse" flips the travel</dd>
+              </div>
+              <div>
+                <dt>data-pause-on-hover</dt>
+                <dd data-i18n="marquee.pause">"false" keeps it running</dd>
+              </div>
+            </dl>
+          </section>
+
+          <section>
+            <h3 data-i18n="spec.props">React props</h3>
+            <dl class="api">
+              <div>
+                <dt>speed</dt>
+                <dd data-i18n="marquee.speed">Pixels per second, default 60</dd>
+              </div>
+              <div>
+                <dt>children</dt>
+                <dd data-i18n="marquee.children">Repeated to fill the ribbon</dd>
+              </div>
+            </dl>
+          </section>
+
+          <section>
+            <h3 data-i18n="spec.tokens">Tokens</h3>
+            <ul class="tokens">
+              <li><b>--marquee-speed</b><span>60</span></li>
+              <li><b>--marquee-tilt</b><span>-3deg</span></li>
+              <li><b>--marquee-gap</b><span>64px</span></li>
+            </ul>
+          </section>
+        </div>
+      </article>
+
+      <article class="component">
+        <div>
+          <div class="component__head">
+            <p class="eyebrow" data-i18n="carousel.eyebrow">06 — motion</p>
+            <h2>Carousel</h2>
+            <p data-i18n="carousel.lede">
+              A copy of the strip sits on each side, so the loop never hits an
+              end. Drag it, use the arrow keys, or press the buttons faster than
+              it animates — the clicks queue instead of dropping.
+            </p>
+          </div>
+
+          <div class="stage stage--block">
+            <div
+              class="ui-carousel"
+              data-carousel
+              data-autoplay="4500"
+              role="group"
+              aria-roledescription="carousel"
+              aria-label="Highlights"
+            >
+              <button
+                class="ui-carousel__button ui-carousel__button--prev"
+                type="button"
+                aria-label="Previous slide" data-i18n-aria="carousel.prev"
+                data-carousel-prev
+              ></button>
+
+              <div class="ui-carousel__viewport" data-carousel-viewport>
+                <div class="ui-carousel__track" data-carousel-track>
+                  <div class="ui-carousel__slide">
+                    <div class="slide-demo" data-i18n="carousel.slide1">Drag me</div>
+                  </div>
+                  <div class="ui-carousel__slide">
+                    <div class="slide-demo" data-i18n="carousel.slide2">Arrow keys work</div>
+                  </div>
+                  <div class="ui-carousel__slide">
+                    <div class="slide-demo" data-i18n="carousel.slide3">Autoplay pauses on hover</div>
+                  </div>
+                </div>
+              </div>
+
+              <button
+                class="ui-carousel__button ui-carousel__button--next"
+                type="button"
+                aria-label="Next slide" data-i18n-aria="carousel.next"
+                data-carousel-next
+              ></button>
+
+              <div class="ui-carousel__dots" data-carousel-dots></div>
+
+              <div
+                class="ui-carousel__status"
+                role="status"
+                aria-live="polite"
+                data-carousel-status
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="spec">
+          <section>
+            <h3 data-i18n="spec.markup">Markup</h3>
+            <dl class="api">
+              <div>
+                <dt>data-autoplay</dt>
+                <dd data-i18n="carousel.autoplay">Milliseconds, omit to disable</dd>
+              </div>
+              <div>
+                <dt>data-carousel-dots</dt>
+                <dd data-i18n="carousel.dots">Empty element the script fills</dd>
+              </div>
+              <div>
+                <dt>data-carousel-status</dt>
+                <dd data-i18n="carousel.status">Live region for screen readers</dd>
+              </div>
+            </dl>
+          </section>
+
+          <section>
+            <h3 data-i18n="spec.props">React props</h3>
+            <dl class="api">
+              <div>
+                <dt>autoplay</dt>
+                <dd data-i18n="carousel.autoplayProp">Milliseconds, default 0</dd>
+              </div>
+              <div>
+                <dt>showDots</dt>
+                <dd data-i18n="carousel.showDots">boolean, default true</dd>
+              </div>
+            </dl>
+          </section>
+
+          <section>
+            <h3 data-i18n="spec.tokens">Tokens</h3>
+            <ul class="tokens">
+              <li><b>--carousel-slide-width</b><span>100%</span></li>
+              <li><b>--carousel-slide-height</b><span>300px</span></li>
+              <li><b>--carousel-duration</b><span>400ms</span></li>
+            </ul>
+          </section>
+        </div>
+      </article>
+    </main>
+
+    <footer class="shell colophon">
+      <span>UI-base — components/&lt;Name&gt;/&lt;Stack&gt;/&lt;Variant&gt;</span>
+      <span data-i18n="colophon.build">No build step, no dependencies</span>
+    </footer>
+
+    <script src="./i18n.js"></script>
+
+    <script type="module" src="./components/Checkbox/Vanilla/Js/checkbox.js"></script>
+    <script type="module" src="./components/Select/Vanilla/Js/select.js"></script>
+    <script type="module" src="./components/Slider/Vanilla/Js/slider.js"></script>
+    <script type="module" src="./components/Marquee/Vanilla/Js/marquee.js"></script>
+    <script type="module" src="./components/Carousel/Vanilla/Js/carousel.js"></script>
   </body>
 </html>

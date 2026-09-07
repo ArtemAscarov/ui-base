@@ -1,0 +1,72 @@
+<div
+  class="group w-full min-w-0 max-w-[var(--slider-width)] p-[var(--slider-padding)] border-[length:var(--slider-border-width)] border-solid border-[color:var(--slider-border-color)] text-[color:var(--slider-color)] data-[disabled]:opacity-[var(--slider-disabled-opacity)] motion-reduce:[--slider-duration:1ms]"
+  style="
+    --slider-color: inherit;
+    --slider-value-color: #ffffff;
+    --slider-bg: #666969;
+    --slider-border-color: rgba(0, 0, 0, 0.26);
+    --slider-track-color: rgba(0, 0, 0, 0.17);
+    --slider-range-color: rgba(0, 0, 0, 0.51);
+    --slider-thumb-color: wheat;
+    --slider-thumb-border-color: rgba(0, 0, 0, 0.6);
+    --slider-width: 400px;
+    --slider-padding: 5px;
+    --slider-body-padding: 10px 15px;
+    --slider-header-gap: 10px;
+    --slider-gap: 10px;
+    --slider-track-height: 8px;
+    --slider-thumb-size: 16px;
+    --slider-border-width: 1px;
+    --slider-radius: 8px;
+    --slider-track-radius: 10px;
+    --slider-thumb-radius: 50%;
+    --slider-font-weight: 500;
+    --slider-shadow: 0 0 5px 0.5px rgb(130, 128, 130);
+    --slider-focus-ring: 0 0 5px 2px rgb(31, 25, 31);
+    --slider-thumb-scale: 1;
+    --slider-active-scale: 1.15;
+    --slider-disabled-opacity: 0.5;
+    --slider-duration: 80ms;
+    --slider-easing: linear;
+  "
+  data-slider
+  data-min="0"
+  data-max="100"
+  data-step="1"
+>
+  <input type="hidden" name="amount" data-slider-input />
+
+  <div
+    class="flex justify-between gap-[var(--slider-gap)] mb-[var(--slider-header-gap)]"
+  >
+    <span>Amount</span>
+    <span data-slider-value></span>
+  </div>
+
+  <div
+    class="flex items-center gap-[var(--slider-gap)] w-full p-[var(--slider-body-padding)] rounded-[var(--slider-radius)] bg-[var(--slider-bg)] [box-shadow:var(--slider-shadow)] text-[color:var(--slider-value-color)] [font-weight:var(--slider-font-weight)] select-none"
+  >
+    <span class="flex-none" data-slider-bound="min"></span>
+
+    <div
+      class="relative w-full h-[var(--slider-track-height)] mx-[calc(var(--slider-thumb-size)/2)] rounded-[var(--slider-track-radius)] bg-[var(--slider-track-color)] cursor-pointer touch-none group-data-[disabled]:cursor-not-allowed group-data-[disabled]:pointer-events-none"
+      data-slider-track
+    >
+      <div
+        class="absolute h-[var(--slider-track-height)] rounded-[var(--slider-track-radius)] bg-[var(--slider-range-color)]"
+        data-slider-range
+      ></div>
+
+      <div
+        class="absolute top-1/2 w-[var(--slider-thumb-size)] h-[var(--slider-thumb-size)] border-[length:var(--slider-border-width)] border-solid border-[color:var(--slider-thumb-border-color)] rounded-[var(--slider-thumb-radius)] bg-[var(--slider-thumb-color)] cursor-grab touch-none [transform:translate(-50%,-50%)_scale(var(--slider-thumb-scale))] transition-transform duration-[var(--slider-duration)] ease-[var(--slider-easing)] hover:[--slider-thumb-scale:var(--slider-active-scale)] focus-visible:[--slider-thumb-scale:var(--slider-active-scale)] focus-visible:outline-none focus-visible:[box-shadow:var(--slider-focus-ring)] active:cursor-grabbing group-data-[dragging]:cursor-grabbing group-data-[disabled]:cursor-not-allowed"
+        data-slider-thumb
+        data-value="40"
+        role="slider"
+        tabindex="0"
+        aria-label="Amount"
+      ></div>
+    </div>
+
+    <span class="flex-none" data-slider-bound="max"></span>
+  </div>
+</div>
