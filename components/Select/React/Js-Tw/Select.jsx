@@ -50,6 +50,7 @@ const optionClass = `${surfaceClass} relative flex-none pr-[calc(var(--select-ch
 export function Select({
   options,
   label,
+  name,
   placeholder = "Select",
   value,
   defaultValue = "",
@@ -212,6 +213,15 @@ export function Select({
       data-open={open || undefined}
       data-placeholder={!selected || undefined}
     >
+      {name ? (
+        <input
+          type="hidden"
+          name={name}
+          value={current}
+          readOnly
+        />
+      ) : null}
+
       <div className="relative">
         <button
           ref={triggerRef}

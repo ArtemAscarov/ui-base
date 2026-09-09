@@ -11,6 +11,18 @@ export function initCarousel(carousel) {
   const slides = [...track.children];
   const count = slides.length;
   const autoplayDelay = Number(carousel.dataset.autoplay ?? 0);
+  const labels = {
+    slide: carousel.dataset.slideLabel ?? "{i} of {n}",
+    dot: carousel.dataset.dotLabel ?? "Slide {i} of {n}",
+    status: carousel.dataset.statusLabel ?? "Slide {i} of {n}",
+  };
+
+  function fill(template, at) {
+    return template
+      .replaceAll("{i}", String(at + 1))
+      .replaceAll("{n}", String(count));
+  }
+
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
 
   let index = count;
@@ -29,7 +41,7 @@ export function initCarousel(carousel) {
     slide.setAttribute("aria-roledescription", "slide");
 
     if (!slide.hasAttribute("aria-label")) {
-      slide.setAttribute("aria-label", `${at + 1} of ${count}`);
+      slide.setAttribute("aria-label", fill(labels.slide, at));
     }
   });
 
@@ -69,7 +81,7 @@ export function initCarousel(carousel) {
 
         dot.className = dotsBox.dataset.dotClass ?? "ui-carousel__dot";
         dot.type = "button";
-        dot.setAttribute("aria-label", `Slide ${at + 1} of ${count}`);
+        dot.setAttribute("aria-label", fill(labels.dot, at));
         dot.addEventListener("click", () => goToSlide(at));
         dotsBox.appendChild(dot);
 
@@ -85,7 +97,7 @@ export function initCarousel(carousel) {
     );
 
     if (status && autoplayTimer === null) {
-      status.textContent = `Slide ${active + 1} of ${count}`;
+      status.textContent = fill(labels.status, active);
     }
   }
 

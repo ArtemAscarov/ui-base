@@ -7,6 +7,7 @@ export type SliderValue = number | [number, number];
 
 export interface SliderProps {
   label?: string;
+  name?: string | [string, string];
   min?: number;
   max?: number;
   step?: number;
@@ -21,6 +22,7 @@ export interface SliderProps {
 
 export function Slider({
   label,
+  name,
   min = 0,
   max = 100,
   step = 1,
@@ -157,6 +159,8 @@ export function Slider({
     };
   }
 
+  const names = Array.isArray(name) ? name : [name, name];
+
   const from = isRange ? percent(values[0]) : 0;
   const to = percent(isRange ? values[1] : values[0]);
 
@@ -167,6 +171,19 @@ export function Slider({
       data-disabled={disabled || undefined}
       data-dragging={dragging || undefined}
     >
+      {name
+        ? values.map((thumbValue, index) => (
+            <input
+              key={index}
+              className="ui-slider__input"
+              type="hidden"
+              name={names[index]}
+              value={thumbValue}
+              readOnly
+            />
+          ))
+        : null}
+
       <div className="ui-slider__header">
         <span className="ui-slider__title">{label}</span>
         <span className="ui-slider__value">

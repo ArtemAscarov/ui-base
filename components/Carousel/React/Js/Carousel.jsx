@@ -5,6 +5,9 @@ import "./Carousel.css";
 export function Carousel({
   children,
   label,
+  slideLabel = (index, total) => `${index} of ${total}`,
+  dotLabel = (index, total) => `Slide ${index} of ${total}`,
+  statusLabel = (index, total) => `Slide ${index} of ${total}`,
   autoplay = 0,
   showDots = true,
   className = "",
@@ -254,7 +257,7 @@ export function Carousel({
                 className="ui-carousel__slide"
                 role="group"
                 aria-roledescription="slide"
-                aria-label={`${(position % count) + 1} of ${count}`}
+                aria-label={slideLabel((position % count) + 1, count)}
                 aria-hidden={!real || undefined}
               >
                 {slide}
@@ -278,7 +281,7 @@ export function Carousel({
               key={at}
               className="ui-carousel__dot"
               type="button"
-              aria-label={`Slide ${at + 1} of ${count}`}
+              aria-label={dotLabel(at + 1, count)}
               aria-current={at === active}
               onClick={() => goToSlide(at)}
             />
@@ -287,7 +290,7 @@ export function Carousel({
       )}
 
       <div className="ui-carousel__status" role="status" aria-live="polite">
-        {autoplay > 0 ? "" : `Slide ${active + 1} of ${count}`}
+        {autoplay > 0 ? "" : statusLabel(active + 1, count)}
       </div>
     </div>
   );

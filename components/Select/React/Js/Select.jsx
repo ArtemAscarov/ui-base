@@ -5,6 +5,7 @@ import "./Select.css";
 export function Select({
   options,
   label,
+  name,
   placeholder = "Select",
   value,
   defaultValue = "",
@@ -167,6 +168,16 @@ export function Select({
       data-open={open || undefined}
       data-placeholder={!selected || undefined}
     >
+      {name ? (
+        <input
+          className="ui-select__input"
+          type="hidden"
+          name={name}
+          value={current}
+          readOnly
+        />
+      ) : null}
+
       <div className="ui-select__header">
         <button
           ref={triggerRef}

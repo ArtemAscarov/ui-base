@@ -11,6 +11,9 @@ import "./Carousel.css";
 export interface CarouselProps {
   children: ReactNode;
   label?: string;
+  slideLabel?: (index: number, total: number) => string;
+  dotLabel?: (index: number, total: number) => string;
+  statusLabel?: (index: number, total: number) => string;
   autoplay?: number;
   showDots?: boolean;
   className?: string;
@@ -20,6 +23,9 @@ export interface CarouselProps {
 export function Carousel({
   children,
   label,
+  slideLabel = (index: number, total: number) => `${index} of ${total}`,
+  dotLabel = (index: number, total: number) => `Slide ${index} of ${total}`,
+  statusLabel = (index: number, total: number) => `Slide ${index} of ${total}`,
   autoplay = 0,
   showDots = true,
   className = "",
@@ -275,7 +281,7 @@ export function Carousel({
                 className="ui-carousel__slide"
                 role="group"
                 aria-roledescription="slide"
-                aria-label={`${(position % count) + 1} of ${count}`}
+                aria-label={slideLabel((position % count) + 1, count)}
                 aria-hidden={!real || undefined}
               >
                 {slide}
@@ -299,7 +305,7 @@ export function Carousel({
               key={at}
               className="ui-carousel__dot"
               type="button"
-              aria-label={`Slide ${at + 1} of ${count}`}
+              aria-label={dotLabel(at + 1, count)}
               aria-current={at === active}
               onClick={() => goToSlide(at)}
             />
@@ -308,7 +314,7 @@ export function Carousel({
       )}
 
       <div className="ui-carousel__status" role="status" aria-live="polite">
-        {autoplay > 0 ? "" : `Slide ${active + 1} of ${count}`}
+        {autoplay > 0 ? "" : statusLabel(active + 1, count)}
       </div>
     </div>
   );
