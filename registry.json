@@ -1,0 +1,53 @@
+{
+  "slider": {
+    "name": "Slider",
+    "description": "Ползунок: одно значение или диапазон",
+    "variants": {
+      "react": {
+        "dependencies": ["react"],
+        "flavors": {
+          "ts": [
+            {
+              "from": "components/Slider/React/Ts/Slider.tsx",
+              "name": "Slider.tsx",
+              "type": "component"
+            },
+            {
+              "from": "components/Slider/React/Ts/Slider.css",
+              "name": "Slider.css",
+              "type": "style"
+            }
+          ],
+          "js": [
+            {
+              "from": "components/Slider/React/Js/Slider.jsx",
+              "name": "Slider.jsx",
+              "type": "component"
+            },
+            {
+              "from": "components/Slider/React/Js/Slider.css",
+              "name": "Slider.css",
+              "type": "style"
+            }
+          ],
+          "ts-tw": [
+            {
+              "from": "components/Slider/React/Ts-Tw/Slider.tsx",
+              "name": "Slider.tsx",
+              "type": "component"
+            }
+          ],
+          "js-tw": [
+            {
+              "from": "components/Slider/React/Js-Tw/Slider.jsx",
+              "name": "Slider.jsx",
+              "type": "component"
+            }
+          ]
+        }
+      },
+      "vanilla": { "ts": [], "js": [], "ts-tw": [], "js-tw": [] },
+      "next": { "ts": [], "js": [], "ts-tw": [], "js-tw": [] }
+    }
+  }
+}
