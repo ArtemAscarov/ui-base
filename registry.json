@@ -1,39 +1,857 @@
 {
-  "slider": {
-    "name": "Slider",
-    "description": "Ползунок: одно значение или диапазон",
+  "carousel": {
+    "name": "Carousel",
+    "description": "",
     "variants": {
       "react": {
-        "dependencies": ["react"],
+        "dependencies": [
+          "react"
+        ],
         "flavors": {
-          "ts": [
-            {
-              "from": "components/Slider/React/Ts/Slider.tsx",
-              "name": "Slider.tsx",
-              "type": "component"
-            },
-            {
-              "from": "components/Slider/React/Ts/Slider.css",
-              "name": "Slider.css",
-              "type": "style"
-            }
-          ],
           "js": [
             {
-              "from": "components/Slider/React/Js/Slider.jsx",
-              "name": "Slider.jsx",
-              "type": "component"
+              "from": "components/Carousel/React/Js/Carousel.css",
+              "name": "Carousel.css",
+              "type": "style"
             },
             {
-              "from": "components/Slider/React/Js/Slider.css",
-              "name": "Slider.css",
+              "from": "components/Carousel/React/Js/Carousel.jsx",
+              "name": "Carousel.jsx",
+              "type": "component"
+            }
+          ],
+          "js-tw": [
+            {
+              "from": "components/Carousel/React/Js-Tw/Carousel.jsx",
+              "name": "Carousel.jsx",
+              "type": "component"
+            }
+          ],
+          "ts": [
+            {
+              "from": "components/Carousel/React/Ts/Carousel.css",
+              "name": "Carousel.css",
               "type": "style"
+            },
+            {
+              "from": "components/Carousel/React/Ts/Carousel.tsx",
+              "name": "Carousel.tsx",
+              "type": "component"
             }
           ],
           "ts-tw": [
             {
-              "from": "components/Slider/React/Ts-Tw/Slider.tsx",
-              "name": "Slider.tsx",
+              "from": "components/Carousel/React/Ts-Tw/Carousel.tsx",
+              "name": "Carousel.tsx",
+              "type": "component"
+            }
+          ]
+        }
+      },
+      "vanilla": {
+        "dependencies": [],
+        "flavors": {
+          "js": [
+            {
+              "from": "components/Carousel/Vanilla/Js/Carousel.css",
+              "name": "Carousel.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Carousel/Vanilla/Js/Carousel.html",
+              "name": "Carousel.html",
+              "type": "markup"
+            },
+            {
+              "from": "components/Carousel/Vanilla/Js/Carousel.js",
+              "name": "Carousel.js",
+              "type": "script"
+            }
+          ],
+          "js-tw": [
+            {
+              "from": "components/Carousel/Vanilla/Js-Tw/Carousel.html",
+              "name": "Carousel.html",
+              "type": "markup"
+            },
+            {
+              "from": "components/Carousel/Vanilla/Js-Tw/Carousel.js",
+              "name": "Carousel.js",
+              "type": "script"
+            }
+          ],
+          "ts": [
+            {
+              "from": "components/Carousel/Vanilla/Ts/Carousel.css",
+              "name": "Carousel.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Carousel/Vanilla/Ts/Carousel.html",
+              "name": "Carousel.html",
+              "type": "markup"
+            },
+            {
+              "from": "components/Carousel/Vanilla/Ts/Carousel.ts",
+              "name": "Carousel.ts",
+              "type": "script"
+            }
+          ],
+          "ts-tw": [
+            {
+              "from": "components/Carousel/Vanilla/Ts-Tw/Carousel.html",
+              "name": "Carousel.html",
+              "type": "markup"
+            },
+            {
+              "from": "components/Carousel/Vanilla/Ts-Tw/Carousel.ts",
+              "name": "Carousel.ts",
+              "type": "script"
+            }
+          ]
+        }
+      },
+      "next": {
+        "dependencies": [
+          "react"
+        ],
+        "flavors": {
+          "js": [
+            {
+              "from": "components/Carousel/React/Js/Carousel.css",
+              "name": "Carousel.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Carousel/React/Js/Carousel.jsx",
+              "name": "Carousel.jsx",
+              "type": "component",
+              "modifiers": [
+                "use-client"
+              ]
+            }
+          ],
+          "js-tw": [
+            {
+              "from": "components/Carousel/React/Js-Tw/Carousel.jsx",
+              "name": "Carousel.jsx",
+              "type": "component",
+              "modifiers": [
+                "use-client"
+              ]
+            }
+          ],
+          "ts": [
+            {
+              "from": "components/Carousel/React/Ts/Carousel.css",
+              "name": "Carousel.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Carousel/React/Ts/Carousel.tsx",
+              "name": "Carousel.tsx",
+              "type": "component",
+              "modifiers": [
+                "use-client"
+              ]
+            }
+          ],
+          "ts-tw": [
+            {
+              "from": "components/Carousel/React/Ts-Tw/Carousel.tsx",
+              "name": "Carousel.tsx",
+              "type": "component",
+              "modifiers": [
+                "use-client"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "checkbox": {
+    "name": "Checkbox",
+    "description": "",
+    "variants": {
+      "react": {
+        "dependencies": [
+          "react"
+        ],
+        "flavors": {
+          "js": [
+            {
+              "from": "components/Checkbox/React/Js/Checkbox.css",
+              "name": "Checkbox.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Checkbox/React/Js/Checkbox.jsx",
+              "name": "Checkbox.jsx",
+              "type": "component"
+            }
+          ],
+          "js-tw": [
+            {
+              "from": "components/Checkbox/React/Js-Tw/Checkbox.jsx",
+              "name": "Checkbox.jsx",
+              "type": "component"
+            }
+          ],
+          "ts": [
+            {
+              "from": "components/Checkbox/React/Ts/Checkbox.css",
+              "name": "Checkbox.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Checkbox/React/Ts/Checkbox.tsx",
+              "name": "Checkbox.tsx",
+              "type": "component"
+            }
+          ],
+          "ts-tw": [
+            {
+              "from": "components/Checkbox/React/Ts-Tw/Checkbox.tsx",
+              "name": "Checkbox.tsx",
+              "type": "component"
+            }
+          ]
+        }
+      },
+      "vanilla": {
+        "dependencies": [],
+        "flavors": {
+          "js": [
+            {
+              "from": "components/Checkbox/Vanilla/Js/Checkbox.css",
+              "name": "Checkbox.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Checkbox/Vanilla/Js/Checkbox.html",
+              "name": "Checkbox.html",
+              "type": "markup"
+            },
+            {
+              "from": "components/Checkbox/Vanilla/Js/Checkbox.js",
+              "name": "Checkbox.js",
+              "type": "script"
+            }
+          ],
+          "js-tw": [
+            {
+              "from": "components/Checkbox/Vanilla/Js-Tw/Checkbox.html",
+              "name": "Checkbox.html",
+              "type": "markup"
+            },
+            {
+              "from": "components/Checkbox/Vanilla/Js-Tw/Checkbox.js",
+              "name": "Checkbox.js",
+              "type": "script"
+            }
+          ],
+          "ts": [
+            {
+              "from": "components/Checkbox/Vanilla/Ts/Checkbox.css",
+              "name": "Checkbox.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Checkbox/Vanilla/Ts/Checkbox.html",
+              "name": "Checkbox.html",
+              "type": "markup"
+            },
+            {
+              "from": "components/Checkbox/Vanilla/Ts/Checkbox.ts",
+              "name": "Checkbox.ts",
+              "type": "script"
+            }
+          ],
+          "ts-tw": [
+            {
+              "from": "components/Checkbox/Vanilla/Ts-Tw/Checkbox.html",
+              "name": "Checkbox.html",
+              "type": "markup"
+            },
+            {
+              "from": "components/Checkbox/Vanilla/Ts-Tw/Checkbox.ts",
+              "name": "Checkbox.ts",
+              "type": "script"
+            }
+          ]
+        }
+      },
+      "next": {
+        "dependencies": [
+          "react"
+        ],
+        "flavors": {
+          "js": [
+            {
+              "from": "components/Checkbox/React/Js/Checkbox.css",
+              "name": "Checkbox.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Checkbox/React/Js/Checkbox.jsx",
+              "name": "Checkbox.jsx",
+              "type": "component",
+              "modifiers": [
+                "use-client"
+              ]
+            }
+          ],
+          "js-tw": [
+            {
+              "from": "components/Checkbox/React/Js-Tw/Checkbox.jsx",
+              "name": "Checkbox.jsx",
+              "type": "component",
+              "modifiers": [
+                "use-client"
+              ]
+            }
+          ],
+          "ts": [
+            {
+              "from": "components/Checkbox/React/Ts/Checkbox.css",
+              "name": "Checkbox.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Checkbox/React/Ts/Checkbox.tsx",
+              "name": "Checkbox.tsx",
+              "type": "component",
+              "modifiers": [
+                "use-client"
+              ]
+            }
+          ],
+          "ts-tw": [
+            {
+              "from": "components/Checkbox/React/Ts-Tw/Checkbox.tsx",
+              "name": "Checkbox.tsx",
+              "type": "component",
+              "modifiers": [
+                "use-client"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "marquee": {
+    "name": "Marquee",
+    "description": "",
+    "variants": {
+      "react": {
+        "dependencies": [
+          "react"
+        ],
+        "flavors": {
+          "js": [
+            {
+              "from": "components/Marquee/React/Js/Marquee.css",
+              "name": "Marquee.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Marquee/React/Js/Marquee.jsx",
+              "name": "Marquee.jsx",
+              "type": "component"
+            }
+          ],
+          "js-tw": [
+            {
+              "from": "components/Marquee/React/Js-Tw/Marquee.jsx",
+              "name": "Marquee.jsx",
+              "type": "component"
+            }
+          ],
+          "ts": [
+            {
+              "from": "components/Marquee/React/Ts/Marquee.css",
+              "name": "Marquee.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Marquee/React/Ts/Marquee.tsx",
+              "name": "Marquee.tsx",
+              "type": "component"
+            }
+          ],
+          "ts-tw": [
+            {
+              "from": "components/Marquee/React/Ts-Tw/Marquee.tsx",
+              "name": "Marquee.tsx",
+              "type": "component"
+            }
+          ]
+        }
+      },
+      "vanilla": {
+        "dependencies": [],
+        "flavors": {
+          "js": [
+            {
+              "from": "components/Marquee/Vanilla/Js/Marquee.css",
+              "name": "Marquee.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Marquee/Vanilla/Js/Marquee.html",
+              "name": "Marquee.html",
+              "type": "markup"
+            },
+            {
+              "from": "components/Marquee/Vanilla/Js/Marquee.js",
+              "name": "Marquee.js",
+              "type": "script"
+            }
+          ],
+          "js-tw": [
+            {
+              "from": "components/Marquee/Vanilla/Js-Tw/Marquee.html",
+              "name": "Marquee.html",
+              "type": "markup"
+            },
+            {
+              "from": "components/Marquee/Vanilla/Js-Tw/Marquee.js",
+              "name": "Marquee.js",
+              "type": "script"
+            }
+          ],
+          "ts": [
+            {
+              "from": "components/Marquee/Vanilla/Ts/Marquee.css",
+              "name": "Marquee.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Marquee/Vanilla/Ts/Marquee.html",
+              "name": "Marquee.html",
+              "type": "markup"
+            },
+            {
+              "from": "components/Marquee/Vanilla/Ts/Marquee.ts",
+              "name": "Marquee.ts",
+              "type": "script"
+            }
+          ],
+          "ts-tw": [
+            {
+              "from": "components/Marquee/Vanilla/Ts-Tw/Marquee.html",
+              "name": "Marquee.html",
+              "type": "markup"
+            },
+            {
+              "from": "components/Marquee/Vanilla/Ts-Tw/Marquee.ts",
+              "name": "Marquee.ts",
+              "type": "script"
+            }
+          ]
+        }
+      },
+      "next": {
+        "dependencies": [
+          "react"
+        ],
+        "flavors": {
+          "js": [
+            {
+              "from": "components/Marquee/React/Js/Marquee.css",
+              "name": "Marquee.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Marquee/React/Js/Marquee.jsx",
+              "name": "Marquee.jsx",
+              "type": "component",
+              "modifiers": [
+                "use-client"
+              ]
+            }
+          ],
+          "js-tw": [
+            {
+              "from": "components/Marquee/React/Js-Tw/Marquee.jsx",
+              "name": "Marquee.jsx",
+              "type": "component",
+              "modifiers": [
+                "use-client"
+              ]
+            }
+          ],
+          "ts": [
+            {
+              "from": "components/Marquee/React/Ts/Marquee.css",
+              "name": "Marquee.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Marquee/React/Ts/Marquee.tsx",
+              "name": "Marquee.tsx",
+              "type": "component",
+              "modifiers": [
+                "use-client"
+              ]
+            }
+          ],
+          "ts-tw": [
+            {
+              "from": "components/Marquee/React/Ts-Tw/Marquee.tsx",
+              "name": "Marquee.tsx",
+              "type": "component",
+              "modifiers": [
+                "use-client"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "radio": {
+    "name": "Radio",
+    "description": "",
+    "variants": {
+      "react": {
+        "dependencies": [
+          "react"
+        ],
+        "flavors": {
+          "js": [
+            {
+              "from": "components/Radio/React/Js/Radio.css",
+              "name": "Radio.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Radio/React/Js/Radio.jsx",
+              "name": "Radio.jsx",
+              "type": "component"
+            }
+          ],
+          "js-tw": [
+            {
+              "from": "components/Radio/React/Js-Tw/Radio.jsx",
+              "name": "Radio.jsx",
+              "type": "component"
+            }
+          ],
+          "ts": [
+            {
+              "from": "components/Radio/React/Ts/Radio.css",
+              "name": "Radio.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Radio/React/Ts/Radio.tsx",
+              "name": "Radio.tsx",
+              "type": "component"
+            }
+          ],
+          "ts-tw": [
+            {
+              "from": "components/Radio/React/Ts-Tw/Radio.tsx",
+              "name": "Radio.tsx",
+              "type": "component"
+            }
+          ]
+        }
+      },
+      "vanilla": {
+        "dependencies": [],
+        "flavors": {
+          "js": [
+            {
+              "from": "components/Radio/Vanilla/Js/Radio.css",
+              "name": "Radio.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Radio/Vanilla/Js/Radio.html",
+              "name": "Radio.html",
+              "type": "markup"
+            }
+          ],
+          "js-tw": [
+            {
+              "from": "components/Radio/Vanilla/Js-Tw/Radio.html",
+              "name": "Radio.html",
+              "type": "markup"
+            }
+          ],
+          "ts": [
+            {
+              "from": "components/Radio/Vanilla/Ts/Radio.css",
+              "name": "Radio.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Radio/Vanilla/Ts/Radio.html",
+              "name": "Radio.html",
+              "type": "markup"
+            }
+          ],
+          "ts-tw": [
+            {
+              "from": "components/Radio/Vanilla/Ts-Tw/Radio.html",
+              "name": "Radio.html",
+              "type": "markup"
+            }
+          ]
+        }
+      },
+      "next": {
+        "dependencies": [
+          "react"
+        ],
+        "flavors": {
+          "js": [
+            {
+              "from": "components/Radio/React/Js/Radio.css",
+              "name": "Radio.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Radio/React/Js/Radio.jsx",
+              "name": "Radio.jsx",
+              "type": "component",
+              "modifiers": [
+                "use-client"
+              ]
+            }
+          ],
+          "js-tw": [
+            {
+              "from": "components/Radio/React/Js-Tw/Radio.jsx",
+              "name": "Radio.jsx",
+              "type": "component",
+              "modifiers": [
+                "use-client"
+              ]
+            }
+          ],
+          "ts": [
+            {
+              "from": "components/Radio/React/Ts/Radio.css",
+              "name": "Radio.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Radio/React/Ts/Radio.tsx",
+              "name": "Radio.tsx",
+              "type": "component",
+              "modifiers": [
+                "use-client"
+              ]
+            }
+          ],
+          "ts-tw": [
+            {
+              "from": "components/Radio/React/Ts-Tw/Radio.tsx",
+              "name": "Radio.tsx",
+              "type": "component",
+              "modifiers": [
+                "use-client"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "select": {
+    "name": "Select",
+    "description": "",
+    "variants": {
+      "react": {
+        "dependencies": [
+          "react"
+        ],
+        "flavors": {
+          "js": [
+            {
+              "from": "components/Select/React/Js/Select.css",
+              "name": "Select.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Select/React/Js/Select.jsx",
+              "name": "Select.jsx",
+              "type": "component"
+            }
+          ],
+          "js-tw": [
+            {
+              "from": "components/Select/React/Js-Tw/Select.jsx",
+              "name": "Select.jsx",
+              "type": "component"
+            }
+          ],
+          "ts": [
+            {
+              "from": "components/Select/React/Ts/Select.css",
+              "name": "Select.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Select/React/Ts/Select.tsx",
+              "name": "Select.tsx",
+              "type": "component"
+            }
+          ],
+          "ts-tw": [
+            {
+              "from": "components/Select/React/Ts-Tw/Select.tsx",
+              "name": "Select.tsx",
+              "type": "component"
+            }
+          ]
+        }
+      },
+      "vanilla": {
+        "dependencies": [],
+        "flavors": {
+          "js": [
+            {
+              "from": "components/Select/Vanilla/Js/Select.css",
+              "name": "Select.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Select/Vanilla/Js/Select.html",
+              "name": "Select.html",
+              "type": "markup"
+            },
+            {
+              "from": "components/Select/Vanilla/Js/Select.js",
+              "name": "Select.js",
+              "type": "script"
+            }
+          ],
+          "js-tw": [
+            {
+              "from": "components/Select/Vanilla/Js-Tw/Select.html",
+              "name": "Select.html",
+              "type": "markup"
+            },
+            {
+              "from": "components/Select/Vanilla/Js-Tw/Select.js",
+              "name": "Select.js",
+              "type": "script"
+            }
+          ],
+          "ts": [
+            {
+              "from": "components/Select/Vanilla/Ts/Select.css",
+              "name": "Select.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Select/Vanilla/Ts/Select.html",
+              "name": "Select.html",
+              "type": "markup"
+            },
+            {
+              "from": "components/Select/Vanilla/Ts/Select.ts",
+              "name": "Select.ts",
+              "type": "script"
+            }
+          ],
+          "ts-tw": [
+            {
+              "from": "components/Select/Vanilla/Ts-Tw/Select.html",
+              "name": "Select.html",
+              "type": "markup"
+            },
+            {
+              "from": "components/Select/Vanilla/Ts-Tw/Select.ts",
+              "name": "Select.ts",
+              "type": "script"
+            }
+          ]
+        }
+      },
+      "next": {
+        "dependencies": [
+          "react"
+        ],
+        "flavors": {
+          "js": [
+            {
+              "from": "components/Select/React/Js/Select.css",
+              "name": "Select.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Select/React/Js/Select.jsx",
+              "name": "Select.jsx",
+              "type": "component",
+              "modifiers": [
+                "use-client"
+              ]
+            }
+          ],
+          "js-tw": [
+            {
+              "from": "components/Select/React/Js-Tw/Select.jsx",
+              "name": "Select.jsx",
+              "type": "component",
+              "modifiers": [
+                "use-client"
+              ]
+            }
+          ],
+          "ts": [
+            {
+              "from": "components/Select/React/Ts/Select.css",
+              "name": "Select.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Select/React/Ts/Select.tsx",
+              "name": "Select.tsx",
+              "type": "component",
+              "modifiers": [
+                "use-client"
+              ]
+            }
+          ],
+          "ts-tw": [
+            {
+              "from": "components/Select/React/Ts-Tw/Select.tsx",
+              "name": "Select.tsx",
+              "type": "component",
+              "modifiers": [
+                "use-client"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "slider": {
+    "name": "Slider",
+    "description": "",
+    "variants": {
+      "react": {
+        "dependencies": [
+          "react"
+        ],
+        "flavors": {
+          "js": [
+            {
+              "from": "components/Slider/React/Js/Slider.css",
+              "name": "Slider.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Slider/React/Js/Slider.jsx",
+              "name": "Slider.jsx",
               "type": "component"
             }
           ],
@@ -43,11 +861,148 @@
               "name": "Slider.jsx",
               "type": "component"
             }
+          ],
+          "ts": [
+            {
+              "from": "components/Slider/React/Ts/Slider.css",
+              "name": "Slider.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Slider/React/Ts/Slider.tsx",
+              "name": "Slider.tsx",
+              "type": "component"
+            }
+          ],
+          "ts-tw": [
+            {
+              "from": "components/Slider/React/Ts-Tw/Slider.tsx",
+              "name": "Slider.tsx",
+              "type": "component"
+            }
           ]
         }
       },
-      "vanilla": { "ts": [], "js": [], "ts-tw": [], "js-tw": [] },
-      "next": { "ts": [], "js": [], "ts-tw": [], "js-tw": [] }
+      "vanilla": {
+        "dependencies": [],
+        "flavors": {
+          "js": [
+            {
+              "from": "components/Slider/Vanilla/Js/Slider.css",
+              "name": "Slider.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Slider/Vanilla/Js/Slider.html",
+              "name": "Slider.html",
+              "type": "markup"
+            },
+            {
+              "from": "components/Slider/Vanilla/Js/Slider.js",
+              "name": "Slider.js",
+              "type": "script"
+            }
+          ],
+          "js-tw": [
+            {
+              "from": "components/Slider/Vanilla/Js-Tw/Slider.html",
+              "name": "Slider.html",
+              "type": "markup"
+            },
+            {
+              "from": "components/Slider/Vanilla/Js-Tw/Slider.js",
+              "name": "Slider.js",
+              "type": "script"
+            }
+          ],
+          "ts": [
+            {
+              "from": "components/Slider/Vanilla/Ts/Slider.css",
+              "name": "Slider.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Slider/Vanilla/Ts/Slider.html",
+              "name": "Slider.html",
+              "type": "markup"
+            },
+            {
+              "from": "components/Slider/Vanilla/Ts/Slider.ts",
+              "name": "Slider.ts",
+              "type": "script"
+            }
+          ],
+          "ts-tw": [
+            {
+              "from": "components/Slider/Vanilla/Ts-Tw/Slider.html",
+              "name": "Slider.html",
+              "type": "markup"
+            },
+            {
+              "from": "components/Slider/Vanilla/Ts-Tw/Slider.ts",
+              "name": "Slider.ts",
+              "type": "script"
+            }
+          ]
+        }
+      },
+      "next": {
+        "dependencies": [
+          "react"
+        ],
+        "flavors": {
+          "js": [
+            {
+              "from": "components/Slider/React/Js/Slider.css",
+              "name": "Slider.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Slider/React/Js/Slider.jsx",
+              "name": "Slider.jsx",
+              "type": "component",
+              "modifiers": [
+                "use-client"
+              ]
+            }
+          ],
+          "js-tw": [
+            {
+              "from": "components/Slider/React/Js-Tw/Slider.jsx",
+              "name": "Slider.jsx",
+              "type": "component",
+              "modifiers": [
+                "use-client"
+              ]
+            }
+          ],
+          "ts": [
+            {
+              "from": "components/Slider/React/Ts/Slider.css",
+              "name": "Slider.css",
+              "type": "style"
+            },
+            {
+              "from": "components/Slider/React/Ts/Slider.tsx",
+              "name": "Slider.tsx",
+              "type": "component",
+              "modifiers": [
+                "use-client"
+              ]
+            }
+          ],
+          "ts-tw": [
+            {
+              "from": "components/Slider/React/Ts-Tw/Slider.tsx",
+              "name": "Slider.tsx",
+              "type": "component",
+              "modifiers": [
+                "use-client"
+              ]
+            }
+          ]
+        }
+      }
     }
   }
 }
