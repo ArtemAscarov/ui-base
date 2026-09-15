@@ -1,7 +1,7 @@
 {
   "carousel": {
     "name": "Carousel",
-    "description": "",
+    "description": "Sliding carousel with dot navigation and optional autoplay",
     "variants": {
       "react": {
         "dependencies": [
@@ -172,7 +172,7 @@
   },
   "checkbox": {
     "name": "Checkbox",
-    "description": "",
+    "description": "Checkbox with indeterminate state over a native input",
     "variants": {
       "react": {
         "dependencies": [
@@ -343,7 +343,7 @@
   },
   "marquee": {
     "name": "Marquee",
-    "description": "",
+    "description": "Looping ticker with adjustable speed and pause on hover",
     "variants": {
       "react": {
         "dependencies": [
@@ -514,7 +514,7 @@
   },
   "radio": {
     "name": "Radio",
-    "description": "",
+    "description": "Radio button over a native input, grouped by name",
     "variants": {
       "react": {
         "dependencies": [
@@ -665,7 +665,7 @@
   },
   "select": {
     "name": "Select",
-    "description": "",
+    "description": "Custom dropdown to replace the native select element",
     "variants": {
       "react": {
         "dependencies": [
@@ -836,7 +836,7 @@
   },
   "slider": {
     "name": "Slider",
-    "description": "",
+    "description": "Single-value or range slider with configurable step",
     "variants": {
       "react": {
         "dependencies": [

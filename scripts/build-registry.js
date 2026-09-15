@@ -1,6 +1,15 @@
 import path from "node:path";
 import { readdirSync, writeFileSync } from "node:fs";
 
+const meta = {
+  Carousel: "Sliding carousel with dot navigation and optional autoplay",
+  Checkbox: "Checkbox with indeterminate state over a native input",
+  Marquee: "Looping ticker with adjustable speed and pause on hover",
+  Radio: "Radio button over a native input, grouped by name",
+  Select: "Custom dropdown to replace the native select element",
+  Slider: "Single-value or range slider with configurable step",
+};
+
 const registry = {};
 
 const root = path.join(import.meta.dirname, "../components");
@@ -27,11 +36,12 @@ const getType = (localFile) => {
     return types[extension];
   }
 
- throw new Error(`Неизвестный тип файла: ${localFile}`);
+  throw new Error(`Неизвестный тип файла: ${localFile}`);
 };
 
 components.forEach((component) => {
   const localVariants = getLocalFiles(component);
+
   const variants = {};
 
   localVariants.forEach((variant) => {
@@ -75,7 +85,7 @@ components.forEach((component) => {
 
   registry[component.toLowerCase()] = {
     name: component,
-    description: "",
+    description: meta[component] || '',
     variants,
   };
 });

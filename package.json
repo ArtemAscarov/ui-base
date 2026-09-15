@@ -4,6 +4,7 @@
   "description": "",
   "type": "module",
   "main": "index.js",
+  "files": ["components", "bin", "src", "registry.json"],
   "scripts": {
     "build": "node scripts/build-registry.js"
   },
