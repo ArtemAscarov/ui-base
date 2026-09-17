@@ -1,0 +1,3 @@
+bin/*.js text eol=lf
+src/*.js text eol=lf
+3

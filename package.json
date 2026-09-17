@@ -1,8 +1,15 @@
 {
-  "name": "ui-base",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@artem_ascarov/ui-base",
+  "version": "0.1.0",
+  "description": "Copy-paste UI components for Vanilla, React and Next — no runtime dependency",
   "type": "module",
+  "engines": {
+    "node": ">=20.11"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ArtemAscarov/ui-base.git"
+  },
   "bin": {
     "ui-base": "bin/index.js"
   },
@@ -13,9 +20,21 @@
     "registry.json"
   ],
   "scripts": {
-    "build": "node scripts/build-registry.js"
+    "build": "node scripts/build-registry.js",
+    "prepublishOnly": "npm run build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "keywords": [
+    "ui",
+    "nextjs",
+    "react",
+    "components",
+    "cli",
+    "vanillajs",
+    "css-variables",
+    "accessible"
+  ],
+  "author": "Artem Ascarov (https://github.com/ArtemAscarov)",
+  "license": "MIT",
+  "homepage": "https://artemascarov.github.io/ui-base/",
+  "bugs": "https://github.com/ArtemAscarov/ui-base/issues"
 }

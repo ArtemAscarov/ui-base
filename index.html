@@ -460,6 +460,174 @@
       .stage .ui-slider {
         --slider-width: 100%;
       }
+
+      .install {
+        display: grid;
+        gap: 14px;
+        padding-block: clamp(28px, 4vw, 44px);
+      }
+
+      .install__lede {
+        margin: 0;
+        max-width: 62ch;
+        color: var(--muted);
+      }
+
+      .snippet {
+        position: relative;
+        display: flex;
+        align-items: stretch;
+        gap: 0;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--raise);
+        overflow: hidden;
+      }
+
+      .snippet pre {
+        flex: 1 1 auto;
+        margin: 0;
+        padding: 12px 14px;
+        min-width: 0;
+      }
+
+      .snippet code {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 13px;
+        line-height: 1.7;
+        color: var(--ink);
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+
+      .snippet--block pre {
+        max-height: 340px;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        scrollbar-width: thin;
+        scrollbar-color: var(--line) transparent;
+      }
+
+      .snippet--block pre::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      .snippet--block pre::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      .snippet--block pre::-webkit-scrollbar-thumb {
+        background: var(--line);
+        border: 3px solid var(--raise);
+        border-radius: 99px;
+      }
+
+      .snippet--block pre::-webkit-scrollbar-thumb:hover {
+        background: var(--accent);
+      }
+
+      .snippet__copy {
+        flex: 0 0 auto;
+        align-self: flex-start;
+        margin: 8px;
+        padding: 6px 12px;
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        background: var(--stage);
+        color: var(--muted);
+        font: inherit;
+        font-size: 13px;
+        cursor: pointer;
+        transition: color 120ms, border-color 120ms;
+      }
+
+      .snippet__copy:hover {
+        color: var(--ink);
+        border-color: var(--accent);
+      }
+
+      .snippet__copy[data-copied="true"] {
+        color: var(--accent);
+        border-color: var(--accent);
+      }
+
+      .snippet__copy:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+
+      .get {
+        display: grid;
+        gap: 10px;
+      }
+
+      .picker {
+        display: grid;
+        gap: 6px;
+      }
+
+      .picker__row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .picker__row--files {
+        margin-top: 4px;
+      }
+
+      .chip {
+        padding: 4px 11px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: transparent;
+        color: var(--muted);
+        font: inherit;
+        font-size: 13px;
+        line-height: 1.5;
+        cursor: pointer;
+        transition: color 120ms, border-color 120ms, background 120ms;
+      }
+
+      .chip:hover {
+        color: var(--ink);
+        border-color: var(--accent);
+      }
+
+      .chip[aria-pressed="true"] {
+        background: var(--accent-wash);
+        border-color: var(--accent);
+        color: var(--ink);
+      }
+
+      .chip:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+
+      .picker__row--files .chip {
+        border-radius: 7px;
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 12px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .chip {
+          transition: none;
+        }
+      }
+
+      .get__note {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .snippet__copy {
+          transition: none;
+        }
+      }
     </style>
   </head>
 
@@ -470,8 +638,8 @@
         <h1 class="masthead__title">UI-base</h1>
         <p class="masthead__lede" data-i18n="masthead.lede">
           Six hand-built components, each shipped as plain source for the stack
-          you actually use. No package to install, no runtime to adopt — take
-          the three files and own them.
+          you actually use. One command copies the files into your project — no
+          runtime to adopt, nothing left in your dependencies.
         </p>
       </div>
 
@@ -512,6 +680,30 @@
         </div>
       </div>
     </div>
+
+    <section class="shell install">
+      <p class="eyebrow" data-i18n="install.eyebrow">One command, files are yours</p>
+      <p class="install__lede" data-i18n="install.lede">
+        The CLI copies the source into your project and gets out of the way.
+        Nothing is added to your dependencies except React, and only if you ask
+        for a React or Next variant.
+      </p>
+
+      <div class="snippet">
+        <pre><code>npx @artem_ascarov/ui-base add slider --next --ts</code></pre>
+        <button class="snippet__copy" type="button" data-copy data-i18n="copy.label" data-i18n-aria="copy.aria" data-i18n-copied="copy.done" aria-label="Copy to clipboard">Copy</button>
+      </div>
+
+      <div class="snippet">
+        <pre><code>npx @artem_ascarov/ui-base list</code></pre>
+        <button class="snippet__copy" type="button" data-copy data-i18n="copy.label" data-i18n-aria="copy.aria" data-i18n-copied="copy.done" aria-label="Copy to clipboard">Copy</button>
+      </div>
+
+      <p class="get__note" data-i18n="install.flags">
+        Flags: --vanilla, --react, --next choose the stack; --ts and --tw choose
+        the flavor; --dry-run shows what would be written without writing it.
+      </p>
+    </section>
 
     <section class="shell matrix">
       <p class="eyebrow" data-i18n="matrix.eyebrow">Every component, three stacks</p>
@@ -627,6 +819,30 @@
         </div>
 
         <div class="spec">
+          <section class="get" data-picker="checkbox">
+            <h3 data-i18n="spec.get">Get it</h3>
+
+            <div class="picker">
+              <div class="picker__row" role="group" aria-label="Stack" data-i18n-aria="picker.stack" data-picker-stacks></div>
+              <div class="picker__row" role="group" aria-label="Flavor" data-i18n-aria="picker.flavor" data-picker-flavors></div>
+            </div>
+
+            <div class="snippet">
+              <pre><code data-picker-command>npx @artem_ascarov/ui-base add checkbox</code></pre>
+              <button class="snippet__copy" type="button" data-copy data-i18n="copy.label" data-i18n-aria="copy.aria" data-i18n-copied="copy.done" aria-label="Copy to clipboard">Copy</button>
+            </div>
+
+            <div class="picker__row picker__row--files" role="group" aria-label="Files" data-i18n-aria="picker.files" data-picker-files></div>
+
+            <p class="get__note" data-i18n="get.note" hidden>Markup is a fragment — paste it into your page, then add the stylesheet and script.</p>
+
+            <div class="snippet snippet--block">
+              <pre><code data-picker-code>…</code></pre>
+              <button class="snippet__copy" type="button" data-copy data-i18n="copy.label" data-i18n-aria="copy.aria" data-i18n-copied="copy.done" aria-label="Copy to clipboard">Copy</button>
+            </div>
+          </section>
+
+
           <section>
             <h3 data-i18n="spec.markup">Markup</h3>
             <dl class="api">
@@ -721,6 +937,30 @@
         </div>
 
         <div class="spec">
+          <section class="get" data-picker="radio">
+            <h3 data-i18n="spec.get">Get it</h3>
+
+            <div class="picker">
+              <div class="picker__row" role="group" aria-label="Stack" data-i18n-aria="picker.stack" data-picker-stacks></div>
+              <div class="picker__row" role="group" aria-label="Flavor" data-i18n-aria="picker.flavor" data-picker-flavors></div>
+            </div>
+
+            <div class="snippet">
+              <pre><code data-picker-command>npx @artem_ascarov/ui-base add radio</code></pre>
+              <button class="snippet__copy" type="button" data-copy data-i18n="copy.label" data-i18n-aria="copy.aria" data-i18n-copied="copy.done" aria-label="Copy to clipboard">Copy</button>
+            </div>
+
+            <div class="picker__row picker__row--files" role="group" aria-label="Files" data-i18n-aria="picker.files" data-picker-files></div>
+
+            <p class="get__note" data-i18n="get.note" hidden>Markup is a fragment — paste it into your page, then add the stylesheet and script.</p>
+
+            <div class="snippet snippet--block">
+              <pre><code data-picker-code>…</code></pre>
+              <button class="snippet__copy" type="button" data-copy data-i18n="copy.label" data-i18n-aria="copy.aria" data-i18n-copied="copy.done" aria-label="Copy to clipboard">Copy</button>
+            </div>
+          </section>
+
+
           <section>
             <h3 data-i18n="spec.files">Files</h3>
             <ul class="files">
@@ -843,6 +1083,30 @@
         </div>
 
         <div class="spec">
+          <section class="get" data-picker="select">
+            <h3 data-i18n="spec.get">Get it</h3>
+
+            <div class="picker">
+              <div class="picker__row" role="group" aria-label="Stack" data-i18n-aria="picker.stack" data-picker-stacks></div>
+              <div class="picker__row" role="group" aria-label="Flavor" data-i18n-aria="picker.flavor" data-picker-flavors></div>
+            </div>
+
+            <div class="snippet">
+              <pre><code data-picker-command>npx @artem_ascarov/ui-base add select</code></pre>
+              <button class="snippet__copy" type="button" data-copy data-i18n="copy.label" data-i18n-aria="copy.aria" data-i18n-copied="copy.done" aria-label="Copy to clipboard">Copy</button>
+            </div>
+
+            <div class="picker__row picker__row--files" role="group" aria-label="Files" data-i18n-aria="picker.files" data-picker-files></div>
+
+            <p class="get__note" data-i18n="get.note" hidden>Markup is a fragment — paste it into your page, then add the stylesheet and script.</p>
+
+            <div class="snippet snippet--block">
+              <pre><code data-picker-code>…</code></pre>
+              <button class="snippet__copy" type="button" data-copy data-i18n="copy.label" data-i18n-aria="copy.aria" data-i18n-copied="copy.done" aria-label="Copy to clipboard">Copy</button>
+            </div>
+          </section>
+
+
           <section>
             <h3 data-i18n="spec.markup">Markup</h3>
             <dl class="api">
@@ -984,6 +1248,30 @@
         </div>
 
         <div class="spec">
+          <section class="get" data-picker="slider">
+            <h3 data-i18n="spec.get">Get it</h3>
+
+            <div class="picker">
+              <div class="picker__row" role="group" aria-label="Stack" data-i18n-aria="picker.stack" data-picker-stacks></div>
+              <div class="picker__row" role="group" aria-label="Flavor" data-i18n-aria="picker.flavor" data-picker-flavors></div>
+            </div>
+
+            <div class="snippet">
+              <pre><code data-picker-command>npx @artem_ascarov/ui-base add slider</code></pre>
+              <button class="snippet__copy" type="button" data-copy data-i18n="copy.label" data-i18n-aria="copy.aria" data-i18n-copied="copy.done" aria-label="Copy to clipboard">Copy</button>
+            </div>
+
+            <div class="picker__row picker__row--files" role="group" aria-label="Files" data-i18n-aria="picker.files" data-picker-files></div>
+
+            <p class="get__note" data-i18n="get.note" hidden>Markup is a fragment — paste it into your page, then add the stylesheet and script.</p>
+
+            <div class="snippet snippet--block">
+              <pre><code data-picker-code>…</code></pre>
+              <button class="snippet__copy" type="button" data-copy data-i18n="copy.label" data-i18n-aria="copy.aria" data-i18n-copied="copy.done" aria-label="Copy to clipboard">Copy</button>
+            </div>
+          </section>
+
+
           <section>
             <h3 data-i18n="spec.markup">Markup</h3>
             <dl class="api">
@@ -1054,6 +1342,30 @@
         </div>
 
         <div class="spec">
+          <section class="get" data-picker="marquee">
+            <h3 data-i18n="spec.get">Get it</h3>
+
+            <div class="picker">
+              <div class="picker__row" role="group" aria-label="Stack" data-i18n-aria="picker.stack" data-picker-stacks></div>
+              <div class="picker__row" role="group" aria-label="Flavor" data-i18n-aria="picker.flavor" data-picker-flavors></div>
+            </div>
+
+            <div class="snippet">
+              <pre><code data-picker-command>npx @artem_ascarov/ui-base add marquee</code></pre>
+              <button class="snippet__copy" type="button" data-copy data-i18n="copy.label" data-i18n-aria="copy.aria" data-i18n-copied="copy.done" aria-label="Copy to clipboard">Copy</button>
+            </div>
+
+            <div class="picker__row picker__row--files" role="group" aria-label="Files" data-i18n-aria="picker.files" data-picker-files></div>
+
+            <p class="get__note" data-i18n="get.note" hidden>Markup is a fragment — paste it into your page, then add the stylesheet and script.</p>
+
+            <div class="snippet snippet--block">
+              <pre><code data-picker-code>…</code></pre>
+              <button class="snippet__copy" type="button" data-copy data-i18n="copy.label" data-i18n-aria="copy.aria" data-i18n-copied="copy.done" aria-label="Copy to clipboard">Copy</button>
+            </div>
+          </section>
+
+
           <section>
             <h3 data-i18n="spec.markup">Markup</h3>
             <dl class="api">
@@ -1155,6 +1467,30 @@
         </div>
 
         <div class="spec">
+          <section class="get" data-picker="carousel">
+            <h3 data-i18n="spec.get">Get it</h3>
+
+            <div class="picker">
+              <div class="picker__row" role="group" aria-label="Stack" data-i18n-aria="picker.stack" data-picker-stacks></div>
+              <div class="picker__row" role="group" aria-label="Flavor" data-i18n-aria="picker.flavor" data-picker-flavors></div>
+            </div>
+
+            <div class="snippet">
+              <pre><code data-picker-command>npx @artem_ascarov/ui-base add carousel</code></pre>
+              <button class="snippet__copy" type="button" data-copy data-i18n="copy.label" data-i18n-aria="copy.aria" data-i18n-copied="copy.done" aria-label="Copy to clipboard">Copy</button>
+            </div>
+
+            <div class="picker__row picker__row--files" role="group" aria-label="Files" data-i18n-aria="picker.files" data-picker-files></div>
+
+            <p class="get__note" data-i18n="get.note" hidden>Markup is a fragment — paste it into your page, then add the stylesheet and script.</p>
+
+            <div class="snippet snippet--block">
+              <pre><code data-picker-code>…</code></pre>
+              <button class="snippet__copy" type="button" data-copy data-i18n="copy.label" data-i18n-aria="copy.aria" data-i18n-copied="copy.done" aria-label="Copy to clipboard">Copy</button>
+            </div>
+          </section>
+
+
           <section>
             <h3 data-i18n="spec.markup">Markup</h3>
             <dl class="api">
@@ -1205,6 +1541,7 @@
     </footer>
 
     <script src="./i18n.js"></script>
+    <script src="./snippets.js"></script>
 
     <script type="module" src="./components/Checkbox/Vanilla/Js/Checkbox.js"></script>
     <script type="module" src="./components/Select/Vanilla/Js/Select.js"></script>
