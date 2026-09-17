@@ -3,8 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "index.js",
-  "files": ["components", "bin", "src", "registry.json"],
+  "bin": {
+    "ui-base": "bin/index.js"
+  },
+  "files": [
+    "components",
+    "bin",
+    "src",
+    "registry.json"
+  ],
   "scripts": {
     "build": "node scripts/build-registry.js"
   },
